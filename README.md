@@ -1,2 +1,1 @@
-# PBA
-Pharo Benchmark Analyzed
+# PBA - Pharo Benchmark Analyzee
