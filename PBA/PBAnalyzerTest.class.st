@@ -13,7 +13,7 @@ Class {
 { #category : 'tests' }
 PBAnalyzerTest >> setUp [ 
 
-	self setUp.
+	super setUp.
 	analyzer := PBAnalyzer new.
 ]
 
@@ -21,7 +21,6 @@ PBAnalyzerTest >> setUp [
 PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheExecutionTime [
 
 	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
-	analyzer analysis: { PBAExecutionTimeAnalysis new }.
 	
-	self assert: (analyzer analyze: target) executionTime equals: 400 milliSeconds.
+	self assert: ((analyzer analyze: target) dynamicResults at: 'executionTime') equals: 400 milliSeconds.
 ]

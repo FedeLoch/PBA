@@ -20,3 +20,9 @@ PBASmarkBenchmarkpProgram >> benchmark: aBenchmark [
 
 	benchmark := aBenchmark
 ]
+
+{ #category : 'accessing' }
+PBASmarkBenchmarkpProgram >> run [
+
+	^ benchmark run.
+]

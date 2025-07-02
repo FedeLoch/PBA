@@ -5,3 +5,9 @@ Class {
 	#package : 'PBA',
 	#tag : 'Analysis'
 }
+
+{ #category : 'testing' }
+PBAAnalysis >> analyze: aTargetProgram [
+
+	self subclassResponsibility 
+]
