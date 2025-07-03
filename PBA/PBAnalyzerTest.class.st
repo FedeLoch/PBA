@@ -18,9 +18,25 @@ PBAnalyzerTest >> setUp [
 ]
 
 { #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheCPUUsed [
+
+	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
+	
+	self assert: ((analyzer analyze: target) at: 'cpu') equals: 400
+]
+
+{ #category : 'tests' }
 PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheExecutionTime [
 
 	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
 	
-	self assert: ((analyzer analyze: target) dynamicResults at: 'executionTime') equals: 400 milliSeconds.
+	self assert: ((analyzer analyze: target) at: 'execution') equals: { 'time' -> 50 }
+]
+
+{ #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheMemoryUsed [
+
+	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
+	
+	self assert: ((analyzer analyze: target) at: 'memory') equals: 400
 ]

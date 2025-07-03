@@ -16,6 +16,25 @@ PBAResult >> analysisResults [
 ]
 
 { #category : 'initialization' }
+PBAResult >> associations [ 
+	
+	^ analysisResults associations 
+]
+
+{ #category : 'accessing' }
+PBAResult >> at: index [
+
+	^ analysisResults at: index 
+]
+
+{ #category : 'accessing' }
+PBAResult >> at: index put: value [
+
+	analysisResults at: index put: value.
+	^ self
+]
+
+{ #category : 'initialization' }
 PBAResult >> initialize [ 
 	
 	super initialize.
@@ -25,6 +44,6 @@ PBAResult >> initialize [
 { #category : 'initialization' }
 PBAResult >> merge: anotherResult [
 	
-	1 halt.
-	analysisResults merge: anotherResult analysisResults
+	analysisResults addAll: anotherResult associations.
+	^ self
 ]

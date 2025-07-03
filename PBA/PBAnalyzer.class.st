@@ -24,7 +24,7 @@ PBAnalyzer >> initialize [
 	super initialize.
 	results := Dictionary new.
 	analysisStrategies := {
-		PBAExecutionTimeAnalysis new.
+		PBACallBacksStrategy new.
 		"TODO: Insert instances of analysis strategies here"
 	}
 	

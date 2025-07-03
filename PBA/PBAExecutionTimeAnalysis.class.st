@@ -1,20 +1,22 @@
 Class {
 	#name : 'PBAExecutionTimeAnalysis',
-	#superclass : 'PBAAnalysis',
-	#category : 'PBA-Analysis',
+	#superclass : 'PBACallbacksAnaylysis',
+	#instVars : [
+		'initialTime'
+	],
+	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
-	#tag : 'Analysis'
+	#tag : 'AnalysisStrategy'
 }
 
 { #category : 'testing' }
-PBAExecutionTimeAnalysis >> analyze: aTargetProgram [
+PBAExecutionTimeAnalysis >> endExecution: aTime for: result [
 
-	| result startTime |
-	
-	result := PBAResult new.
-	startTime := Time now asMilliSeconds.
-	
-	aTargetProgram run.
-	
-	^ result at: 'executionTime' put: (Time now asMilliSeconds - startTime)
+	^ result at: 'execution' put: { 'time' -> (Time now asMilliSeconds - initialTime) }
+]
+
+{ #category : 'testing' }
+PBAExecutionTimeAnalysis >> startExecution: aTime [
+
+	initialTime := aTime
 ]

@@ -1,13 +1,7 @@
 Class {
 	#name : 'PBAAnalysis',
 	#superclass : 'Object',
-	#category : 'PBA-Analysis',
+	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
-	#tag : 'Analysis'
+	#tag : 'AnalysisStrategy'
 }
-
-{ #category : 'testing' }
-PBAAnalysis >> analyze: aTargetProgram [
-
-	self subclassResponsibility 
-]
