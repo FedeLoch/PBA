@@ -10,9 +10,9 @@ Class {
 }
 
 { #category : 'testing' }
-PBAExecutionTimeAnalysis >> endExecution: aTime for: result [
+PBAExecutionTimeAnalysis >> endExecution: endTime for: result [
 
-	^ result at: 'execution' put: { 'time' -> (Time now asMilliSeconds - initialTime) }
+	^ result at: 'executionTime' put: (endTime - initialTime)
 ]
 
 { #category : 'testing' }

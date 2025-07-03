@@ -16,11 +16,10 @@ PBACallBacksStrategy >> analyze: aTargetProgram [
 	
 	aTargetProgram run.
 	
-	endTime := Time now asMilliSeconds - startTime.
+	endTime := Time now asMilliSeconds.
 	^ analysis inject: PBAResult new into: [ :result :anAnalysis |
-		anAnalysis endExecution: startTime for: result
+		anAnalysis endExecution: endTime for: result
 	].
-"	^ result at: 'executionTime' put: ()"
 ]
 
 { #category : 'initialization' }

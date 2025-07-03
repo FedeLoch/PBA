@@ -30,7 +30,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheExecutionTime [
 
 	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
 	
-	self assert: ((analyzer analyze: target) at: 'execution') equals: { 'time' -> 50 }
+	self assert: ((analyzer analyze: target) at: 'executionTime') equals: 50
 ]
 
 { #category : 'tests' }
