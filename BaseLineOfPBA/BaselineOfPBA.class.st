@@ -1,8 +1,8 @@
 Class {
 	#name : 'BaselineOfPBA',
 	#superclass : 'Object',
-	#category : 'BaseLineOfPBA',
-	#package : 'BaseLineOfPBA'
+	#category : 'BaselineOfPBA',
+	#package : 'BaselineOfPBA'
 }
 
 { #category : 'baselines' }
