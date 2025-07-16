@@ -1,6 +1,6 @@
 Class {
 	#name : 'BaselineOfPBA',
-	#superclass : 'Object',
+	#superclass : 'BaselineOf',
 	#category : 'BaselineOfPBA',
 	#package : 'BaselineOfPBA'
 }
@@ -8,6 +8,7 @@ Class {
 { #category : 'baselines' }
 BaselineOfPBA >> baseline: spec [
 
+	<baseline>
 	spec for: #common do: [
 		spec baseline: 'SMark' with: [ spec repository: 'github://smarr/SMark' ].
 		spec package: 'PBA' with: [ spec requires: #( 'SMark' ) ]
