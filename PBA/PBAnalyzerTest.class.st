@@ -18,6 +18,16 @@ PBAnalyzerTest >> setUp [
 ]
 
 { #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheAverageObjectLifetime [
+
+	| averageObjectLifetime |
+	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
+	averageObjectLifetime := (analyzer analyze: target) at:
+		                         'average object lifetime'.
+	self assert: (averageObjectLifetime between: 29 and: 38)
+]
+
+{ #category : 'tests' }
 PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheCPUUsed [
 
 	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.

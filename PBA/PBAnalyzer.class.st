@@ -25,6 +25,7 @@ PBAnalyzer >> initialize [
 	results := Dictionary new.
 	analysisStrategies := {
 		PBACallBacksStrategy new.
+		PBAIllimaniStrategy new.
 		"TODO: Insert instances of analysis strategies here"
 	}
 	
