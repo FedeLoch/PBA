@@ -18,6 +18,17 @@ PBAnalyzerTest >> setUp [
 ]
 
 { #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheAverageObjectAllocationSize [
+
+	| averageObjectAllocationSize |
+	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
+	averageObjectAllocationSize := (analyzer analyze: target) at:
+		                         'average object allocation size'.
+		
+	self assert: (averageObjectAllocationSize between: 45 and: 80)
+]
+
+{ #category : 'tests' }
 PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheAverageObjectLifetime [
 
 	| averageObjectLifetime |

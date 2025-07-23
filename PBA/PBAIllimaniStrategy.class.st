@@ -23,5 +23,6 @@ PBAIllimaniStrategy >> initialize [
 	super initialize.
 	analysis := {
 		            PBAObjectLifetimeAnaylysis new.
-		            PBAMemoryConsumedAnaylysis new }
+		            PBAMemoryConsumedAnaylysis new.
+		            PBAObjectAllocationSizeAnaylysis new }
 ]
