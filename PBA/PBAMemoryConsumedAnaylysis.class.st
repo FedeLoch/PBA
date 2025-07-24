@@ -10,7 +10,6 @@ Class {
 PBAMemoryConsumedAnaylysis >> queryOn: profiler for: result [
 
 	^ result
-		  at: 'memory consumed (KB)'
+		  at: 'memory consumed (B)'
 		  put: profiler queryAllocationStats totalAllocatedMemory
-				  humanReadableByteSizeString asInteger
 ]
