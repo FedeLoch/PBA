@@ -10,7 +10,7 @@ Class {
 PBAObjectLifetimeAnaylysis >> queryOn: profiler for: result [
 
 	^ result
-		  at: 'average object lifetime'
+		  at: 'average object lifetime (%)'
 		  put:
 			  (profiler queryAllocationStats averageRelativeLifetime asFloat
 			   * 100 round: 2)
