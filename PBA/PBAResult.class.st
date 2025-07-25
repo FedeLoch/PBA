@@ -44,6 +44,8 @@ PBAResult >> initialize [
 { #category : 'initialization' }
 PBAResult >> merge: anotherResult [
 	
-	analysisResults addAll: anotherResult associations.
+	anotherResult associations do: [ :assoc |
+		analysisResults at: assoc key put: assoc value	
+	].
 	^ self
 ]
