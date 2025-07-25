@@ -23,7 +23,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheAverageObjectAllocat
 	| averageObjectAllocationSize |
 	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
 	averageObjectAllocationSize := (analyzer analyze: target) at:
-		                         'average object allocation size'.
+		                         'average object allocation size (B)'.
 		
 	self assert: (averageObjectAllocationSize between: 45 and: 80)
 ]
@@ -34,7 +34,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheAverageObjectLifetim
 	| averageObjectLifetime |
 	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
 	averageObjectLifetime := (analyzer analyze: target) at:
-		                         'average object lifetime'.
+		                         'average object lifetime (%)'.
 		
 	self assert: (averageObjectLifetime between: 29 and: 40)
 ]
@@ -52,7 +52,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheExecutionTime [
 
 	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
 	
-	self assert: ((analyzer analyze: target) at: 'executionTime') equals: 50
+	self assert: ((analyzer analyze: target) at: 'execution time (ms)') equals: 50
 ]
 
 { #category : 'tests' }
@@ -60,9 +60,9 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheMemoryConsumed [
 
 	| memoryConsumed |
 	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
-	memoryConsumed := (analyzer analyze: target) at: 'memory consumed'.
+	memoryConsumed := (analyzer analyze: target) at: 'memory consumed (B)'.
 	
-	self assert: (memoryConsumed between: 55 and: 106)
+	self assert: (memoryConsumed between: 53000 and: 107000)
 ]
 
 { #category : 'tests' }

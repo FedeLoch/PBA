@@ -9,10 +9,9 @@ Class {
 { #category : 'as yet unclassified' }
 PBAObjectAllocationSizeAnaylysis >> queryOn: profiler for: result [
 
-	| allocations |
-	allocations := profiler objectAllocations.
 	^ result
-		  at: 'average object allocation size'
+		  at: 'average object allocation size (B)'
 		  put:
-		  ((allocations collect: #sizeInBytes) average asFloat round: 2)
+		  (profiler queryAllocationStats averageSizeInMemory asFloat round:
+			   2)
 ]

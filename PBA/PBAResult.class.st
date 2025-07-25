@@ -43,7 +43,7 @@ PBAResult >> initialize [
 
 { #category : 'initialization' }
 PBAResult >> merge: anotherResult [
-	
-	analysisResults addAll: anotherResult associations.
+
+	analysisResults addAll: anotherResult analysisResults.
 	^ self
 ]

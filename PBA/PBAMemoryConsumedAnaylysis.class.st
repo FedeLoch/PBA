@@ -9,10 +9,7 @@ Class {
 { #category : 'as yet unclassified' }
 PBAMemoryConsumedAnaylysis >> queryOn: profiler for: result [
 
-	| stats |
-	stats := profiler queryAllocationStats.
 	^ result
-		  at: 'memory consumed'
-		  put:
-		  stats totalAllocatedMemory humanReadableByteSizeString asInteger
+		  at: 'memory consumed (B)'
+		  put: profiler queryAllocationStats totalAllocatedMemory
 ]
