@@ -10,6 +10,18 @@ Class {
 	#tag : 'Analyzer'
 }
 
+{ #category : 'accessing' }
+PBAnalyzer >> analysisStrategies [
+
+	^ analysisStrategies
+]
+
+{ #category : 'accessing' }
+PBAnalyzer >> analysisStrategies: anObject [
+
+	analysisStrategies := anObject
+]
+
 { #category : 'analyzing' }
 PBAnalyzer >> analyze: aTargetProgram [
 
@@ -43,6 +55,18 @@ PBAnalyzer >> initialize [
 		"TODO: Insert instances of analysis strategies here"
 	}
 	
+]
+
+{ #category : 'accessing' }
+PBAnalyzer >> results [
+
+	^ results
+]
+
+{ #category : 'accessing' }
+PBAnalyzer >> results: anObject [
+
+	results := anObject
 ]
 
 { #category : 'writing' }
