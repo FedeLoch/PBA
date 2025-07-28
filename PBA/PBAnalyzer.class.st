@@ -2,7 +2,8 @@ Class {
 	#name : 'PBAnalyzer',
 	#superclass : 'Object',
 	#instVars : [
-		'analysisStrategies'
+		'analysisStrategies',
+		'results'
 	],
 	#category : 'PBA-Analyzer',
 	#package : 'PBA',
@@ -20,14 +21,16 @@ PBAnalyzer >> analyze: aTargetProgram [
 { #category : 'analyzing' }
 PBAnalyzer >> analyzeAll: targetPrograms [
 
-	| results |
-	results := targetPrograms collect: [ :target |
-		           (self analyze: target) analysisResults ].
-	^ DataFrame
-		  withRows: results
-		  rowNames:
-		  (targetPrograms collect: [ :target | target benchmark class ])
-		  columnNames: results anyOne keys
+	| targetResults |
+	targetResults := targetPrograms collect: [ :target |
+		                 (self analyze: target) analysisResults ].
+	results := DataFrame
+		           withRows: targetResults
+		           rowNames:
+		           (targetPrograms collect: [ :target |
+			            target benchmark class ])
+		           columnNames: targetResults anyOne keys.
+	^ results
 ]
 
 { #category : 'initialization' }
@@ -40,4 +43,10 @@ PBAnalyzer >> initialize [
 		"TODO: Insert instances of analysis strategies here"
 	}
 	
+]
+
+{ #category : 'writing' }
+PBAnalyzer >> resultsToCSV: aFileReference [
+
+	results writeToCsv: aFileReference
 ]
