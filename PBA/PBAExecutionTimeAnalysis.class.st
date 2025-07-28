@@ -12,7 +12,7 @@ Class {
 { #category : 'testing' }
 PBAExecutionTimeAnalysis >> endExecution: endTime for: result [
 
-	^ result at: 'executionTime' put: (endTime - initialTime)
+	^ result at: 'execution time (ms)' put: (endTime - initialTime).
 ]
 
 { #category : 'testing' }

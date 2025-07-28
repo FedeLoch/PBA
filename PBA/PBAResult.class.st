@@ -47,5 +47,6 @@ PBAResult >> merge: anotherResult [
 	anotherResult associations do: [ :assoc |
 		analysisResults at: assoc key put: assoc value	
 	].
+
 	^ self
 ]
