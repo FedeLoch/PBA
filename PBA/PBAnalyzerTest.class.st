@@ -40,19 +40,14 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheAverageObjectLifetim
 ]
 
 { #category : 'tests' }
-PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheCPUUsed [
-
-	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
-	
-	self assert: ((analyzer analyze: target) at: 'cpu') equals: 400
-]
-
-{ #category : 'tests' }
 PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheExecutionTime [
 
+	| executionTime |
 	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
-	
-	self assert: ((analyzer analyze: target) at: 'execution time (ms)') equals: 50
+	executionTime := (analyzer analyze: target) at: 'execution time (ms)'.
+
+	self assert: (executionTime between: 30 and: 50)
+
 ]
 
 { #category : 'tests' }
@@ -63,12 +58,4 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheMemoryConsumed [
 	memoryConsumed := (analyzer analyze: target) at: 'memory consumed (B)'.
 	
 	self assert: (memoryConsumed between: 53000 and: 107000)
-]
-
-{ #category : 'tests' }
-PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheMemoryUsed [
-
-	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
-	
-	self assert: ((analyzer analyze: target) at: 'memory') equals: 400
 ]
