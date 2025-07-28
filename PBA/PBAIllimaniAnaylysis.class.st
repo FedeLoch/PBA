@@ -6,7 +6,7 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing - query' }
 PBAIllimaniAnaylysis >> queryOn: profiler for: result [
 
 	^ self subclassResponsibility

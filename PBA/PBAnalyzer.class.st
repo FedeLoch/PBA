@@ -2,7 +2,6 @@ Class {
 	#name : 'PBAnalyzer',
 	#superclass : 'Object',
 	#instVars : [
-		'results',
 		'analysisStrategies'
 	],
 	#category : 'PBA-Analyzer',
@@ -10,7 +9,7 @@ Class {
 	#tag : 'Analyzer'
 }
 
-{ #category : 'initialization' }
+{ #category : 'analyzing' }
 PBAnalyzer >> analyze: aTargetProgram [
 
 	^ analysisStrategies inject: PBAResult new into: [ :result :strategy |
@@ -18,11 +17,23 @@ PBAnalyzer >> analyze: aTargetProgram [
 	] 
 ]
 
+{ #category : 'analyzing' }
+PBAnalyzer >> analyzeAll: targetPrograms [
+
+	| results |
+	results := targetPrograms collect: [ :target |
+		           (self analyze: target) analysisResults ].
+	^ DataFrame
+		  withRows: results
+		  rowNames:
+		  (targetPrograms collect: [ :target | target benchmark class ])
+		  columnNames: results anyOne keys
+]
+
 { #category : 'initialization' }
 PBAnalyzer >> initialize [ 
 	
 	super initialize.
-	results := Dictionary new.
 	analysisStrategies := {
 		PBACallBacksStrategy new.
 		PBAIllimaniStrategy new.

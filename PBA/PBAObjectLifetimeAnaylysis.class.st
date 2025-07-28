@@ -6,7 +6,7 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing - query' }
 PBAObjectLifetimeAnaylysis >> queryOn: profiler for: result [
 
 	^ result
