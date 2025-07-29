@@ -38,9 +38,7 @@ PBAnalyzer >> analyzeAll: targetPrograms [
 		                 (self analyze: target) analysisResults ].
 	results := DataFrame
 		           withRows: targetResults
-		           rowNames:
-		           (targetPrograms collect: [ :target |
-			            target benchmark class ])
+		           rowNames: (self rowNames: targetPrograms)
 		           columnNames: targetResults anyOne keys.
 	^ results
 ]
@@ -73,4 +71,24 @@ PBAnalyzer >> results: anObject [
 PBAnalyzer >> resultsToCSV: aFileReference [
 
 	results writeToCsv: aFileReference
+]
+
+{ #category : 'accessing' }
+PBAnalyzer >> rowNames: targetPrograms [
+	"Row names have to be unique"
+
+	| uniqueNames classNames counters |
+	classNames := targetPrograms collect: [ :target |
+		              target benchmark className ].
+	uniqueNames := classNames copyWithoutDuplicates.
+	counters := Dictionary
+		            newFromKeys: uniqueNames
+		            andValues:
+		            ((1 to: uniqueNames size) collect: [ :i | 0 ]).
+	^ classNames collect: [ :name |
+		  | count newName |
+		  count := (counters at: name) + 1.
+		  counters at: name put: count.
+		  newName := name , count asString.
+		  newName ]
 ]
