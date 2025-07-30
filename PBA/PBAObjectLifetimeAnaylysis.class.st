@@ -6,12 +6,8 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
-{ #category : 'accessing - query' }
-PBAObjectLifetimeAnaylysis >> queryOn: profiler for: result [
+{ #category : 'initialization' }
+PBAObjectLifetimeAnaylysis >> defaultFeatureName [
 
-	^ result
-		  at: 'average object lifetime (%)'
-		  put:
-			  (profiler queryAllocationStats averageRelativeLifetime asFloat
-			   * 100 round: 2)
+	^ 'average object lifetime (%)'
 ]

@@ -6,12 +6,8 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
-{ #category : 'accessing - query' }
-PBAObjectAllocationSizeAnaylysis >> queryOn: profiler for: result [
+{ #category : 'initialization' }
+PBAObjectAllocationSizeAnaylysis >> defaultFeatureName [
 
-	^ result
-		  at: 'average object allocation size (B)'
-		  put:
-		  (profiler queryAllocationStats averageSizeInMemory asFloat round:
-			   2)
+	^ 'average object allocation size (B)'
 ]

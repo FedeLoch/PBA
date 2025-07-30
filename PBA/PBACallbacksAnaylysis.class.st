@@ -6,6 +6,12 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
+{ #category : 'testing' }
+PBACallbacksAnaylysis class >> isAbstract [
+
+	^ self = PBACallbacksAnaylysis
+]
+
 { #category : 'as yet unclassified' }
 PBACallbacksAnaylysis >> endExecution: aTime for: result [
 

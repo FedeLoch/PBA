@@ -26,5 +26,5 @@ PBACallBacksStrategy >> analyze: aTargetProgram [
 PBACallBacksStrategy >> initialize [ 
 	
 	super initialize.
-	analysis := { PBAExecutionTimeAnalysis new }
+	analysis := PBACallbacksAnaylysis allSubclasses collect: #new
 ]

@@ -21,8 +21,5 @@ PBAIllimaniStrategy >> analyze: aTargetProgram [
 PBAIllimaniStrategy >> initialize [
 
 	super initialize.
-	analysis := {
-		            PBAObjectLifetimeAnaylysis new.
-		            PBAMemoryConsumedAnaylysis new.
-		            PBAObjectAllocationSizeAnaylysis new }
+	analysis := PBAIllimaniAnaylysis allSubclasses collect: #new
 ]

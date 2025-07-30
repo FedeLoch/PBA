@@ -6,6 +6,12 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
+{ #category : 'testing' }
+PBAIllimaniAnaylysis class >> isAbstract [
+
+	^ self = PBAIllimaniAnaylysis
+]
+
 { #category : 'accessing - query' }
 PBAIllimaniAnaylysis >> queryOn: profiler for: result [
 

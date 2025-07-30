@@ -10,6 +10,24 @@ Class {
 }
 
 { #category : 'testing' }
+PBAAnalysisStrategy class >> isAbstract [
+
+	^ self = PBAAnalysisStrategy
+]
+
+{ #category : 'accessing' }
+PBAAnalysisStrategy >> analysis [
+
+	^ analysis
+]
+
+{ #category : 'accessing' }
+PBAAnalysisStrategy >> analysis: anObject [
+
+	analysis := anObject
+]
+
+{ #category : 'testing' }
 PBAAnalysisStrategy >> analyze: aTargetProgram [
 
 	self subclassResponsibility 

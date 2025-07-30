@@ -9,10 +9,10 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
-{ #category : 'testing' }
-PBAExecutionTimeAnalysis >> endExecution: endTime for: result [
+{ #category : 'initialization' }
+PBAExecutionTimeAnalysis >> defaultFeatureName [
 
-	^ result at: 'execution time (ms)' put: (endTime - initialTime).
+	^ 'execution time (ms)'
 ]
 
 { #category : 'testing' }

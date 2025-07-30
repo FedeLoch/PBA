@@ -6,10 +6,8 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
-{ #category : 'accessing - query' }
-PBAMemoryConsumedAnaylysis >> queryOn: profiler for: result [
+{ #category : 'initialization' }
+PBAMemoryConsumedAnaylysis >> defaultFeatureName [
 
-	^ result
-		  at: 'memory consumed (B)'
-		  put: profiler queryAllocationStats totalAllocatedMemory
+	^ 'memory consumed (B)'
 ]
