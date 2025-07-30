@@ -33,13 +33,16 @@ PBAnalyzer >> analyze: aTargetProgram [
 { #category : 'analyzing' }
 PBAnalyzer >> analyzeAll: targetPrograms [
 
-	| targetResults |
-	targetResults := targetPrograms collect: [ :target |
-		                 (self analyze: target) analysisResults ].
-	results := DataFrame
-		           withRows: targetResults
-		           rowNames: (self rowNames: targetPrograms)
-		           columnNames: targetResults anyOne keys.
+	| numberOfAnalysis |
+	numberOfAnalysis := (analysisStrategies collect: [ :strat |
+		                     strat analysis size ]) sum.
+	results := targetPrograms
+		           inject: (DataFrame new: 0 @ numberOfAnalysis)
+		           into: [ :df :target |
+			           df
+				           addRow: (self analyze: target) analysisResults values
+				           named:
+				           (self rowNameFor: target benchmark className in: df) ].
 	^ results
 ]
 
@@ -74,21 +77,14 @@ PBAnalyzer >> resultsToCSV: aFileReference [
 ]
 
 { #category : 'accessing' }
-PBAnalyzer >> rowNames: targetPrograms [
+PBAnalyzer >> rowNameFor: aBenchmark in: dataframe [
 	"Row names have to be unique"
 
-	| uniqueNames classNames counters |
-	classNames := targetPrograms collect: [ :target |
-		              target benchmark className ].
-	uniqueNames := classNames copyWithoutDuplicates.
-	counters := Dictionary
-		            newFromKeys: uniqueNames
-		            andValues:
-		            ((1 to: uniqueNames size) collect: [ :i | 0 ]).
-	^ classNames collect: [ :name |
-		  | count newName |
-		  count := (counters at: name) + 1.
-		  counters at: name put: count.
-		  newName := name , count asString.
-		  newName ]
+	| matchingNames newId |
+	dataframe row: aBenchmark , '_1' ifAbsent: [ ^ aBenchmark , '_1' ].
+	matchingNames := dataframe rowNames select: [ :rowName |
+		                 aBenchmark , '*' match: rowName ].
+	newId := ((matchingNames last substrings: '_') last asInteger + 1)
+		         asString.
+	^ aBenchmark , '_' , newId
 ]
