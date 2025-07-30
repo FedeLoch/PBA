@@ -12,13 +12,13 @@ PBACallbacksAnaylysis class >> isAbstract [
 	^ self = PBACallbacksAnaylysis
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'testing' }
 PBACallbacksAnaylysis >> endExecution: aTime for: result [
 
-	self subclassResponsibility 
+	^ self putValueFrom: aTime in: result
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'testing' }
 PBACallbacksAnaylysis >> startExecution: aTime [
 
 	self subclassResponsibility 

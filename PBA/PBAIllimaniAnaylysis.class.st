@@ -12,8 +12,8 @@ PBAIllimaniAnaylysis class >> isAbstract [
 	^ self = PBAIllimaniAnaylysis
 ]
 
-{ #category : 'accessing - query' }
+{ #category : 'accessing' }
 PBAIllimaniAnaylysis >> queryOn: profiler for: result [
 
-	^ self subclassResponsibility
+	^ self putValueFrom: profiler in: result
 ]

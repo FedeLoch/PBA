@@ -20,3 +20,9 @@ PBAExecutionTimeAnalysis >> startExecution: aTime [
 
 	initialTime := aTime
 ]
+
+{ #category : 'accessing' }
+PBAExecutionTimeAnalysis >> valueToExtractFrom: endTime [
+
+	^ endTime - initialTime
+]

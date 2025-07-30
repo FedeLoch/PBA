@@ -11,3 +11,10 @@ PBAObjectLifetimeAnaylysis >> defaultFeatureName [
 
 	^ 'average object lifetime (%)'
 ]
+
+{ #category : 'accessing' }
+PBAObjectLifetimeAnaylysis >> valueToExtractFrom: profiler [
+
+	^ profiler queryAllocationStats averageRelativeLifetime asFloat * 100
+		  round: 2
+]

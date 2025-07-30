@@ -38,3 +38,15 @@ PBAAnalysis >> initialize [
 
 	featureName := self defaultFeatureName
 ]
+
+{ #category : 'accessing' }
+PBAAnalysis >> putValueFrom: anObject in: result [
+
+	^ result at: featureName put: (self valueToExtractFrom: anObject)
+]
+
+{ #category : 'accessing' }
+PBAAnalysis >> valueToExtractFrom: anObject [
+
+	^ self subclassResponsibility
+]

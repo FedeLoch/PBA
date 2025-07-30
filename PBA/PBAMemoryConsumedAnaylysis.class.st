@@ -11,3 +11,9 @@ PBAMemoryConsumedAnaylysis >> defaultFeatureName [
 
 	^ 'memory consumed (B)'
 ]
+
+{ #category : 'accessing' }
+PBAMemoryConsumedAnaylysis >> valueToExtractFrom: profiler [
+
+	^ profiler queryAllocationStats totalAllocatedMemory
+]
