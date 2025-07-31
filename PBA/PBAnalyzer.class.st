@@ -17,9 +17,9 @@ PBAnalyzer >> analysisStrategies [
 ]
 
 { #category : 'accessing' }
-PBAnalyzer >> analysisStrategies: anObject [
+PBAnalyzer >> analysisStrategies: someAnalysisStrategies [
 
-	analysisStrategies := anObject
+	analysisStrategies := someAnalysisStrategies
 ]
 
 { #category : 'analyzing' }
@@ -66,26 +66,30 @@ PBAnalyzer >> results [
 ]
 
 { #category : 'accessing' }
-PBAnalyzer >> results: anObject [
+PBAnalyzer >> results: someResults [
 
-	results := anObject
+	results := someResults
 ]
 
 { #category : 'writing' }
 PBAnalyzer >> resultsToCSV: aFileReference [
 
+	aFileReference deleteIfAbsent: [].
 	results writeToCsv: aFileReference
 ]
 
 { #category : 'accessing' }
 PBAnalyzer >> rowNameFor: aBenchmark in: dataframe [
-	"Row names have to be unique"
+	"Row names have to be unique, the numbers matter little as long as the rows have different names"
 
-	| matchingNames newId |
+	| matchingNames oldId newId |
 	dataframe row: aBenchmark , '_1' ifAbsent: [ ^ aBenchmark , '_1' ].
+
 	matchingNames := dataframe rowNames select: [ :rowName |
 		                 aBenchmark , '*' match: rowName ].
-	newId := ((matchingNames last substrings: '_') last asInteger + 1)
-		         asString.
+
+	oldId := (matchingNames last substrings: '_') last.
+	newId := (oldId asInteger + 1) asString.
+	
 	^ aBenchmark , '_' , newId
 ]

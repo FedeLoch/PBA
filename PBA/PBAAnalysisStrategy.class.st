@@ -22,9 +22,9 @@ PBAAnalysisStrategy >> analysis [
 ]
 
 { #category : 'accessing' }
-PBAAnalysisStrategy >> analysis: anObject [
+PBAAnalysisStrategy >> analysis: someAnalysis [
 
-	analysis := anObject
+	analysis := someAnalysis
 ]
 
 { #category : 'accessing' }

@@ -28,9 +28,9 @@ PBAAnalysis >> featureName [
 ]
 
 { #category : 'accessing' }
-PBAAnalysis >> featureName: anObject [
+PBAAnalysis >> featureName: aName [
 
-	featureName := anObject
+	featureName := aName
 ]
 
 { #category : 'initialization' }
