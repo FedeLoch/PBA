@@ -26,18 +26,19 @@ PBAnalyzer >> analysisStrategies: anObject [
 PBAnalyzer >> analyze: aTargetProgram [
 
 	^ analysisStrategies inject: PBAResult new into: [ :result :strategy |
-		(strategy analyze: aTargetProgram) merge: result
+		result merge: (strategy analyze: aTargetProgram)
 	] 
 ]
 
 { #category : 'analyzing' }
 PBAnalyzer >> analyzeAll: targetPrograms [
 
-	| numberOfAnalysis |
-	numberOfAnalysis := (analysisStrategies collect: [ :strat |
-		                     strat analysis size ]) sum.
+	| featureNames |
+	featureNames := (analysisStrategies collect: [ :strat |
+		                 strat analysis collect: #defaultFeatureName ])
+		                flattened.
 	results := targetPrograms
-		           inject: (DataFrame new: 0 @ numberOfAnalysis)
+		           inject: (DataFrame withColumnNames: featureNames)
 		           into: [ :df :target |
 			           df
 				           addRow: (self analyze: target) analysisResults values
