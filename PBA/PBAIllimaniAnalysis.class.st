@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBAIllimaniAnaylysis',
+	#name : 'PBAIllimaniAnalysis',
 	#superclass : 'PBAAnalysis',
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
@@ -7,13 +7,13 @@ Class {
 }
 
 { #category : 'testing' }
-PBAIllimaniAnaylysis class >> isAbstract [
+PBAIllimaniAnalysis class >> isAbstract [
 
-	^ self = PBAIllimaniAnaylysis
+	^ self = PBAIllimaniAnalysis
 ]
 
 { #category : 'accessing' }
-PBAIllimaniAnaylysis >> queryOn: profiler for: result [
+PBAIllimaniAnalysis >> queryOn: profiler for: result [
 
 	^ self putValueFrom: profiler in: result
 ]

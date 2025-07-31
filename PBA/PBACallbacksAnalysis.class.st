@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBACallbacksAnaylysis',
+	#name : 'PBACallbacksAnalysis',
 	#superclass : 'PBAAnalysis',
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
@@ -7,19 +7,19 @@ Class {
 }
 
 { #category : 'testing' }
-PBACallbacksAnaylysis class >> isAbstract [
+PBACallbacksAnalysis class >> isAbstract [
 
-	^ self = PBACallbacksAnaylysis
+	^ self = PBACallbacksAnalysis
 ]
 
 { #category : 'testing' }
-PBACallbacksAnaylysis >> endExecution: aTime for: result [
+PBACallbacksAnalysis >> endExecution: aTime for: result [
 
 	^ self putValueFrom: aTime in: result
 ]
 
 { #category : 'testing' }
-PBACallbacksAnaylysis >> startExecution: aTime [
+PBACallbacksAnalysis >> startExecution: aTime [
 
 	self subclassResponsibility 
 ]
