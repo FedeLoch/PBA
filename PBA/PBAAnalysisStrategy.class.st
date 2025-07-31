@@ -27,6 +27,12 @@ PBAAnalysisStrategy >> analysis: anObject [
 	analysis := anObject
 ]
 
+{ #category : 'accessing' }
+PBAAnalysisStrategy >> analysisClass [
+
+	^ self subclassResponsibility
+]
+
 { #category : 'testing' }
 PBAAnalysisStrategy >> analyze: aTargetProgram [
 
@@ -37,5 +43,5 @@ PBAAnalysisStrategy >> analyze: aTargetProgram [
 PBAAnalysisStrategy >> initialize [ 
 	
 	super initialize.
-	analysis := {  }
+	analysis := self analysisClass allSubclasses collect: #new
 ]
