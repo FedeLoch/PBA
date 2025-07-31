@@ -1,17 +1,20 @@
 Class {
 	#name : 'PBAObjectLifetimeAnaylysis',
-	#superclass : 'PBAIllimaniAnaylysis',
+	#superclass : 'PBAIllimaniAnalysis',
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
 	#tag : 'AnalysisStrategy'
 }
 
-{ #category : 'as yet unclassified' }
-PBAObjectLifetimeAnaylysis >> queryOn: profiler for: result [
+{ #category : 'initialization' }
+PBAObjectLifetimeAnaylysis >> defaultFeatureName [
 
-	^ result
-		  at: 'average object lifetime (%)'
-		  put:
-			  (profiler queryAllocationStats averageRelativeLifetime asFloat
-			   * 100 round: 2)
+	^ 'average object lifetime (%)'
+]
+
+{ #category : 'accessing' }
+PBAObjectLifetimeAnaylysis >> valueToExtractFrom: profiler [
+
+	^ profiler queryAllocationStats averageRelativeLifetime asFloat * 100
+		  round: 2
 ]

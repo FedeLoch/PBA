@@ -1,17 +1,19 @@
 Class {
 	#name : 'PBAObjectAllocationSizeAnaylysis',
-	#superclass : 'PBAIllimaniAnaylysis',
+	#superclass : 'PBAIllimaniAnalysis',
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
 	#tag : 'AnalysisStrategy'
 }
 
-{ #category : 'as yet unclassified' }
-PBAObjectAllocationSizeAnaylysis >> queryOn: profiler for: result [
+{ #category : 'initialization' }
+PBAObjectAllocationSizeAnaylysis >> defaultFeatureName [
 
-	^ result
-		  at: 'average object allocation size (B)'
-		  put:
-		  (profiler queryAllocationStats averageSizeInMemory asFloat round:
-			   2)
+	^ 'average object allocation size (B)'
+]
+
+{ #category : 'accessing' }
+PBAObjectAllocationSizeAnaylysis >> valueToExtractFrom: profiler [
+
+	^ profiler queryAllocationStats averageSizeInMemory asFloat round: 2
 ]

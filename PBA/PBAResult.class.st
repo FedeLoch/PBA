@@ -35,10 +35,10 @@ PBAResult >> at: index put: value [
 ]
 
 { #category : 'initialization' }
-PBAResult >> initialize [ 
-	
+PBAResult >> initialize [
+
 	super initialize.
-	analysisResults := Dictionary new.
+	analysisResults := DataSeries new
 ]
 
 { #category : 'initialization' }

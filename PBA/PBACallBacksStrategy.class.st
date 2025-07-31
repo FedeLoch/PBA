@@ -6,6 +6,12 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
+{ #category : 'accessing' }
+PBACallBacksStrategy >> analysisClass [
+
+	^ PBACallbacksAnalysis
+]
+
 { #category : 'testing' }
 PBACallBacksStrategy >> analyze: aTargetProgram [
 
@@ -20,11 +26,4 @@ PBACallBacksStrategy >> analyze: aTargetProgram [
 	^ analysis inject: PBAResult new into: [ :result :anAnalysis |
 		anAnalysis endExecution: endTime for: result
 	].
-]
-
-{ #category : 'initialization' }
-PBACallBacksStrategy >> initialize [ 
-	
-	super initialize.
-	analysis := { PBAExecutionTimeAnalysis new }
 ]

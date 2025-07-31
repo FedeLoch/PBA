@@ -1,15 +1,19 @@
 Class {
 	#name : 'PBAMemoryConsumedAnaylysis',
-	#superclass : 'PBAIllimaniAnaylysis',
+	#superclass : 'PBAIllimaniAnalysis',
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
 	#tag : 'AnalysisStrategy'
 }
 
-{ #category : 'as yet unclassified' }
-PBAMemoryConsumedAnaylysis >> queryOn: profiler for: result [
+{ #category : 'initialization' }
+PBAMemoryConsumedAnaylysis >> defaultFeatureName [
 
-	^ result
-		  at: 'memory consumed (B)'
-		  put: profiler queryAllocationStats totalAllocatedMemory
+	^ 'memory consumed (B)'
+]
+
+{ #category : 'accessing' }
+PBAMemoryConsumedAnaylysis >> valueToExtractFrom: profiler [
+
+	^ profiler queryAllocationStats totalAllocatedMemory
 ]

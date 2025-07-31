@@ -10,6 +10,30 @@ Class {
 }
 
 { #category : 'testing' }
+PBAAnalysisStrategy class >> isAbstract [
+
+	^ self = PBAAnalysisStrategy
+]
+
+{ #category : 'accessing' }
+PBAAnalysisStrategy >> analysis [
+
+	^ analysis
+]
+
+{ #category : 'accessing' }
+PBAAnalysisStrategy >> analysis: someAnalysis [
+
+	analysis := someAnalysis
+]
+
+{ #category : 'accessing' }
+PBAAnalysisStrategy >> analysisClass [
+
+	^ self subclassResponsibility
+]
+
+{ #category : 'testing' }
 PBAAnalysisStrategy >> analyze: aTargetProgram [
 
 	self subclassResponsibility 
@@ -19,5 +43,5 @@ PBAAnalysisStrategy >> analyze: aTargetProgram [
 PBAAnalysisStrategy >> initialize [ 
 	
 	super initialize.
-	analysis := {  }
+	analysis := self analysisClass allSubclasses collect: #new
 ]

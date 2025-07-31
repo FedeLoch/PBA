@@ -16,6 +16,12 @@ PBASmarkBenchmarkpProgram class >> bench: smarkBench [
 ]
 
 { #category : 'accessing' }
+PBASmarkBenchmarkpProgram >> benchmark [
+
+	^ benchmark
+]
+
+{ #category : 'accessing' }
 PBASmarkBenchmarkpProgram >> benchmark: aBenchmark [
 
 	benchmark := aBenchmark
