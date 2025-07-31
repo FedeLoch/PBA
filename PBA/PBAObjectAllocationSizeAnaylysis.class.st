@@ -1,6 +1,6 @@
 Class {
 	#name : 'PBAObjectAllocationSizeAnaylysis',
-	#superclass : 'PBAIllimaniAnaylysis',
+	#superclass : 'PBAIllimaniAnalysis',
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
 	#tag : 'AnalysisStrategy'

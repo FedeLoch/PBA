@@ -1,6 +1,6 @@
 Class {
 	#name : 'PBAExecutionTimeAnalysis',
-	#superclass : 'PBACallbacksAnaylysis',
+	#superclass : 'PBACallbacksAnalysis',
 	#instVars : [
 		'initialTime'
 	],
