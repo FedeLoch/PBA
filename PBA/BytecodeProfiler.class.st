@@ -17,6 +17,12 @@ BytecodeProfiler class >> profile: aContext [
 ]
 
 { #category : 'accessing' }
+BytecodeProfiler >> context [
+
+	^ currentContext
+]
+
+{ #category : 'accessing' }
 BytecodeProfiler >> context: aContext [
 
 	currentContext := aContext
