@@ -16,7 +16,9 @@ BaselineOfPBA >> baseline: spec [
     	spec baseline: 'IllimaniProfiler' with: [
 			spec repository: 'github://jordanmontt/illimani-memory-profiler:main'
 		].
-		spec package: 'PBA' with: [ spec requires: #( 'SMark' 'IllimaniProfiler' ) ].
+		spec baseline: 'PharoVM' with: [ spec repository: 'github://evref-inria/pharo-vm:pharo-12' ].
+
+		spec package: 'PBA' with: [ spec requires: #( 'SMark' 'IllimaniProfiler' 'PharoVM' ) ].
     	spec group: 'default' with: #( 'PBA' )
 	]
 ]
