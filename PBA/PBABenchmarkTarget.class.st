@@ -5,3 +5,15 @@ Class {
 	#package : 'PBA',
 	#tag : 'Target'
 }
+
+{ #category : 'converting' }
+PBABenchmarkTarget >> asContext [
+
+	^ [ self run ] asContext
+]
+
+{ #category : 'converting' }
+PBABenchmarkTarget >> run [
+
+	^ self subclassResponsibility 
+]
