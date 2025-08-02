@@ -28,6 +28,12 @@ BytecodeProfiler >> context: aContext [
 	currentContext := aContext
 ]
 
+{ #category : 'running' }
+BytecodeProfiler >> featureTrackers [
+
+	^ featureTrackers 
+]
+
 { #category : 'accessing' }
 BytecodeProfiler >> initialize [
 
@@ -47,7 +53,7 @@ BytecodeProfiler >> notifyTrackers [
 ]
 
 { #category : 'running' }
-BytecodeProfiler >> report [
+BytecodeProfiler >> result [
 
 	"TODO"
 	^ self
@@ -58,5 +64,5 @@ BytecodeProfiler >> run [
 
 	[ self notifyTrackers; context: currentContext step. currentContext willFailReturn ] whileFalse.
 
-	^ self report
+	^ self result
 ]
