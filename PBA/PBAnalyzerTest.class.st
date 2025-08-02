@@ -44,6 +44,17 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheAverageObjectLifetim
 ]
 
 { #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheAverageOfArguments [
+
+	| total result |
+	
+	result := analyzer analyze: deltaBlue.
+	total := result at: 'avgArguments'.
+	
+	self assert: total equals: 0.714
+]
+
+{ #category : 'tests' }
 PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheExecutionTime [
 
 	| executionTime result |
