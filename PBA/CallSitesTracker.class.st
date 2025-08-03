@@ -35,7 +35,7 @@ CallSitesTracker >> send: selector super: supered numArgs: numberArguments [
 	
 	sender := profiler context sender.
 	
-	sender ifNil: [ ^ self ]. 
-
-	callSites at: sender selector update: [ :old | old + 1 ] initial: 1
+	sender ifNotNil: [
+		callSites at: sender asString update: [ :old | old + 1 ] initial: 1
+	]. 
 ]
