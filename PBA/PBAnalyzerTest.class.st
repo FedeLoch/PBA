@@ -78,6 +78,17 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheMemoryConsumed [
 ]
 
 { #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfDifferentCallSites [
+
+	| total result |
+	
+	result := analyzer analyze: deltaBlue.
+	total := result at: 'differentCallSites'.
+	
+	self assert: total equals: 68
+]
+
+{ #category : 'tests' }
 PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfDifferentExecutedBytecodes [
 
 	| total result |
@@ -117,6 +128,6 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfMethods
 	
 	result := analyzer analyze: deltaBlue.
 	total := result at: 'totalMethodsCalled'.
-	
+
 	self assert: total equals: 12267492
 ]
