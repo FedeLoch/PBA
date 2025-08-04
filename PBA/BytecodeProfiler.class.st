@@ -38,9 +38,9 @@ BytecodeProfiler >> featureTrackers [
 BytecodeProfiler >> initialize [
 
 	super initialize.
-	featureTrackers := BytecodeInstructionClient subclasses collect: [ :trackerClass |
-		trackerClass new profiler: self
-	].
+	featureTrackers := {
+		BytecodeInstructionClient new profiler: self
+	}
 ]
 
 { #category : 'running' }
