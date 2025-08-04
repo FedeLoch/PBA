@@ -7,7 +7,9 @@ Class {
 		'callSites',
 		'executedBytecodes',
 		'executedMethods',
-		'totalArguments'
+		'totalArguments',
+		'stackPushs',
+		'stackPops'
 	],
 	#category : 'PBA-BytecodeProfiler',
 	#package : 'PBA',
@@ -50,6 +52,12 @@ BytecodeInstructionClient >> differentMethodsCalled [
 	^ executedMethods keys size
 ]
 
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> doPop [
+
+	stackPops := stackPops + 1
+]
+
 { #category : 'as yet unclassified' }
 BytecodeInstructionClient >> dumpResult: aResult [
 
@@ -74,6 +82,8 @@ BytecodeInstructionClient >> initialize [
 	executedBytecodes := Dictionary new.
 	executedMethods := Dictionary new.
 	totalArguments := 0.
+	stackPushs := 0.
+	stackPops := 0.
 ]
 
 { #category : 'instruction decoding' }
@@ -86,6 +96,90 @@ BytecodeInstructionClient >> pc: aBytecode [
 BytecodeInstructionClient >> profiler: aProfiler [
 
 	profiler := aProfiler 
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> pushActiveContext [
+	
+	self stackPush
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> pushActiveProcess [
+	
+	self stackPush
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> pushClosureTemps: numTemps [
+	
+	self stackPush
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> pushConsArrayWithElements: numElements [
+	
+	self stackPush
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> pushConstant: value [
+	
+	self stackPush
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> pushFloat32ArrayToRegister [
+	
+	self stackPush
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> pushFloat64ArrayToRegister [
+	
+	self stackPush
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> pushFullClosure: aCollection numCopied: anInteger receiverOnStack: aFalse ignoreOuterContext: aFalse4 [
+	
+	self stackPush
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> pushLiteralVariable: anAssociation [
+	
+	self stackPush
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> pushNewArrayOfSize: numElements [
+	
+	self stackPush
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> pushReceiver [
+	
+	self stackPush
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> pushReceiverVariable: offset [
+	
+	self stackPush
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> pushRemoteTemp: remoteTempIndex inVectorAt: tempVectorIndex [
+	
+	self stackPush
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> pushTemporaryVariable: offset [
+	
+	self stackPush
 ]
 
 { #category : 'instruction decoding' }
@@ -105,6 +199,12 @@ BytecodeInstructionClient >> send: selector super: supered numArgs: numberArgume
 
 	executedMethods at: profiler context method update: [ :old | old + 1 ] initial: 1.
 	totalArguments := totalArguments + numberArguments
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> stackPush [
+
+	stackPushs := stackPushs + 1
 ]
 
 { #category : 'as yet unclassified' }
