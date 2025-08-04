@@ -9,7 +9,8 @@ Class {
 		'executedMethods',
 		'totalArguments',
 		'stackPushs',
-		'stackPops'
+		'stackPops',
+		'arrayAccesses'
 	],
 	#category : 'PBA-BytecodeProfiler',
 	#package : 'PBA',
@@ -82,8 +83,15 @@ BytecodeInstructionClient >> initialize [
 	executedBytecodes := Dictionary new.
 	executedMethods := Dictionary new.
 	totalArguments := 0.
+	arrayAccesses := 0.
 	stackPushs := 0.
 	stackPops := 0.
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> isArrayAccess: method [
+	
+	^ method = (Array >> #at:)
 ]
 
 { #category : 'instruction decoding' }
@@ -185,20 +193,23 @@ BytecodeInstructionClient >> pushTemporaryVariable: offset [
 { #category : 'instruction decoding' }
 BytecodeInstructionClient >> send: selector super: supered numArgs: numberArguments [
 
-	| sender |
+	| sender method |
 	
 	sender := profiler context sender.
+	method := profiler context method.
 
-	profiler context method isCompiledBlock ifTrue: [
-		executedBlocks at: (profiler context method) update: [ :old | old + 1 ] initial: 1.
+	method isCompiledBlock ifTrue: [
+		executedBlocks at: method update: [ :old | old + 1 ] initial: 1.
 	].
 	
 	sender ifNotNil: [
 		callSites at: ((sender asString), self currentBytecode asString) update: [ :old | old + 1 ] initial: 1
 	].
 
-	executedMethods at: profiler context method update: [ :old | old + 1 ] initial: 1.
-	totalArguments := totalArguments + numberArguments
+	(self isArrayAccess: method) ifTrue: [ arrayAccesses := arrayAccesses + 1 ].
+
+	executedMethods at: method update: [ :old | old + 1 ] initial: 1.
+	totalArguments := totalArguments + numberArguments.
 ]
 
 { #category : 'instruction decoding' }
