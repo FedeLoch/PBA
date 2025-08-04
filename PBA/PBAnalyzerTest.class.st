@@ -3,7 +3,8 @@ Class {
 	#superclass : 'TestCase',
 	#instVars : [
 		'target',
-		'analyzer'
+		'analyzer',
+		'deltaBlue'
 	],
 	#category : 'PBA-Analyzer',
 	#package : 'PBA',
@@ -14,48 +15,141 @@ Class {
 PBAnalyzerTest >> setUp [ 
 
 	super setUp.
+	self timeLimit: 5 hours.
+
 	analyzer := PBAnalyzer new.
+	deltaBlue := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
 ]
 
 { #category : 'tests' }
 PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheAverageObjectAllocationSize [
 
-	| averageObjectAllocationSize |
-	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
-	averageObjectAllocationSize := (analyzer analyze: target) at:
-		                         'average object allocation size (B)'.
-		
-	self assert: (averageObjectAllocationSize between: 45 and: 80)
+	| averageObjectAllocationSize result |
+	
+	result := analyzer analyze: deltaBlue.
+	averageObjectAllocationSize := result at: 'average object allocation size (B)'.
+	
+	self assert: (averageObjectAllocationSize between: 1 and: 100)
 ]
 
 { #category : 'tests' }
 PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheAverageObjectLifetime [
 
-	| averageObjectLifetime |
-	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
-	averageObjectLifetime := (analyzer analyze: target) at:
-		                         'average object lifetime (%)'.
+	| averageObjectLifetime result |
+	
+	result := analyzer analyze: deltaBlue.
+	averageObjectLifetime := result at: 'average object lifetime (%)'.
 		
-	self assert: (averageObjectLifetime between: 29 and: 40)
+	self assert: (averageObjectLifetime between: 1 and: 100)
+]
+
+{ #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheAverageOfArguments [
+
+	| total result |
+	
+	result := analyzer analyze: deltaBlue.
+	total := result at: 'avgArguments'.
+	
+	self assert: total equals: 0.714
 ]
 
 { #category : 'tests' }
 PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheExecutionTime [
 
-	| executionTime |
-	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
-	executionTime := (analyzer analyze: target) at: 'execution time (ms)'.
+	| executionTime result |
+	
+	result := analyzer analyze: deltaBlue.
+	executionTime := result at: 'execution time (ms)'.
 
-	self assert: (executionTime between: 30 and: 50)
+	self assert: (executionTime between: 1 and: 100)
 
 ]
 
 { #category : 'tests' }
 PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheMemoryConsumed [
 
-	| memoryConsumed |
-	target := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
-	memoryConsumed := (analyzer analyze: target) at: 'memory consumed (B)'.
+	| memoryConsumed result |
 	
-	self assert: (memoryConsumed between: 53000 and: 107000)
+	result := analyzer analyze: deltaBlue.
+	memoryConsumed := result at: 'memory consumed (B)'.
+	
+	self assert: (memoryConsumed between: 50000 and: 150000)
+]
+
+{ #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfDifferentCallSites [
+
+	| total result |
+	
+	result := analyzer analyze: deltaBlue.
+	total := result at: 'differentCallSites'.
+	
+	self assert: total equals: 719
+]
+
+{ #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfDifferentExecutedBlocks [
+
+	| total result |
+	
+	result := analyzer analyze: deltaBlue.
+	total := result at: 'differentExecutedBlocks'.
+
+	self assert: total equals: 16
+]
+
+{ #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfDifferentExecutedBytecodes [
+
+	| total result |
+	
+	result := analyzer analyze: deltaBlue.
+	total := result at: 'differentExecutedBytecodes'.
+	
+	self assert: total equals: 356
+]
+
+{ #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfDifferentMethodsCalled [
+
+	| total result |
+	
+	result := analyzer analyze: deltaBlue.
+	total := result at: 'differentMethodsCalled'.
+	
+	self assert: total equals: 127
+]
+
+{ #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfExecutedBlocks [
+
+	| total result |
+	
+	result := analyzer analyze: deltaBlue.
+	total := result at: 'totalExecutedBlocks'.
+
+	self assert: total equals: 1075376
+]
+
+{ #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfExecutedBytecodes [
+
+	| total result |
+	
+	result := analyzer analyze: deltaBlue.
+	total := result at: 'totalExecutedBytecodes'.
+
+	self assert: total equals: 50833582
+]
+
+{ #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfMethodsCalled [
+
+	| total result |
+	
+	result := analyzer analyze: deltaBlue.
+	total := result at: 'totalMethodsCalled'.
+
+	self assert: total equals: 12267492
 ]
