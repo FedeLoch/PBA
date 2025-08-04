@@ -27,6 +27,7 @@ MethodsTracker >> dumpResult: aResult [
 
 	aResult at: 'totalMethodsCalled' put: self totalMethodsCalled.
 	aResult at: 'differentMethodsCalled' put: self differentMethodsCalled.
+	aResult at: 'totalExecutedLoops' put: self totalExecutedLoops.
 	aResult at: 'avgArguments' put: self avgArguments.
 ]
 
@@ -43,6 +44,14 @@ MethodsTracker >> send: selector super: supered numArgs: numberArguments [
 
 	executedMethods at: profiler context method update: [ :old | old + 1 ] initial: 1.
 	totalArguments := totalArguments + numberArguments
+]
+
+{ #category : 'accessing' }
+MethodsTracker >> totalExecutedLoops [
+
+	^ executedMethods keys inject: 0 into: [ :r :method |
+		method isLoop ifTrue: [ r + executedMethods at: method ] ifFalse: [ r ]
+	]
 ]
 
 { #category : 'accessing' }
