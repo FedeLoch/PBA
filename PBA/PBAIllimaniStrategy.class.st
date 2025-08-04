@@ -6,12 +6,6 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
-{ #category : 'accessing' }
-PBAIllimaniStrategy >> analysisClass [
-
-	^ PBAIllimaniAnalysis
-]
-
 { #category : 'testing' }
 PBAIllimaniStrategy >> analyze: aTargetProgram [
 
@@ -21,4 +15,11 @@ PBAIllimaniStrategy >> analyze: aTargetProgram [
 		  inject: PBAResult new
 		  into: [ :result :anAnalysis |
 		  anAnalysis queryOn: profiler for: result ]
+]
+
+{ #category : 'initialization' }
+PBAIllimaniStrategy >> initialize [
+
+	super initialize.
+	analysis := PBAIllimaniAnalysis allSubclasses collect: #new
 ]
