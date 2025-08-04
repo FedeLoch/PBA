@@ -9,12 +9,6 @@ Class {
 	#tag : 'BytecodeProfiler'
 }
 
-{ #category : 'instruction decoding' }
-BlocksTracker >> blockReturnTop [
-
-	executedBlocks at: (profiler context method hash) update: [ :old | old + 1 ] initial: 1.
-]
-
 { #category : 'as yet unclassified' }
 BlocksTracker >> differentExecutedBlocks [
 
@@ -33,6 +27,15 @@ BlocksTracker >> initialize [
 
 	super initialize.
 	executedBlocks := Dictionary new.
+]
+
+{ #category : 'instruction decoding' }
+BlocksTracker >> send: selector super: supered numArgs: numberArguments [
+
+	profiler context method isCompiledBlock ifTrue: [
+		executedBlocks at: (profiler context method) update: [ :old | old + 1 ] initial: 1.
+	].
+	
 ]
 
 { #category : 'as yet unclassified' }

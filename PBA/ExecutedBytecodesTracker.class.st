@@ -32,7 +32,7 @@ ExecutedBytecodesTracker >> initialize [
 { #category : 'instruction decoding' }
 ExecutedBytecodesTracker >> pc: aBytecode [
 	
-	executedBytecodes at: aBytecode update: [ :old | old + 1 ] initial: 1
+	executedBytecodes at: self currentBytecode update: [ :old | old + 1 ] initial: 1
 ]
 
 { #category : 'accessing' }

@@ -85,7 +85,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfDiffere
 	result := analyzer analyze: deltaBlue.
 	total := result at: 'differentCallSites'.
 	
-	self assert: total equals: 118
+	self assert: total equals: 719
 ]
 
 { #category : 'tests' }
@@ -96,7 +96,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfDiffere
 	result := analyzer analyze: deltaBlue.
 	total := result at: 'differentExecutedBlocks'.
 
-	self assert: total equals: 15
+	self assert: total equals: 16
 ]
 
 { #category : 'tests' }

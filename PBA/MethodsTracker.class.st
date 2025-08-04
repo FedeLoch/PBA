@@ -41,7 +41,7 @@ MethodsTracker >> initialize [
 { #category : 'instruction decoding' }
 MethodsTracker >> send: selector super: supered numArgs: numberArguments [
 
-	executedMethods at: selector update: [ :old | old + 1 ] initial: 1.
+	executedMethods at: profiler context method update: [ :old | old + 1 ] initial: 1.
 	totalArguments := totalArguments + numberArguments
 ]
 

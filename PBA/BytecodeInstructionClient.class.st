@@ -9,6 +9,12 @@ Class {
 	#tag : 'BytecodeProfiler'
 }
 
+{ #category : 'accessing' }
+BytecodeInstructionClient >> currentBytecode [ 
+	
+	^ profiler context pc - 1
+]
+
 { #category : 'as yet unclassified' }
 BytecodeInstructionClient >> dumpResult: aResult [
 
