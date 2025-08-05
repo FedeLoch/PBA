@@ -10,7 +10,9 @@ Class {
 		'totalArguments',
 		'stackPushs',
 		'stackPops',
-		'arrayAccesses'
+		'arrayAccesses',
+		'instanceVariableAccesses',
+		'staticVariableAccesses'
 	],
 	#category : 'PBA-BytecodeProfiler',
 	#package : 'PBA',
@@ -72,6 +74,8 @@ BytecodeInstructionClient >> dumpResult: aResult [
 		'differentMethodsCalled' -> self differentMethodsCalled.
 		'totalExecutedLoops' -> self totalExecutedLoops.
 		'avgArguments' -> self avgArguments.
+		'staticVariableAccesses' -> self staticVariableAccesses.
+		'instanceVariableAccesses' -> self instanceVariableAccesses 
 	})
 	
 ]
@@ -80,14 +84,28 @@ BytecodeInstructionClient >> dumpResult: aResult [
 BytecodeInstructionClient >> initialize [
 
 	super initialize.
-	executedBlocks := Dictionary new.
-	callSites := Dictionary new.
-	executedBytecodes := Dictionary new.
-	executedMethods := Dictionary new.
+	executedBlocks := Dictionary new: 1000.
+	callSites := Dictionary new: 1000.
+	executedBytecodes := Dictionary new: 1000.
+	executedMethods := Dictionary new: 1000.
+	instanceVariableAccesses := 0.
+	staticVariableAccesses := 0.
 	totalArguments := 0.
 	arrayAccesses := 0.
 	stackPushs := 0.
 	stackPops := 0.
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> instanceVariableAccess [
+
+	instanceVariableAccesses := instanceVariableAccesses + 1
+]
+
+{ #category : 'as yet unclassified' }
+BytecodeInstructionClient >> instanceVariableAccesses [
+
+	^ instanceVariableAccesses 
 ]
 
 { #category : 'instruction decoding' }
@@ -97,10 +115,11 @@ BytecodeInstructionClient >> isArrayAccess: method [
 ]
 
 { #category : 'as yet unclassified' }
-BytecodeInstructionClient >> methodToCall: selector numArgs: numArgs [ 
-	
+BytecodeInstructionClient >> methodToCall: selector receiver: receiverToCall super: supered [
 
-	^ (self receiverToCall: numArgs) class lookupSelector: selector
+	^ (supered ifTrue: [ receiverToCall class class ]
+		   		  ifFalse: [ receiverToCall class ]
+		) lookupSelector: selector
 ]
 
 { #category : 'instruction decoding' }
@@ -112,13 +131,15 @@ BytecodeInstructionClient >> pc: aBytecode [
 { #category : 'instruction decoding' }
 BytecodeInstructionClient >> popIntoLiteralVariable: anAssociation [
 
-	self stackPop
+	self stackPop.
+	self staticVariableAccess
 ]
 
 { #category : 'instruction decoding' }
 BytecodeInstructionClient >> popIntoReceiverVariable: offset [
 
-	self stackPop
+	self stackPop.
+	self instanceVariableAccess
 ]
 
 { #category : 'instruction decoding' }
@@ -190,7 +211,8 @@ BytecodeInstructionClient >> pushFullClosure: aCollection numCopied: anInteger r
 { #category : 'instruction decoding' }
 BytecodeInstructionClient >> pushLiteralVariable: anAssociation [
 	
-	self stackPush
+	self stackPush.
+	self staticVariableAccess
 ]
 
 { #category : 'instruction decoding' }
@@ -208,7 +230,8 @@ BytecodeInstructionClient >> pushReceiver [
 { #category : 'instruction decoding' }
 BytecodeInstructionClient >> pushReceiverVariable: offset [
 	
-	self stackPush
+	self stackPush.
+	self instanceVariableAccess
 ]
 
 { #category : 'instruction decoding' }
@@ -237,14 +260,14 @@ BytecodeInstructionClient >> send: selector super: supered numArgs: numberArgume
 	sender := profiler context sender.
 	caller := profiler context method.
 	receiverToCall := self receiverToCall: numberArguments.
-	methodToCall := self methodToCall: selector numArgs: numberArguments.
+	methodToCall := self methodToCall: selector receiver: receiverToCall super: supered.
 	
 	receiverToCall isBlock ifTrue: [
-		executedBlocks at: receiverToCall update: [ :old | old + 1 ] initial: 1.
+		executedBlocks at: receiverToCall compiledBlock update: [ :old | old + 1 ] initial: 1.
 	].
 	
 	caller ifNotNil: [
-		callSites at: ((caller asString), self currentBytecode asString) update: [ :old | old + 1 ] initial: 1
+		callSites at: (caller printString, self currentBytecode asString) update: [ :old | old + 1 ] initial: 1
 	].
 
 	(self isArrayAccess: methodToCall) ifTrue: [ arrayAccesses := arrayAccesses + 1 ].
@@ -263,6 +286,18 @@ BytecodeInstructionClient >> stackPop [
 BytecodeInstructionClient >> stackPush [
 
 	stackPushs := stackPushs + 1
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> staticVariableAccess [
+
+	staticVariableAccesses := staticVariableAccesses + 1
+]
+
+{ #category : 'as yet unclassified' }
+BytecodeInstructionClient >> staticVariableAccesses [
+
+	^ staticVariableAccesses 
 ]
 
 { #category : 'as yet unclassified' }
