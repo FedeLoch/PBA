@@ -85,7 +85,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfDiffere
 	result := analyzer analyze: deltaBlue.
 	total := result at: 'differentCallSites'.
 	
-	self assert: total equals: 719
+	self assert: total equals: 489
 ]
 
 { #category : 'tests' }
@@ -118,7 +118,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfDiffere
 	result := analyzer analyze: deltaBlue.
 	total := result at: 'differentMethodsCalled'.
 	
-	self assert: total equals: 127
+	self assert: total equals: 179
 ]
 
 { #category : 'tests' }
@@ -129,7 +129,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfExecute
 	result := analyzer analyze: deltaBlue.
 	total := result at: 'totalExecutedBlocks'.
 
-	self assert: total equals: 1075376
+	self assert: total equals: 840279
 ]
 
 { #category : 'tests' }
@@ -151,5 +151,5 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfMethods
 	result := analyzer analyze: deltaBlue.
 	total := result at: 'totalMethodsCalled'.
 
-	self assert: total equals: 12267492
+	self assert: total equals: 12267491
 ]

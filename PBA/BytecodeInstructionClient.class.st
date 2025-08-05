@@ -270,9 +270,11 @@ BytecodeInstructionClient >> send: selector super: supered numArgs: numberArgume
 		callSites at: (caller printString, self currentBytecode asString) update: [ :old | old + 1 ] initial: 1
 	].
 
-	(self isArrayAccess: methodToCall) ifTrue: [ arrayAccesses := arrayAccesses + 1 ].
-
-	executedMethods at: methodToCall update: [ :old | old + 1 ] initial: 1.
+	methodToCall ifNotNil: [
+		(self isArrayAccess: methodToCall) ifTrue: [ arrayAccesses := arrayAccesses + 1 ].
+		executedMethods at: methodToCall update: [ :old | old + 1 ] initial: 1
+	].
+	
 	totalArguments := totalArguments + numberArguments.
 ]
 
