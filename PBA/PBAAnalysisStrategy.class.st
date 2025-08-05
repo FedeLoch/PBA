@@ -27,21 +27,8 @@ PBAAnalysisStrategy >> analysis: someAnalysis [
 	analysis := someAnalysis
 ]
 
-{ #category : 'accessing' }
-PBAAnalysisStrategy >> analysisClass [
-
-	^ self subclassResponsibility
-]
-
 { #category : 'testing' }
 PBAAnalysisStrategy >> analyze: aTargetProgram [
 
 	self subclassResponsibility 
-]
-
-{ #category : 'initialization' }
-PBAAnalysisStrategy >> initialize [ 
-	
-	super initialize.
-	analysis := self analysisClass allSubclasses collect: #new
 ]
