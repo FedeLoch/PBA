@@ -117,9 +117,9 @@ BytecodeInstructionClient >> isArrayAccess: method [
 { #category : 'as yet unclassified' }
 BytecodeInstructionClient >> methodToCall: selector receiver: receiverToCall super: supered [
 
-	^ (supered ifTrue: [ receiverToCall class class ]
-		   		  ifFalse: [ receiverToCall class ]
-		) lookupSelector: selector
+	^ (supered
+		   ifTrue: [ receiverToCall class ]
+		   ifFalse: [ receiverToCall ]) class lookupSelector: selector
 ]
 
 { #category : 'instruction decoding' }
