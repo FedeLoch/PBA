@@ -61,7 +61,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheExecutionTime [
 	
 	result := analyzer analyze: deltaBlue.
 	executionTime := result at: 'execution time (ms)'.
-
+	
 	self assert: (executionTime between: 1 and: 100)
 
 ]

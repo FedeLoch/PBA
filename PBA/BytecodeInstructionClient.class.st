@@ -56,21 +56,23 @@ BytecodeInstructionClient >> differentMethodsCalled [
 { #category : 'instruction decoding' }
 BytecodeInstructionClient >> doPop [
 
-	stackPops := stackPops + 1
+	self stackPop
 ]
 
 { #category : 'as yet unclassified' }
 BytecodeInstructionClient >> dumpResult: aResult [
 
-	aResult at: 'totalExecutedBlocks' put: self totalExecutedBlocks.
-	aResult at: 'differentExecutedBlocks' put: self differentExecutedBlocks.
-	aResult at: 'differentCallSites' put: self differentCallSites.
-	aResult at: 'totalExecutedBytecodes' put: self totalExecutedBytecodes.
-	aResult at: 'differentExecutedBytecodes' put: self differentExecutedBytecodes.
-	aResult at: 'totalMethodsCalled' put: self totalMethodsCalled.
-	aResult at: 'differentMethodsCalled' put: self differentMethodsCalled.
-	aResult at: 'totalExecutedLoops' put: self totalExecutedLoops.
-	aResult at: 'avgArguments' put: self avgArguments.
+	aResult merge: (Dictionary newFrom: {
+		'totalExecutedBlocks' -> self totalExecutedBlocks.
+		'differentExecutedBlocks' -> self differentExecutedBlocks.
+		'differentCallSites' -> self differentCallSites.
+		'totalExecutedBytecodes' -> self totalExecutedBytecodes.
+		'differentExecutedBytecodes' -> self differentExecutedBytecodes.
+		'totalMethodsCalled' -> self totalMethodsCalled.
+		'differentMethodsCalled' -> self differentMethodsCalled.
+		'totalExecutedLoops' -> self totalExecutedLoops.
+		'avgArguments' -> self avgArguments.
+	})
 	
 ]
 
@@ -90,14 +92,45 @@ BytecodeInstructionClient >> initialize [
 
 { #category : 'instruction decoding' }
 BytecodeInstructionClient >> isArrayAccess: method [
-	
+
 	^ method = (Array >> #at:)
+]
+
+{ #category : 'as yet unclassified' }
+BytecodeInstructionClient >> methodToCall: selector numArgs: numArgs [ 
+	
+
+	^ (self receiverToCall: numArgs) class lookupSelector: selector
 ]
 
 { #category : 'instruction decoding' }
 BytecodeInstructionClient >> pc: aBytecode [
 	
 	executedBytecodes at: self currentBytecode update: [ :old | old + 1 ] initial: 1
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> popIntoLiteralVariable: anAssociation [
+
+	self stackPop
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> popIntoReceiverVariable: offset [
+
+	self stackPop
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> popIntoRemoteTemp: remoteTempIndex inVectorAt: tempVectorIndex [
+
+	self stackPop
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> popIntoTemporaryVariable: offset [
+
+	self stackPop
 ]
 
 { #category : 'accessing' }
@@ -191,25 +224,39 @@ BytecodeInstructionClient >> pushTemporaryVariable: offset [
 ]
 
 { #category : 'instruction decoding' }
+BytecodeInstructionClient >> receiverToCall: numberArguments [
+
+	^ profiler context stackAt: numberArguments
+]
+
+{ #category : 'instruction decoding' }
 BytecodeInstructionClient >> send: selector super: supered numArgs: numberArguments [
 
-	| sender method |
+	| sender caller methodToCall receiverToCall |
 	
 	sender := profiler context sender.
-	method := profiler context method.
-
-	method isCompiledBlock ifTrue: [
-		executedBlocks at: method update: [ :old | old + 1 ] initial: 1.
+	caller := profiler context method.
+	receiverToCall := self receiverToCall: numberArguments.
+	methodToCall := self methodToCall: selector numArgs: numberArguments.
+	
+	receiverToCall isBlock ifTrue: [
+		executedBlocks at: receiverToCall update: [ :old | old + 1 ] initial: 1.
 	].
 	
-	sender ifNotNil: [
-		callSites at: ((sender asString), self currentBytecode asString) update: [ :old | old + 1 ] initial: 1
+	caller ifNotNil: [
+		callSites at: ((caller asString), self currentBytecode asString) update: [ :old | old + 1 ] initial: 1
 	].
 
-	(self isArrayAccess: method) ifTrue: [ arrayAccesses := arrayAccesses + 1 ].
+	(self isArrayAccess: methodToCall) ifTrue: [ arrayAccesses := arrayAccesses + 1 ].
 
-	executedMethods at: method update: [ :old | old + 1 ] initial: 1.
+	executedMethods at: methodToCall update: [ :old | old + 1 ] initial: 1.
 	totalArguments := totalArguments + numberArguments.
+]
+
+{ #category : 'instruction decoding' }
+BytecodeInstructionClient >> stackPop [
+
+	stackPops := stackPops + 1
 ]
 
 { #category : 'instruction decoding' }
