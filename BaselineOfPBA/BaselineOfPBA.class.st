@@ -10,7 +10,7 @@ BaselineOfPBA >> baseline: spec [
 
 	<baseline>
 	spec for: #common do: [
-		spec baseline: 'SMark' with: [ spec loads: #('full'); repository: 'github://DurieuxPol/SMark/feat/updateBaseline ' ].
+		spec baseline: 'SMark' with: [ spec repository: 'github://guillep/SMark' ].
     spec baseline: 'IllimaniProfiler' with: [ spec repository: 'github://jordanmontt/illimani-memory-profiler:main' ].
 		spec package: 'PBA' with: [ spec requires: #( 'SMark' 'IllimaniProfiler' ) ].
     
