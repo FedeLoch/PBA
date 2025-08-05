@@ -48,7 +48,7 @@ PBAExperiment >> pcaWith: results [
 { #category : 'as yet unclassified' }
 PBAExperiment >> runExperiment [
 
-	| results mTransformed df |
+	| results mTransformed df file |
 	results := self getResults.
 	mTransformed := self pcaWith: results.
 
@@ -56,5 +56,7 @@ PBAExperiment >> runExperiment [
 		      withRows: mTransformed rows
 		      columnNames: #( PCA1 PCA2 ).
 	df addColumn: (results columnAt: 1) named: 'execution time'.
-	^ df
+
+	file := 'exp.csv' asFileReference.
+	df writeToCsv: file
 ]
