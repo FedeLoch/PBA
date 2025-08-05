@@ -40,13 +40,12 @@ PBAnalyzer >> analyzeAll: targetPrograms [
 	intermediateResult := self analyze: targetPrograms first.
 	featureNames := intermediateResult analysisResults keys.
 	firstRowName := targetPrograms first benchmark className , '_'
-				            , 1 asString.
+	                , 1 asString.
 
 	results := targetPrograms allButFirst
 		           inject: ((DataFrame withColumnNames: featureNames)
 				            addRow: intermediateResult analysisResults values
-				            named: firstRowName
-				            )
+				            named: firstRowName)
 		           into: [ :df :target |
 				           df
 					           addRow: (self analyze: target) analysisResults values
