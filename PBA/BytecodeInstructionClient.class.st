@@ -305,7 +305,9 @@ BytecodeInstructionClient >> staticVariableAccesses [
 { #category : 'as yet unclassified' }
 BytecodeInstructionClient >> totalExecutedBlocks [
 
-	^ executedBlocks values sum
+	executedBlocks values
+		ifEmpty: [ ^ 0 ]
+		ifNotEmpty: [ ^ executedBlocks values sum ]
 ]
 
 { #category : 'accessing' }

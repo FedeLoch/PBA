@@ -33,17 +33,24 @@ PBAnalyzer >> analyze: aTargetProgram [
 { #category : 'analyzing' }
 PBAnalyzer >> analyzeAll: targetPrograms [
 
-	| featureNames |
-	featureNames := (analysisStrategies collect: [ :strat |
-		                 strat analysis collect: #defaultFeatureName ])
-		                flattened.
-	results := targetPrograms
-		           inject: (DataFrame withColumnNames: featureNames)
+	| featureNames intermediateResult firstRowName |
+	(targetPrograms isNil or: [ targetPrograms isEmpty ]) ifTrue: [
+		^ DataFrame new: 0 @ 0 ].
+
+	intermediateResult := self analyze: targetPrograms first.
+	featureNames := intermediateResult analysisResults keys.
+	firstRowName := targetPrograms first benchmark className , '_'
+	                , 1 asString.
+
+	results := targetPrograms allButFirst
+		           inject: ((DataFrame withColumnNames: featureNames)
+				            addRow: intermediateResult analysisResults values
+				            named: firstRowName)
 		           into: [ :df :target |
-			           df
-				           addRow: (self analyze: target) analysisResults values
-				           named:
-				           (self rowNameFor: target benchmark className in: df) ].
+				           df
+					           addRow: (self analyze: target) analysisResults values
+					           named:
+					           (self rowNameFor: target benchmark className in: df) ].
 	^ results
 ]
 
@@ -74,7 +81,7 @@ PBAnalyzer >> results: someResults [
 { #category : 'writing' }
 PBAnalyzer >> resultsToCSV: aFileReference [
 
-	aFileReference deleteIfAbsent: [].
+	aFileReference ensureDelete.
 	results writeToCsv: aFileReference
 ]
 
