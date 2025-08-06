@@ -21,13 +21,15 @@ PBAExperiment >> allBenchmarks [
 ]
 
 { #category : 'as yet unclassified' }
-PBAExperiment >> getResults [
+PBAExperiment >> getResultsAndWriteToCSV [
 
-	| analyzer benchmarks results |
+	| analyzer benchmarks results featuresFile |
 	analyzer := analyzer := PBAnalyzer new.
 	benchmarks := self allBenchmarks collect: [ :bench |
 		              PBASmarkBenchmarkpProgram bench: bench ].
 	results := analyzer analyzeAll: benchmarks.
+	featuresFile := 'features.csv' asFileReference.
+	results writeToCsv: featuresFile.
 	^ results
 ]
 
@@ -49,7 +51,7 @@ PBAExperiment >> pcaWith: results [
 PBAExperiment >> runExperiment [
 
 	| results mTransformed df file |
-	results := self getResults.
+	results := self getResultsAndWriteToCSV.
 	mTransformed := self pcaWith: results.
 
 	df := DataFrame
