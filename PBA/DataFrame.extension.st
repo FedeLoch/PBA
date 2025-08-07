@@ -33,7 +33,7 @@ DataFrame >> buildLegendFor: categories in: chart [
 ]
 
 { #category : '*PBA' }
-DataFrame >> openScatterPlotWithTitle: aString forColumn: columnName withAxisNames: nameX and: nameY [
+DataFrame >> openPCAScatterPlotWithTitle: aString forColumn: columnName withAxisNames: nameX and: nameY [
 
 	| chart categories |
 	categories := (self column: columnName) asSet sorted.
