@@ -54,13 +54,11 @@ PBAExperiment >> pcaWith: results [
 	
 	"We standarize the parameters"
 	standardizedMatrix := PMStandardizationScaler new fitAndTransform: matrix.
-
+	
 	"PCA generation"
-	pca := PMPrincipalComponentAnalyserJacobiTransformation new
+	^ PMPrincipalComponentAnalyserJacobiTransformation new
 		componentsNumber: 2;
-		fit: standardizedMatrix. 
-
-	^ pca transform: standardizedMatrix
+		fitAndTransform: standardizedMatrix
 ]
 
 { #category : 'as yet unclassified' }
