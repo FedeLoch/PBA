@@ -56,4 +56,6 @@ BytecodeProfiler >> notifyTrackers [
 BytecodeProfiler >> run [
 
 	[ self notifyTrackers; context: currentContext step. currentContext willFailReturn ] whileFalse.
+
+	^ self featureTrackers collect: #result
 ]
