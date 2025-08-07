@@ -64,19 +64,7 @@ BytecodeInstructionClient >> doPop [
 { #category : 'as yet unclassified' }
 BytecodeInstructionClient >> dumpResult: aResult [
 
-	aResult merge: (Dictionary newFrom: {
-		'totalExecutedBlocks' -> self totalExecutedBlocks.
-		'differentExecutedBlocks' -> self differentExecutedBlocks.
-		'differentCallSites' -> self differentCallSites.
-		'totalExecutedBytecodes' -> self totalExecutedBytecodes.
-		'differentExecutedBytecodes' -> self differentExecutedBytecodes.
-		'totalMethodsCalled' -> self totalMethodsCalled.
-		'differentMethodsCalled' -> self differentMethodsCalled.
-		'totalExecutedLoops' -> self totalExecutedLoops.
-		'avgArguments' -> self avgArguments.
-		'staticVariableAccesses' -> self staticVariableAccesses.
-		'instanceVariableAccesses' -> self instanceVariableAccesses 
-	})
+	aResult merge: self result
 	
 ]
 
@@ -250,6 +238,25 @@ BytecodeInstructionClient >> pushTemporaryVariable: offset [
 BytecodeInstructionClient >> receiverToCall: numberArguments [
 
 	^ profiler context stackAt: numberArguments
+]
+
+{ #category : 'as yet unclassified' }
+BytecodeInstructionClient >> result [
+	
+	^ Dictionary newFrom: {
+		'totalExecutedBlocks' -> self totalExecutedBlocks.
+		'differentExecutedBlocks' -> self differentExecutedBlocks.
+		'differentCallSites' -> self differentCallSites.
+		'totalExecutedBytecodes' -> self totalExecutedBytecodes.
+		'differentExecutedBytecodes' -> self differentExecutedBytecodes.
+		'totalMethodsCalled' -> self totalMethodsCalled.
+		'differentMethodsCalled' -> self differentMethodsCalled.
+		'totalExecutedLoops' -> self totalExecutedLoops.
+		'avgArguments' -> self avgArguments.
+		'staticVariableAccesses' -> self staticVariableAccesses.
+		'instanceVariableAccesses' -> self instanceVariableAccesses 
+	}
+	
 ]
 
 { #category : 'instruction decoding' }
