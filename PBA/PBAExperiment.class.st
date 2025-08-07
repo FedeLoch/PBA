@@ -50,6 +50,16 @@ PBAExperiment >> runExperiment [
 ]
 
 { #category : 'as yet unclassified' }
+PBAExperiment >> runExperiment: fileName [
+
+	| benchmarks |
+	
+	benchmarks := self allBenchmarks collect: [ :bench | PBASmarkBenchmarkpProgram bench: bench ].
+
+	^ self runExperimentAndWriteCSVWith: self allBenchmarks  name: fileName
+]
+
+{ #category : 'as yet unclassified' }
 PBAExperiment >> runExperimentAndWriteCSVWith: benchmarks name: fileName [
 
 	| featuresResult |

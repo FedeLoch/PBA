@@ -30,9 +30,5 @@ PBASmarkBenchmarksExperiment >> benchmarks [
 { #category : 'as yet unclassified' }
 PBASmarkBenchmarksExperiment >> runExperiment [
 
-	| benchmarks |
-	
-	benchmarks := self allBenchmarks collect: [ :bench | PBASmarkBenchmarkpProgram bench: bench ].
-
-	^ self runExperimentAndWriteCSVWith: self allBenchmarks  name: 'smark-benchmarks-features.csv'
+	^ self runExperiment: 'smark-benchmarks-features.csv'
 ]
