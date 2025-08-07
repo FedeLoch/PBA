@@ -48,17 +48,18 @@ PBAExperiment >> pcaComponentWeights [
 PBAExperiment >> pcaWith: results [
 
 	| matrix standardizedMatrix |
-
 	"PCA will be trained on everything but the first parameter ( execution time )"
-	matrix := PMMatrix rows: (results columnsFrom: 2 to: results numberOfColumns).
-	
+	matrix := PMMatrix rows:
+		          (results columnsFrom: 2 to: results numberOfColumns).
+
 	"We standarize the parameters"
-	standardizedMatrix := PMStandardizationScaler new fitAndTransform: matrix.
+	standardizedMatrix := PMStandardizationScaler new fitAndTransform:
+		                      matrix.
 
 	"PCA generation"
 	pca := PMPrincipalComponentAnalyserJacobiTransformation new
-		componentsNumber: 2;
-		fit: standardizedMatrix. 
+		       componentsNumber: 2;
+		       fit: standardizedMatrix.
 
 	^ pca transform: standardizedMatrix
 ]
