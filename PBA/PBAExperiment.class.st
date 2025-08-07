@@ -1,6 +1,9 @@
 Class {
 	#name : 'PBAExperiment',
 	#superclass : 'Object',
+	#instVars : [
+		'pca'
+	],
 	#category : 'PBA-Experiment',
 	#package : 'PBA',
 	#tag : 'Experiment'
@@ -25,6 +28,22 @@ PBAExperiment >> executionTimeLabel [
 	^ 'execution time'
 ]
 
+{ #category : 'accessing' }
+PBAExperiment >> pcaComponentInformationShare [
+	"This represents how much information from the original dataset each principal component holds"
+
+	| eigenvalues |
+	eigenvalues := pca jacobiTransform eigenvalues.
+	^ eigenvalues / eigenvalues sum
+]
+
+{ #category : 'accessing' }
+PBAExperiment >> pcaComponentWeights [
+	"Each row is the weights of a given principal component for each original features"
+
+	^ pca jacobiTransform transform
+]
+
 { #category : 'as yet unclassified' }
 PBAExperiment >> pcaWith: results [
 
@@ -35,11 +54,13 @@ PBAExperiment >> pcaWith: results [
 	
 	"We standarize the parameters"
 	standardizedMatrix := PMStandardizationScaler new fitAndTransform: matrix.
-	
+
 	"PCA generation"
-	^ PMPrincipalComponentAnalyserJacobiTransformation new
+	pca := PMPrincipalComponentAnalyserJacobiTransformation new
 		componentsNumber: 2;
-		fitAndTransform: standardizedMatrix
+		fit: standardizedMatrix. 
+
+	^ pca transform: standardizedMatrix
 ]
 
 { #category : 'as yet unclassified' }
