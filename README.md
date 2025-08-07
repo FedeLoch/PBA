@@ -69,3 +69,15 @@ Running the Bytecode profiler is easy. It only needs to receive a `Context`. The
         'totalMethodsCalled'->1
     )"
 ```
+
+### Running Experiments
+
+We designed a simplified API to run experiments. For example, the next line runs and analyze all `Smark` benchmarks:
+
+```Smalltalk
+    PBASmarkBenchmarksExperiment run
+```
+
+This will generate the next two files, `smark-benchmarks-features.csv` csv which lists all the benchmarks and their feature values. On another hand, this experiment will generate a `smark-benchmarks-pca.csv` CSV file with the PCA analysis applied to the executed features.
+
+If you want to create your experiment, you need to define a subclass of `PBAExperiment` and define a method, for example, run. Then you only need to define the `benchmarks` method, and then by running the method `runExperiment: fileName`, it will execute and analyze all the benchmarks, generating the feature csv. 
