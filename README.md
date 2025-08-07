@@ -55,7 +55,7 @@ By definition, implement the bytecode profiler since the Pharo image adds overhe
 Running the Bytecode profiler is easy. It only needs to receive a `Context`. Then the profiler will execute and collect all the information about its execution.
 
 ```Smalltalk
-    BytecodeProfiler profile: ([ { 1. 2. 3.4 } at: 2 ] asContext) "-> (a Dictionary(
+    BytecodeProfiler profile: ([ { 1. 2. 3.4 } at: 2 ] asContext) "-> a Dictionary(
         'avgArguments'->1.0
         'differentCallSites'->1
         'differentExecutedBlocks'->0
@@ -67,7 +67,7 @@ Running the Bytecode profiler is easy. It only needs to receive a `Context`. The
         'totalExecutedBytecodes'->7
         'totalExecutedLoops'->0
         'totalMethodsCalled'->1
-    )"
+    "
 ```
 
 ### Running Experiments
