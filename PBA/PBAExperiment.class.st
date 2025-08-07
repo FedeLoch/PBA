@@ -39,8 +39,7 @@ PBAExperiment >> pcaWith: results [
 	"PCA generation"
 	^ PMPrincipalComponentAnalyserJacobiTransformation new
 		componentsNumber: 2;
-		fit: standardizedMatrix;
-		transform: standardizedMatrix
+		fitAndTransform: standardizedMatrix
 ]
 
 { #category : 'as yet unclassified' }
@@ -51,10 +50,6 @@ PBAExperiment >> runExperiment [
 
 { #category : 'as yet unclassified' }
 PBAExperiment >> runExperiment: fileName [
-
-	| benchmarks |
-	
-	benchmarks := self allBenchmarks collect: [ :bench | PBASmarkBenchmarkpProgram bench: bench ].
 
 	^ self runExperimentAndWriteCSVWith: self allBenchmarks  name: fileName
 ]
