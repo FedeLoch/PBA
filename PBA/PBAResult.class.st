@@ -9,6 +9,12 @@ Class {
 	#tag : 'Result'
 }
 
+{ #category : 'instance creation' }
+PBAResult class >> from: dict [
+
+	^ self new merge: dict
+]
+
 { #category : 'initialization' }
 PBAResult >> analysisResults [
 
