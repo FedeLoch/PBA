@@ -12,7 +12,7 @@ Class {
 { #category : 'as yet unclassified' }
 PBAExperiment >> allBenchmarks [
 
-	^ self benchmarks collect: [ :bench | PBASmarkBenchmarkpProgram bench: bench ].
+	^ self benchmarks collect: [ :bench | PBASmarkBenchmarkProgram bench: bench ].
 
 ]
 

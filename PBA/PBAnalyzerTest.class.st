@@ -18,7 +18,7 @@ PBAnalyzerTest >> setUp [
 	self timeLimit: 5 hours.
 
 	analyzer := PBAnalyzer new.
-	deltaBlue := PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new.
+	deltaBlue := PBASmarkBenchmarkProgram bench: SMarkDeltaBlue new.
 ]
 
 { #category : 'tests' }
