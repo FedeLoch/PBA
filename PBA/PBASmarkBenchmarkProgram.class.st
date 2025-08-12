@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBASmarkBenchmarkpProgram',
+	#name : 'PBASmarkBenchmarkProgram',
 	#superclass : 'PBABenchmarkTarget',
 	#instVars : [
 		'benchmark'
@@ -10,25 +10,31 @@ Class {
 }
 
 { #category : 'benchmarking' }
-PBASmarkBenchmarkpProgram class >> bench: smarkBench [
+PBASmarkBenchmarkProgram class >> bench: smarkBench [
 
 	^ self new benchmark: smarkBench.
 ]
 
 { #category : 'accessing' }
-PBASmarkBenchmarkpProgram >> benchmark [
+PBASmarkBenchmarkProgram >> benchmark [
 
 	^ benchmark
 ]
 
 { #category : 'accessing' }
-PBASmarkBenchmarkpProgram >> benchmark: aBenchmark [
+PBASmarkBenchmarkProgram >> benchmark: aBenchmark [
 
 	benchmark := aBenchmark
 ]
 
 { #category : 'accessing' }
-PBASmarkBenchmarkpProgram >> run [
+PBASmarkBenchmarkProgram >> name [
+
+	^ benchmark className
+]
+
+{ #category : 'accessing' }
+PBASmarkBenchmarkProgram >> run [
 
 	^ benchmark run.
 ]

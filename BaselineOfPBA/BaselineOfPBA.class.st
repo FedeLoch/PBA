@@ -15,6 +15,7 @@ BaselineOfPBA >> baseline: spec [
 			spec baseline: 'DataFrame' with: [ spec repository: 'github://PolyMathOrg/DataFrame:pre-v3/src' ].
 			"spec baseline: 'PharoVM' with: [ spec repository: 'github://evref-inria/pharo-vm:pharo-12' ]."
 			spec baseline: 'PolyMath' with: [ spec repository: 'github://PolyMathOrg/PolyMath' ].
-			spec package: 'PBA' with: [ spec requires: #( 'SMark' 'IllimaniProfiler' 'DataFrame' 'PolyMath' ) ].
+			spec baseline: 'Veritas' with: [ spec repository: 'github.com/jordanmontt/PharoVeritasBenchSuite:main' ].
+			spec package: 'PBA' with: [ spec requires: #( 'SMark' 'IllimaniProfiler' 'Veritas' 'DataFrame' 'PolyMath' ) ].
 			spec group: 'default' with: #( 'PBA' ) ]
 ]

@@ -269,7 +269,7 @@ BytecodeInstructionClient >> send: selector super: supered numArgs: numberArgume
 	receiverToCall := self receiverToCall: numberArguments.
 	methodToCall := self methodToCall: selector receiver: receiverToCall super: supered.
 	
-	receiverToCall isBlock ifTrue: [
+	receiverToCall isBlockForPBA ifTrue: [
 		executedBlocks at: receiverToCall compiledBlock update: [ :old | old + 1 ] initial: 1.
 	].
 	

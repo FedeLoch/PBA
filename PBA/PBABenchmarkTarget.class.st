@@ -12,6 +12,12 @@ PBABenchmarkTarget >> asContext [
 	^ [ self run ] asContext
 ]
 
+{ #category : 'accessing' }
+PBABenchmarkTarget >> name [
+
+	self subclassResponsibility 
+]
+
 { #category : 'converting' }
 PBABenchmarkTarget >> run [
 
