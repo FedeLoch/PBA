@@ -15,6 +15,11 @@ PBAVeritasBenchmarkProgram class >> bench: smarkBench [
 	^ self new benchmark: smarkBench.
 ]
 
+{ #category : 'benchmarking' }
+PBAVeritasBenchmarkProgram >> benchmark [
+	self shouldBeImplemented.
+]
+
 { #category : 'accessing' }
 PBAVeritasBenchmarkProgram >> filename [ 
 
@@ -25,6 +30,12 @@ PBAVeritasBenchmarkProgram >> filename [
 PBAVeritasBenchmarkProgram >> filename: aFilename [
 
 	filename := aFilename
+]
+
+{ #category : 'accessing' }
+PBAVeritasBenchmarkProgram >> name [
+
+	^ filename 
 ]
 
 { #category : 'accessing' }

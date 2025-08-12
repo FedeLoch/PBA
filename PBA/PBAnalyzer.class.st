@@ -39,7 +39,7 @@ PBAnalyzer >> analyzeAll: targetPrograms [
 
 	intermediateResult := self analyze: targetPrograms first.
 	featureNames := intermediateResult analysisResults keys.
-	firstRowName := targetPrograms first benchmark className , '_'
+	firstRowName := targetPrograms first name , '_'
 	                , 1 asString.
 
 	results := targetPrograms allButFirst

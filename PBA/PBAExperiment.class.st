@@ -77,11 +77,11 @@ PBAExperiment >> runExperiment: fileName [
 ]
 
 { #category : 'as yet unclassified' }
-PBAExperiment >> runExperimentAndWriteCSVWith: benchmarks name: fileName [
+PBAExperiment >> runExperimentAndWriteCSVWith: targets name: fileName [
 
 	| featuresResult |
 
-	featuresResult := PBAnalyzer new analyzeAll: benchmarks.
+	featuresResult := PBAnalyzer new analyzeAll: targets.
 	featuresResult writeToCsv: fileName asFileReference.
 	
 	^ featuresResult

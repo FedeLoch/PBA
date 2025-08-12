@@ -28,6 +28,12 @@ PBASmarkBenchmarkProgram >> benchmark: aBenchmark [
 ]
 
 { #category : 'accessing' }
+PBASmarkBenchmarkProgram >> name [
+
+	^ benchmark className
+]
+
+{ #category : 'accessing' }
 PBASmarkBenchmarkProgram >> run [
 
 	^ benchmark run.
