@@ -44,7 +44,8 @@ As a result, PBA provides a **PBAResult** which has a series of feature measurem
 
 ## Integrated Profilers
 
-PBA uses two different profilers. On one hand, we use [Illimani](https://github.com/jordanmontt/illimani-memory-profiler), a memory profiler that provides us with object memory information. On the other hand, we utilise our handmade bytecode profiler, which provides information about the executed bytecodes.
+PBA uses two different profilers. On one hand, we use [Illimani](https://github.com/jordanmontt/illimani-memory-profiler), a memory profiler that provides us with object memory information.
+On the other hand, we utilise [PBP](https://github.com/FedeLoch/PBP), our handmade bytecode profiler, which provides information about the executed bytecodes.
 
 ### Running Experiments
 
