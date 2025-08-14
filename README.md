@@ -44,35 +44,11 @@ As a result, PBA provides a **PBAResult** which has a series of feature measurem
 
 ## Integrated Profilers
 
-PBA uses two different profilers. On one hand, we use [Illimani](https://github.com/jordanmontt/illimani-memory-profiler), a memory profiler that provides us with object memory information. On the other hand, we use our handmade bytecode profiler that gives information about the executed bytecodes.
-
-## Bytecode Profiler
-
-Our `BytecodeProfiler` is implemented by using the Pharo debugger interpreter. This means that we are in charge of executing step by step the current context, notifying our `InstructionClient` to handle the current bytecode event.
-
-By definition, implement the bytecode profiler since the Pharo image adds overhead, and therefore, it is more expensive than a VM Interpreter bytecode profiler. Our long-term objective is to implement it on the VM side.
-
-Running the Bytecode profiler is easy. It only needs to receive a `Context`. Then the profiler will execute and collect all the information about its execution.
-
-```Smalltalk
-    BytecodeProfiler profile: ([ { 1. 2. 3.4 } at: 2 ] asContext) "-> a Dictionary(
-        'avgArguments'->1.0
-        'differentCallSites'->1
-        'differentExecutedBlocks'->0
-        'differentExecutedBytecodes'->6
-        'differentMethodsCalled'->1
-        'instanceVariableAccesses'->0
-        'staticVariableAccesses'->0
-        'totalExecutedBlocks'->0
-        'totalExecutedBytecodes'->7
-        'totalExecutedLoops'->0
-        'totalMethodsCalled'->1
-    "
-```
+PBA uses two different profilers. On one hand, we use [Illimani](https://github.com/jordanmontt/illimani-memory-profiler), a memory profiler that provides us with object memory information. On the other hand, we utilise our handmade bytecode profiler, which provides information about the executed bytecodes.
 
 ### Running Experiments
 
-We designed a simplified API to run experiments. For example, the next line runs and analyze all `Smark` benchmarks:
+We designed a simplified API to facilitate the running of experiments. For example, the next line runs and analyze all `Smark` benchmarks:
 
 ```Smalltalk
     PBASmarkBenchmarksExperiment run
