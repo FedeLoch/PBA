@@ -41,5 +41,5 @@ PBAVeritasBenchmarkProgram >> name [
 { #category : 'accessing' }
 PBAVeritasBenchmarkProgram >> run [
 
-	^ ACExDataFrame new run: filename
+	^ VeritasBenchSuite new loadFileInDataFrame: filename
 ]
