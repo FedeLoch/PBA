@@ -9,7 +9,8 @@ To install the framework, you must execute this Metacello script in your playgro
 ```Smalltalk
 Metacello new
     baseline: 'PBA';
-    repository: 'github://FedeLoch/PBA/tree/main/src';
+    repository: 'github://FedeLoch/PBA:main';
+    onConflictUseIncoming;
     load
 ```
 
