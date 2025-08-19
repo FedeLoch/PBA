@@ -12,7 +12,7 @@ Class {
 { #category : 'initialization' }
 PBAExecutionTimeAnalysis >> defaultFeatureName [
 
-	^ 'execution time (ms)'
+	^ 'execution time (μs)'
 ]
 
 { #category : 'testing' }

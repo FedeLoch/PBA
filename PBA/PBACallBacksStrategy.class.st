@@ -11,12 +11,12 @@ PBACallBacksStrategy >> analyze: aTargetProgram [
 
 	| startTime endTime |
 	
-	startTime := Time now asMilliSeconds.
+	startTime := Time microsecondClockValue.
 	analysis do: [ :anAnalysis | anAnalysis startExecution: startTime ].
 	
 	aTargetProgram run.
 	
-	endTime := Time now asMilliSeconds.
+	endTime := Time microsecondClockValue.
 	^ analysis inject: PBAResult new into: [ :result :anAnalysis |
 		anAnalysis endExecution: endTime for: result
 	].
