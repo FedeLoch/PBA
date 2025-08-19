@@ -168,6 +168,17 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfExecute
 ]
 
 { #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfExecutedLoops [
+
+	| total result |
+	
+	result := analyzer analyze: deltaBlue.
+	total := result at: 'totalExecutedLoops'.
+
+	self assert: total equals: 895444
+]
+
+{ #category : 'tests' }
 PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfMethodsCalled [
 
 	| total result |

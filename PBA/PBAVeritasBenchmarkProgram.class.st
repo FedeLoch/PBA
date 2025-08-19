@@ -2,7 +2,9 @@ Class {
 	#name : 'PBAVeritasBenchmarkProgram',
 	#superclass : 'PBABenchmarkTarget',
 	#instVars : [
-		'filename'
+		'filename',
+		'benchmark',
+		'classesToExecute'
 	],
 	#category : 'PBA-Target',
 	#package : 'PBA',
@@ -20,6 +22,18 @@ PBAVeritasBenchmarkProgram >> benchmark [
 	self shouldBeImplemented.
 ]
 
+{ #category : 'as yet unclassified' }
+PBAVeritasBenchmarkProgram >> classesToExecute [
+	
+	^ classesToExecute 
+]
+
+{ #category : 'accessing' }
+PBAVeritasBenchmarkProgram >> classesToExecute: cls [
+
+	classesToExecute := cls
+]
+
 { #category : 'accessing' }
 PBAVeritasBenchmarkProgram >> filename [ 
 
@@ -30,6 +44,13 @@ PBAVeritasBenchmarkProgram >> filename [
 PBAVeritasBenchmarkProgram >> filename: aFilename [
 
 	filename := aFilename
+]
+
+{ #category : 'initialization' }
+PBAVeritasBenchmarkProgram >> initialize [ 
+
+	super initialize.
+	classesToExecute := {}
 ]
 
 { #category : 'accessing' }
