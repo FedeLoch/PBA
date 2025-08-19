@@ -13,6 +13,9 @@ PBACoverageCollectorStrategy >> analyze: aTargetProgram [
 	
 	result := CoverageCollector new methods: aTargetProgram methodsToExecute; runOn: [ aTargetProgram run ].
 
-	^ PBAResult new at: 'coveredMethods' put: result methods size;
-		at: 'coveredNodes' put: result nodes size
+	^ PBAResult from: ({
+		'methodsCovered' -> result methods size.
+		'percentageCovered' -> result percentage.
+		'coveredNodes' -> result nodes size
+	} asDictionary)
 ]

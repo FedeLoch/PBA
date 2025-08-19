@@ -9,13 +9,6 @@ Class {
 	#tag : 'Experiment'
 }
 
-{ #category : 'as yet unclassified' }
-PBAExperiment >> allBenchmarks [
-
-	^ self benchmarks collect: [ :bench | PBASmarkBenchmarkProgram bench: bench ].
-
-]
-
 { #category : 'accessing' }
 PBAExperiment >> benchmarks [
 
