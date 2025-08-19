@@ -18,7 +18,9 @@ PBAnalyzerTest >> setUp [
 	self timeLimit: 5 hours.
 
 	analyzer := PBAnalyzer new.
+
 	deltaBlue := PBASmarkBenchmarkProgram bench: SMarkDeltaBlue new.
+	deltaBlue classesToExecute: 'SMark-DeltaBlue' asPackage classes.
 ]
 
 { #category : 'tests' }
@@ -60,9 +62,9 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheExecutionTime [
 	| executionTime result |
 	
 	result := analyzer analyze: deltaBlue.
-	executionTime := result at: 'execution time (ms)'.
-	
-	self assert: (executionTime between: 1 and: 100)
+	executionTime := result at: 'execution time (μs)'.
+
+	self assert: (executionTime between: 1 and: 100000)
 
 ]
 
@@ -75,6 +77,28 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheMemoryConsumed [
 	memoryConsumed := result at: 'memory consumed (B)'.
 	
 	self assert: (memoryConsumed between: 50000 and: 150000)
+]
+
+{ #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfCoveredMethods [
+
+	| total result |
+	
+	result := analyzer analyze: deltaBlue.
+	total := result at: 'coveredMethods'.
+
+	self assert: total equals: 6
+]
+
+{ #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfCoveredNodes [
+
+	| total result |
+	
+	result := analyzer analyze: deltaBlue.
+	total := result at: 'coveredNodes'.
+
+	self assert: total equals: 7
 ]
 
 { #category : 'tests' }
@@ -141,6 +165,17 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfExecute
 	total := result at: 'totalExecutedBytecodes'.
 
 	self assert: total equals: 50833582
+]
+
+{ #category : 'tests' }
+PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfExecutedLoops [
+
+	| total result |
+	
+	result := analyzer analyze: deltaBlue.
+	total := result at: 'totalExecutedLoops'.
+
+	self assert: total equals: 895444
 ]
 
 { #category : 'tests' }

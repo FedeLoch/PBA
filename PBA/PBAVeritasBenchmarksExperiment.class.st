@@ -15,7 +15,10 @@ PBAVeritasBenchmarksExperiment class >> run [
 { #category : 'as yet unclassified' }
 PBAVeritasBenchmarksExperiment >> allBenchmarks [
 
-	^ self benchmarkFiles collect: [ :filename | PBAVeritasBenchmarkProgram new filename: filename ].
+	^ self benchmarkFiles collect: [ :filename |
+		PBAVeritasBenchmarkProgram new filename: filename;
+		classesToExecute: ('Veritas-DataFrame' asPackage) classes
+	].
 ]
 
 { #category : 'as yet unclassified' }

@@ -50,7 +50,7 @@ PBAnalyzer >> analyzeAll: targetPrograms [
 				           df
 					           addRow: (self analyze: target) analysisResults values
 					           named:
-					           (self rowNameFor: target benchmark className in: df) ].
+					           (self rowNameFor: target name in: df) ].
 	^ results
 ]
 
@@ -60,6 +60,7 @@ PBAnalyzer >> initialize [
 	super initialize.
 	analysisStrategies := {
 		PBACallBacksStrategy new.
+		PBACoverageCollectorStrategy new.
 		PBAIllimaniStrategy new.
 		PBABytecodeProfilerStrategy new.
 	}

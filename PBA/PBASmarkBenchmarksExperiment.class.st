@@ -13,6 +13,15 @@ PBASmarkBenchmarksExperiment class >> run [
 ]
 
 { #category : 'as yet unclassified' }
+PBASmarkBenchmarksExperiment >> allBenchmarks [
+
+	^ self benchmarks collect: [ :bench |
+		  (PBASmarkBenchmarkProgram bench: bench) classesToExecute:
+			  bench class package classes
+	]
+]
+
+{ #category : 'as yet unclassified' }
 PBASmarkBenchmarksExperiment >> benchmarks [
 
 	^ {
