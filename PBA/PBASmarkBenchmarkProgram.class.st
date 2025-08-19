@@ -2,7 +2,8 @@ Class {
 	#name : 'PBASmarkBenchmarkProgram',
 	#superclass : 'PBABenchmarkTarget',
 	#instVars : [
-		'benchmark'
+		'benchmark',
+		'classesToExecute'
 	],
 	#category : 'PBA-Target',
 	#package : 'PBA',
@@ -25,6 +26,25 @@ PBASmarkBenchmarkProgram >> benchmark [
 PBASmarkBenchmarkProgram >> benchmark: aBenchmark [
 
 	benchmark := aBenchmark
+]
+
+{ #category : 'accessing' }
+PBASmarkBenchmarkProgram >> classesToExecute [
+	
+	^ classesToExecute 
+]
+
+{ #category : 'accessing' }
+PBASmarkBenchmarkProgram >> classesToExecute: cls [
+
+	classesToExecute := cls
+]
+
+{ #category : 'initialization' }
+PBASmarkBenchmarkProgram >> initialize [ 
+
+	super initialize.
+	classesToExecute := {}
 ]
 
 { #category : 'accessing' }
