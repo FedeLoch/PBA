@@ -18,15 +18,15 @@ BaselineOfPBA >> baseline: spec [
 			spec baseline: 'DataFrame' with: [ spec repository: 'github://PolyMathOrg/DataFrame:pre-v3/src' ].
 			
 			{ 'VeritasDataFrame' . 'VeritasCormas' . 'VeritasRewriter' .
-				'VeritasReMobydyc' . 'VeritasHoneyGinger' . 'VeritasMoose' .
-				'VeritasBloc' . 'VeritasRegis' . 'VeritasMicrodown' } do: [ :baseline |
+				'VeritasReMobidyc' . 'VeritasHoneyGinger' . 'VeritasMoose' .
+				'VeritasBloc' ". 'VeritasRegis'" . 'VeritasMicrodown' } do: [ :baseline |
 				spec baseline: baseline with: [ spec repository: 'github://jordanmontt/PharoVeritasBenchSuite:main' ]
 			].
 			
 			spec package: 'PBA' with: [
 				spec requires: #( 'SMark' 'PBP' 'IllimaniProfiler' 'VeritasDataFrame' 'VeritasCormas'
-					'VeritasRewriter'  'VeritasReMobydyc' 'VeritasHoneyGinger' 'VeritasMoose' 'VeritasBloc'
-					'VeritasRegis' 'VeritasMicrodown' 'DataFrame' 'PolyMath'
+					'VeritasRewriter'  'VeritasReMobidyc' 'VeritasHoneyGinger' 'VeritasMoose' 'VeritasBloc'
+					"'VeritasRegis'" 'VeritasMicrodown' 'DataFrame' 'PolyMath'
 				)
 			].
 			spec group: 'default' with: #( 'PBA' ) ]
