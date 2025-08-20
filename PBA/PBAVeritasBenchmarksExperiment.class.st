@@ -26,8 +26,8 @@ PBAVeritasBenchmarksExperiment >> benchmarkFiles [
 
 	^ { 
 		'tiny_dataset.csv'.
-		'tiny_fifty_times_larger_dataset.csv'.
-		'tiny_one_hundred_times_larger_dataset.csv'
+"		'tiny_fifty_times_larger_dataset.csv'.
+		'tiny_one_hundred_times_larger_dataset.csv'"
 	}
 ]
 
