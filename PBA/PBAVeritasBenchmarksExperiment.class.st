@@ -22,16 +22,6 @@ PBAVeritasBenchmarksExperiment >> allBenchmarks [
 ]
 
 { #category : 'as yet unclassified' }
-PBAVeritasBenchmarksExperiment >> benchmarkFiles [
-
-	^ { 
-		'tiny_dataset.csv'.
-"		'tiny_fifty_times_larger_dataset.csv'.
-		'tiny_one_hundred_times_larger_dataset.csv'"
-	}
-]
-
-{ #category : 'as yet unclassified' }
 PBAVeritasBenchmarksExperiment >> runExperiment [
 
 	^ self runExperiment: 'veritas-benchmarks-features.csv'
