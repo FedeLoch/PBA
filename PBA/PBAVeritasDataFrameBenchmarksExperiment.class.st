@@ -16,7 +16,7 @@ PBAVeritasDataFrameBenchmarksExperiment class >> run [
 PBAVeritasDataFrameBenchmarksExperiment >> allBenchmarks [
 
 	^ self benchmarkFiles collect: [ :filename |
-		PBAVeritasBenchmarkProgram new filename: filename;
+		PBAVeritasDataFrameBenchmarkProgram new filename: filename;
 		classesToExecute: ('Veritas-DataFrame' asPackage) classes
 	].
 ]

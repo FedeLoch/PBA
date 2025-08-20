@@ -15,10 +15,25 @@ PBAVeritasBenchmarksExperiment class >> run [
 { #category : 'as yet unclassified' }
 PBAVeritasBenchmarksExperiment >> allBenchmarks [
 
-	^ self benchmarkFiles collect: [ :filename |
-		PBAVeritasBenchmarkProgram new filename: filename;
-		classesToExecute: ('Veritas-DataFrame' asPackage) classes
+	^ self benchmarkClasses collect: [ :benchClass |
+		PBABenchmarkProgram bench: benchClass new
 	].
+]
+
+{ #category : 'as yet unclassified' }
+PBAVeritasBenchmarksExperiment >> benchmarkClasses [
+
+	^ {
+		VeritasDataFrame.
+		VeritasCormas.
+		"VeritasRewriterTransformer.
+		VeritasRewriterFinder."
+		VeritasReMobidyc.
+		VeritasHoneyGinger.
+		"VeritasMoose."
+		"VeritasBloc."
+		"VeritasMicrodown"
+	}
 ]
 
 { #category : 'as yet unclassified' }

@@ -19,7 +19,7 @@ PBAnalyzerTest >> setUp [
 
 	analyzer := PBAnalyzer new.
 
-	deltaBlue := PBASmarkBenchmarkProgram bench: SMarkDeltaBlue new.
+	deltaBlue := PBABenchmarkProgram bench: SMarkDeltaBlue new.
 	deltaBlue classesToExecute: 'SMark-DeltaBlue' asPackage classes.
 ]
 
