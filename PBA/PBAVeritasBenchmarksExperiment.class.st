@@ -26,13 +26,14 @@ PBAVeritasBenchmarksExperiment >> benchmarkClasses [
 	^ {
 		VeritasDataFrame.
 		VeritasCormas.
-		"VeritasRewriterTransformer.
-		VeritasRewriterFinder."
+		VeritasRewriterTransformer.
+		VeritasRewriterFinder.
 		VeritasReMobidyc.
 		VeritasHoneyGinger.
 		"VeritasMoose."
 		"VeritasBloc."
-		"VeritasMicrodown"
+		VeritasMicrodown.
+		"VeritasRegis"
 	}
 ]
 
