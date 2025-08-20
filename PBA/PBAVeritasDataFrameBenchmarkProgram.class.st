@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBAVeritasBenchmarkProgram',
+	#name : 'PBAVeritasDataFrameBenchmarkProgram',
 	#superclass : 'PBABenchmarkTarget',
 	#instVars : [
 		'filename',
@@ -12,55 +12,55 @@ Class {
 }
 
 { #category : 'benchmarking' }
-PBAVeritasBenchmarkProgram class >> bench: smarkBench [
+PBAVeritasDataFrameBenchmarkProgram class >> bench: smarkBench [
 
 	^ self new benchmark: smarkBench.
 ]
 
 { #category : 'benchmarking' }
-PBAVeritasBenchmarkProgram >> benchmark [
+PBAVeritasDataFrameBenchmarkProgram >> benchmark [
 	self shouldBeImplemented.
 ]
 
 { #category : 'as yet unclassified' }
-PBAVeritasBenchmarkProgram >> classesToExecute [
+PBAVeritasDataFrameBenchmarkProgram >> classesToExecute [
 	
 	^ classesToExecute 
 ]
 
 { #category : 'accessing' }
-PBAVeritasBenchmarkProgram >> classesToExecute: cls [
+PBAVeritasDataFrameBenchmarkProgram >> classesToExecute: cls [
 
 	classesToExecute := cls
 ]
 
 { #category : 'accessing' }
-PBAVeritasBenchmarkProgram >> filename [ 
+PBAVeritasDataFrameBenchmarkProgram >> filename [ 
 
 	^ filename
 ]
 
 { #category : 'accessing' }
-PBAVeritasBenchmarkProgram >> filename: aFilename [
+PBAVeritasDataFrameBenchmarkProgram >> filename: aFilename [
 
 	filename := aFilename
 ]
 
 { #category : 'initialization' }
-PBAVeritasBenchmarkProgram >> initialize [ 
+PBAVeritasDataFrameBenchmarkProgram >> initialize [ 
 
 	super initialize.
 	classesToExecute := {}
 ]
 
 { #category : 'accessing' }
-PBAVeritasBenchmarkProgram >> name [
+PBAVeritasDataFrameBenchmarkProgram >> name [
 
 	^ filename 
 ]
 
 { #category : 'accessing' }
-PBAVeritasBenchmarkProgram >> run [
+PBAVeritasDataFrameBenchmarkProgram >> run [
 
 	^ VeritasDataFrame new loadFileInDataFrame: filename
 ]
