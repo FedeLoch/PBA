@@ -35,7 +35,8 @@ PBAPBTBenchmarkProgram >> run [
 
 { #category : 'accessing' }
 PBAPBTBenchmarkProgram >> test: aTest [
-
+	aTest resetAutotune.
+	aTest autoTuneIterationsFor: 300 milliSeconds.
 	test := aTest 
 
 	
