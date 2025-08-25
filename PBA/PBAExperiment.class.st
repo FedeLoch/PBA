@@ -15,7 +15,7 @@ PBAExperiment >> benchmarks [
 	^ self subclassResponsibility 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PBAExperiment >> executionTimeLabel [
 
 	^ 'execution time'
@@ -64,7 +64,7 @@ PBAExperiment >> pcaComponentWeights [
 	^ pca jacobiTransform transform
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PBAExperiment >> pcaWith: results [
 
 	| matrix standardizedMatrix |
@@ -92,19 +92,19 @@ PBAExperiment >> removeMeaninglessColumnsFrom: dataframe [
 			 (dataframe column: colName) stdev = 0 ])
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'running' }
 PBAExperiment >> runExperiment [
 
 	self subclassResponsibility 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'running' }
 PBAExperiment >> runExperiment: fileName [
 
 	^ self runExperimentAndWriteCSVWith: self allBenchmarks  name: fileName
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'running' }
 PBAExperiment >> runExperimentAndWriteCSVWith: targets name: fileName [
 
 	| featuresResult |
@@ -127,7 +127,7 @@ PBAExperiment >> runLinearRegressionExperiment: fileName [
 	self write: linearRegressionDict toJson: fileName
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'running' }
 PBAExperiment >> runPCAExperiment: fileName [
 
 	| results mTransformed pcaDataFrame |
