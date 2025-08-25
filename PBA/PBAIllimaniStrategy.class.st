@@ -10,7 +10,7 @@ Class {
 PBAIllimaniStrategy >> analyze: aTargetProgram [
 
 	| profiler |
-	profiler := IllMemoryProfiler new profileOn: [ aTargetProgram run ].
+	profiler := FiLiP new profileOn: [ aTargetProgram run ].
 	^ analysis
 		  inject: PBAResult new
 		  into: [ :result :anAnalysis |
