@@ -22,30 +22,53 @@ PBAExperiment >> executionTimeLabel [
 ]
 
 { #category : 'accessing' }
-PBAExperiment >> linearRegressionWith: dataframe [
+PBAExperiment >> linearRegressionGDWith: dataframe [
 
-	| y x normalizedX linearRegressionModel linearRegressionDict predictedValues costHistory weights bias |
+	| y x normalizedX linearRegressionModel costHistory weights bias |
 	y := (dataframe columnAt: 1) values.
 	x := (dataframe columnsFrom: 2 to: dataframe numberOfColumns)
 		     asArrayOfRows.
-
 	normalizedX := AIStandardizationNormalizer new normalize: x.
 
 	linearRegressionModel := AILinearRegression new
 		                         learningRate: 0.01;
 		                         maxIterations: 2000;
 		                         yourself.
-
 	linearRegressionModel fitX: normalizedX y: y.
-	predictedValues := linearRegressionModel predict: normalizedX.
+
 	costHistory := linearRegressionModel costHistory.
 	weights := linearRegressionModel weights.
 	bias := linearRegressionModel bias.
 
-	linearRegressionDict := Dictionary newFrom: {
-			                        ('weights' -> weights).
-			                        ('bias' -> bias).
-			                        ('costs' -> costHistory) }
+	^ Dictionary newFrom: {
+			  ('weights' -> weights).
+			  ('bias' -> bias).
+			  ('costs' -> costHistory) }
+]
+
+{ #category : 'accessing' }
+PBAExperiment >> linearRegressionLSWith: dataframe [
+
+	| y x xMatrix linearRegressionModel predictedValues weights bias meanSquaredError |
+	y := (dataframe columnAt: 1) values.
+	x := (dataframe columnsFrom: 2 to: dataframe numberOfColumns)
+		     asArrayOfRows.
+	xMatrix := AIColumnMajorMatrix rows: x.
+
+	linearRegressionModel := AILinearRegressionLeastSquares new.
+	linearRegressionModel fitX: xMatrix y: y.
+
+	predictedValues := linearRegressionModel predict: x.
+	meanSquaredError := linearRegressionModel
+		                    meanSquaredErrorBetweenActual: y
+		                    andPredicted: predictedValues.
+	weights := linearRegressionModel weights.
+	bias := linearRegressionModel bias.
+
+	^ Dictionary newFrom: {
+			  ('weights' -> weights).
+			  ('bias' -> bias).
+			  ('mse' -> meanSquaredError) }
 ]
 
 { #category : 'accessing' }
@@ -116,13 +139,25 @@ PBAExperiment >> runExperimentAndWriteCSVWith: targets name: fileName [
 ]
 
 { #category : 'running' }
-PBAExperiment >> runLinearRegressionExperiment: fileName [
+PBAExperiment >> runLinearRegressionGDExperiment: fileName [
 
 	| results cleanResults linearRegressionDict |
 
 	results := self runExperiment.
 	cleanResults := self removeMeaninglessColumnsFrom: results.
-	linearRegressionDict := self linearRegressionWith: cleanResults.
+	linearRegressionDict := self linearRegressionGDWith: cleanResults.
+
+	self write: linearRegressionDict toJson: fileName
+]
+
+{ #category : 'running' }
+PBAExperiment >> runLinearRegressionLSExperiment: fileName [
+
+	| results cleanResults linearRegressionDict |
+
+	results := self runExperiment.
+	cleanResults := self removeMeaninglessColumnsFrom: results.
+	linearRegressionDict := self linearRegressionLSWith: cleanResults.
 
 	self write: linearRegressionDict toJson: fileName
 ]
