@@ -38,7 +38,7 @@ PBAExperiment >> getPreprocessedResults [
 ]
 
 { #category : 'accessing' }
-PBAExperiment >> linearRegressionGDWith: dataframe [
+PBAExperiment >> linearRegressionGDWith: dataframe learningRate: learningRate maxIterations: maxIter [
 
 	| y x normalizedX linearRegressionModel costHistory weights bias |
 	y := (dataframe columnAt: 1) values.
@@ -47,8 +47,8 @@ PBAExperiment >> linearRegressionGDWith: dataframe [
 	normalizedX := AIStandardizationNormalizer new normalize: x.
 
 	linearRegressionModel := AILinearRegression new
-		                         learningRate: 0.01;
-		                         maxIterations: 2000;
+		                         learningRate: learningRate;
+		                         maxIterations: maxIter;
 		                         yourself.
 	linearRegressionModel fitX: normalizedX y: y.
 
@@ -155,11 +155,14 @@ PBAExperiment >> runExperimentAndWriteCSVWith: targets name: fileName [
 ]
 
 { #category : 'running' }
-PBAExperiment >> runLinearRegressionGDExperiment: fileName [
+PBAExperiment >> runLinearRegressionGDExperiment: fileName withLearningRate: learningRate andMaxIterations: maxIter [
 
 	| results linearRegressionDict |
 	results := self getPreprocessedResults.
-	linearRegressionDict := self linearRegressionGDWith: results.
+	linearRegressionDict := self
+		                        linearRegressionGDWith: results
+		                        learningRate: learningRate
+		                        maxIterations: maxIter.
 
 	self write: linearRegressionDict toJson: fileName
 ]
