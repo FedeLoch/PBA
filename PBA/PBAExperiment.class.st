@@ -10,6 +10,12 @@ Class {
 }
 
 { #category : 'accessing' }
+PBAExperiment >> allBenchmarks [
+
+	^ self subclassResponsibility
+]
+
+{ #category : 'accessing' }
 PBAExperiment >> benchmarks [
 
 	^ self subclassResponsibility 
