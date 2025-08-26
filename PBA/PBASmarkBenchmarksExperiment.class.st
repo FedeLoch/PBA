@@ -16,8 +16,8 @@ PBASmarkBenchmarksExperiment class >> run [
 PBASmarkBenchmarksExperiment >> allBenchmarks [
 
 	^ self benchmarks collect: [ :bench |
-		  (PBASmarkBenchmarkProgram bench: bench) classesToExecute:
-			  bench class package classes
+		  (PBASmarkBenchmarkProgram bench: bench new) classesToExecute:
+			  bench package classes
 	]
 ]
 
@@ -25,15 +25,23 @@ PBASmarkBenchmarksExperiment >> allBenchmarks [
 PBASmarkBenchmarksExperiment >> benchmarks [
 
 	^ {
-		  SMarkDeltaBlue new.
-		  SMarkRichards new.
-		  BGBinaryTrees new.
-		  BGMeteor new.
-		  BGNBody new.
-		  BGPiDigits new.
-		  BGSpectralNorm new.
-		  BGThreadRing new
-	}
+		  SMarkDeltaBlue.
+		  SMarkRichards.
+		  BGBinaryTrees.
+		  BGMeteor.
+		  BGNBody.
+		  BGPiDigits.
+		  BGSpectralNorm.
+		  BGThreadRing.
+		  BGChameleons.
+		  BGChameneosRedux.
+		  BGFasta.
+		  BGKNucleotide.
+		  BGMandelbrot.
+		  BGRegexDNA.
+		  BGReverseComplement.
+		  "SMarkSlopstone"
+		}
 ]
 
 { #category : 'as yet unclassified' }
