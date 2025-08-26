@@ -18,6 +18,7 @@ BaselineOfPBA >> baseline: spec [
 			spec baseline: 'PolyMath' with: [ spec repository: 'github://PolyMathOrg/PolyMath' ].
 			spec baseline: 'VeritasDataFrame' with: [ spec repository: 'github://jordanmontt/PharoVeritasBenchSuite:main' ].
 			spec baseline: 'AILinearModels' with: [ spec repository: 'github://pharo-ai/linear-models/src' ].
-			spec package: 'PBA' with: [ spec requires: #( 'SMark' 'PBP' 'BenchEvaluation' 'IllimaniProfiler' 'VeritasDataFrame' 'PolyMath' 'AILinearModels' ) ].
+			spec baseline: 'AIMetrics' with: [ spec repository: 'github://pharo-ai/metrics' ].
+			spec package: 'PBA' with: [ spec requires: #( 'SMark' 'PBP' 'BenchEvaluation' 'IllimaniProfiler' 'VeritasDataFrame' 'PolyMath' 'AILinearModels' 'AIMetrics' ) ].
 			spec group: 'default' with: #( 'PBA' ) ]
 ]

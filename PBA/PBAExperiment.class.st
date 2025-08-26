@@ -75,9 +75,9 @@ PBAExperiment >> linearRegressionLSWith: dataframe [
 	linearRegressionModel fitX: xMatrix y: y.
 
 	predictedValues := linearRegressionModel predict: x.
-	meanSquaredError := linearRegressionModel
-		                    meanSquaredErrorBetweenActual: y
-		                    andPredicted: predictedValues.
+	meanSquaredError := AIMeanSquaredError new
+		                    computeForActual: y
+		                    predicted: predictedValues.
 	weights := linearRegressionModel weights.
 	bias := linearRegressionModel bias.
 
