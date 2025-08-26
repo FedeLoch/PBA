@@ -22,6 +22,16 @@ PBAExperiment >> executionTimeLabel [
 ]
 
 { #category : 'accessing' }
+PBAExperiment >> getPreprocessedResults [
+
+	| results |
+	results := self runExperiment.
+	self removeUselessColumnsFrom: results.
+
+	^ results
+]
+
+{ #category : 'accessing' }
 PBAExperiment >> linearRegressionGDWith: dataframe [
 
 	| y x normalizedX linearRegressionModel costHistory weights bias |
@@ -108,8 +118,8 @@ PBAExperiment >> pcaWith: results [
 ]
 
 { #category : 'removing' }
-PBAExperiment >> removeMeaninglessColumnsFrom: dataframe [
-	"Meaningless columns are those with only one value for all rows, so a standard deviation of 0"
+PBAExperiment >> removeUselessColumnsFrom: dataframe [
+	"Useless columns are the columns for which all rows have the same value, so a standard deviation of 0. These columns don't carry information, so we can remove them without any risk"
 
 	dataframe removeColumns: (dataframe columnNames select: [ :colName |
 			 (dataframe column: colName) stdev = 0 ])
@@ -141,11 +151,9 @@ PBAExperiment >> runExperimentAndWriteCSVWith: targets name: fileName [
 { #category : 'running' }
 PBAExperiment >> runLinearRegressionGDExperiment: fileName [
 
-	| results cleanResults linearRegressionDict |
-
-	results := self runExperiment.
-	cleanResults := self removeMeaninglessColumnsFrom: results.
-	linearRegressionDict := self linearRegressionGDWith: cleanResults.
+	| results linearRegressionDict |
+	results := self getPreprocessedResults.
+	linearRegressionDict := self linearRegressionGDWith: results.
 
 	self write: linearRegressionDict toJson: fileName
 ]
@@ -153,11 +161,9 @@ PBAExperiment >> runLinearRegressionGDExperiment: fileName [
 { #category : 'running' }
 PBAExperiment >> runLinearRegressionLSExperiment: fileName [
 
-	| results cleanResults linearRegressionDict |
-
-	results := self runExperiment.
-	cleanResults := self removeMeaninglessColumnsFrom: results.
-	linearRegressionDict := self linearRegressionLSWith: cleanResults.
+	| results linearRegressionDict |
+	results := self getPreprocessedResults.
+	linearRegressionDict := self linearRegressionLSWith: results.
 
 	self write: linearRegressionDict toJson: fileName
 ]
@@ -165,13 +171,16 @@ PBAExperiment >> runLinearRegressionLSExperiment: fileName [
 { #category : 'running' }
 PBAExperiment >> runPCAExperiment: fileName [
 
-	| results mTransformed pcaDataFrame |
+	| results matrixTransformed pcaDataFrame |
+	results := self getPreprocessedResults.
 
-	results := self runExperiment.
-	mTransformed := self pcaWith: results.
-
-	pcaDataFrame := DataFrame withRows: mTransformed rows columnNames: #( PCA1 PCA2 ).
-	pcaDataFrame addColumn: (results columnAt: 1) named: self executionTimeLabel.
+	matrixTransformed := self pcaWith: results.
+	pcaDataFrame := DataFrame
+		                withRows: matrixTransformed rows
+		                columnNames: #( PCA1 PCA2 ).
+	pcaDataFrame
+		addColumn: (results columnAt: 1)
+		named: self executionTimeLabel.
 
 	pcaDataFrame writeToCsv: fileName asFileReference
 ]
