@@ -48,17 +48,16 @@ PBAExperiment >> initialize [
 { #category : 'accessing' }
 PBAExperiment >> linearRegressionGDWith: dataframe learningRate: learningRate maxIterations: maxIter [
 
-	| y x normalizedX linearRegressionModel costHistory weights bias |
+	| y x linearRegressionModel costHistory weights bias |
 	y := (dataframe columnAt: 1) values.
 	x := (dataframe columnsFrom: 2 to: dataframe numberOfColumns)
 		     asArrayOfRows.
-	normalizedX := AIStandardizationNormalizer new normalize: x.
 
 	linearRegressionModel := AILinearRegression new
 		                         learningRate: learningRate;
 		                         maxIterations: maxIter;
 		                         yourself.
-	linearRegressionModel fitX: normalizedX y: y.
+	linearRegressionModel fitX: x y: y.
 
 	costHistory := linearRegressionModel costHistory.
 	weights := linearRegressionModel weights.
