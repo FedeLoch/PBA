@@ -3,7 +3,8 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'pca',
-		'standardizer'
+		'standardizer',
+		'linearRegressionModel'
 	],
 	#category : 'PBA-Experiment',
 	#package : 'PBA',
@@ -46,52 +47,49 @@ PBAExperiment >> initialize [
 ]
 
 { #category : 'accessing' }
-PBAExperiment >> linearRegressionGDWith: dataframe learningRate: learningRate maxIterations: maxIter [
+PBAExperiment >> learnModelAndGetMSEFrom: x and: y with: learningRate and: maxIter [
+	"If learningRate is nil, it is assume that maxIter is nil as well and that the least squares method should be used"
 
-	| y x linearRegressionModel costHistory weights bias |
-	y := (dataframe columnAt: 1) values.
-	x := (dataframe columnsFrom: 2 to: dataframe numberOfColumns)
-		     asArrayOfRows.
-
-	linearRegressionModel := AILinearRegression new
-		                         learningRate: learningRate;
-		                         maxIterations: maxIter;
-		                         yourself.
-	linearRegressionModel fitX: x y: y.
-
-	costHistory := linearRegressionModel costHistory.
-	weights := linearRegressionModel weights.
-	bias := linearRegressionModel bias.
-
-	^ Dictionary newFrom: {
-			  ('weights' -> weights).
-			  ('bias' -> bias).
-			  ('costs' -> costHistory) }
+	| predictedValues xMatrix |
+	^ learningRate
+		  ifNil: [
+			  xMatrix := AIColumnMajorMatrix rows: x.
+			  linearRegressionModel := AILinearRegressionLeastSquares new.
+			  linearRegressionModel fitX: xMatrix y: y.
+			  predictedValues := linearRegressionModel predict: x.
+			  AIMeanSquaredError new
+				  computeForActual: y
+				  predicted: predictedValues ]
+		  ifNotNil: [
+			  linearRegressionModel := AILinearRegression new
+				                           learningRate: learningRate;
+				                           maxIterations: maxIter;
+				                           yourself.
+			  linearRegressionModel fitX: x y: y.
+			  linearRegressionModel costHistory ]
 ]
 
 { #category : 'accessing' }
-PBAExperiment >> linearRegressionLSWith: dataframe [
+PBAExperiment >> linearRegressionWith: dataframe learningRate: learningRate maxIterations: maxIter [
 
-	| y x xMatrix linearRegressionModel predictedValues weights bias meanSquaredError |
+	| y x weights bias mse |
 	y := (dataframe columnAt: 1) values.
 	x := (dataframe columnsFrom: 2 to: dataframe numberOfColumns)
 		     asArrayOfRows.
-	xMatrix := AIColumnMajorMatrix rows: x.
 
-	linearRegressionModel := AILinearRegressionLeastSquares new.
-	linearRegressionModel fitX: xMatrix y: y.
+	mse := self
+		       learnModelAndGetMSEFrom: x
+		       and: y
+		       with: learningRate
+		       and: maxIter.
 
-	predictedValues := linearRegressionModel predict: x.
-	meanSquaredError := AIMeanSquaredError new
-		                    computeForActual: y
-		                    predicted: predictedValues.
 	weights := linearRegressionModel weights.
 	bias := linearRegressionModel bias.
 
 	^ Dictionary newFrom: {
 			  ('weights' -> weights).
 			  ('bias' -> bias).
-			  ('mse' -> meanSquaredError) }
+			  ('mse' -> mse) }
 ]
 
 { #category : 'accessing' }
@@ -162,12 +160,12 @@ PBAExperiment >> runExperimentAndWriteCSVWith: targets name: fileName [
 ]
 
 { #category : 'running' }
-PBAExperiment >> runLinearRegressionGDExperiment: fileName withLearningRate: learningRate andMaxIterations: maxIter [
+PBAExperiment >> runLinearRegressionExperiment: fileName withLearningRate: learningRate andMaxIterations: maxIter [
 
 	| results linearRegressionDict |
 	results := self getPreprocessedResults.
 	linearRegressionDict := self
-		                        linearRegressionGDWith: results
+		                        linearRegressionWith: results
 		                        learningRate: learningRate
 		                        maxIterations: maxIter.
 
@@ -175,13 +173,21 @@ PBAExperiment >> runLinearRegressionGDExperiment: fileName withLearningRate: lea
 ]
 
 { #category : 'running' }
+PBAExperiment >> runLinearRegressionGDExperiment: fileName withLearningRate: learningRate andMaxIterations: maxIter [
+
+	self
+		runLinearRegressionExperiment: fileName
+		withLearningRate: learningRate
+		andMaxIterations: maxIter
+]
+
+{ #category : 'running' }
 PBAExperiment >> runLinearRegressionLSExperiment: fileName [
 
-	| results linearRegressionDict |
-	results := self getPreprocessedResults.
-	linearRegressionDict := self linearRegressionLSWith: results.
-
-	self write: linearRegressionDict toJson: fileName
+	self
+		runLinearRegressionExperiment: fileName
+		withLearningRate: nil
+		andMaxIterations: nil
 ]
 
 { #category : 'running' }
