@@ -72,7 +72,7 @@ PBAExperiment >> learnModelAndGetMSEFrom: x and: y with: learningRate and: maxIt
 { #category : 'accessing' }
 PBAExperiment >> linearRegressionWith: dataframe learningRate: learningRate maxIterations: maxIter [
 
-	| y x weights bias mse |
+	| y x weights bias mse features |
 	y := (dataframe columnAt: 1) values.
 	x := (dataframe columnsFrom: 2 to: dataframe numberOfColumns)
 		     asArrayOfRows.
@@ -85,8 +85,10 @@ PBAExperiment >> linearRegressionWith: dataframe learningRate: learningRate maxI
 
 	weights := linearRegressionModel weights.
 	bias := linearRegressionModel bias.
+	features := dataframe columnNames allButFirst.
 
 	^ Dictionary newFrom: {
+			  ('features' -> features).
 			  ('weights' -> weights).
 			  ('bias' -> bias).
 			  ('mse' -> mse) }
