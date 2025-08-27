@@ -2,7 +2,8 @@ Class {
 	#name : 'PBAExperiment',
 	#superclass : 'Object',
 	#instVars : [
-		'pca'
+		'pca',
+		'standardizer'
 	],
 	#category : 'PBA-Experiment',
 	#package : 'PBA',
@@ -30,11 +31,18 @@ PBAExperiment >> executionTimeLabel [
 { #category : 'accessing' }
 PBAExperiment >> getPreprocessedResults [
 
-	| results |
+	| results standardizedResults |
 	results := self runExperiment.
 	self removeUselessColumnsFrom: results.
+	standardizedResults := standardizer normalize: results.
 
-	^ results
+	^ standardizedResults
+]
+
+{ #category : 'initialization' }
+PBAExperiment >> initialize [
+
+	standardizer := AIStandardizationNormalizer new
 ]
 
 { #category : 'accessing' }
