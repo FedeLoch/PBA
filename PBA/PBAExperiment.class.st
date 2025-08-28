@@ -66,7 +66,7 @@ PBAExperiment >> runExperiment [
 { #category : 'as yet unclassified' }
 PBAExperiment >> runExperiment: fileName [
 
-	^ self runExperimentAndWriteCSVWith: self allBenchmarks  name: fileName
+	^ self runExperimentAndWriteCSVWith: self allBenchmarks name: fileName
 ]
 
 { #category : 'as yet unclassified' }
