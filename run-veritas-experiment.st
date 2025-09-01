@@ -4,4 +4,4 @@ Metacello new
 		onConflictUseIncoming;
 		load.
 
-(Smalltalk at: #PBAVeritasBenchmarksExperiment) run
+(Smalltalk at: #PBAMemoryBenchmarksExperiment) run

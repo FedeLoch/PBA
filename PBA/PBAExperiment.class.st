@@ -143,7 +143,7 @@ PBAExperiment >> runExperiment [
 { #category : 'running' }
 PBAExperiment >> runExperiment: fileName [
 
-	^ self runExperimentAndWriteCSVWith: self allBenchmarks  name: fileName
+	^ self runExperimentAndWriteCSVWith: self allBenchmarks name: fileName
 ]
 
 { #category : 'running' }
