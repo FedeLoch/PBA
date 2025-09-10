@@ -60,9 +60,10 @@ PBAnalyzer >> initialize [
 	super initialize.
 	analysisStrategies := {
 		PBACallBacksStrategy new.
-		PBACoverageCollectorStrategy new.
+		"TODO: Commented for the moment" 
+"		PBACoverageCollectorStrategy new.
 		PBAIllimaniStrategy new.
-		PBABytecodeProfilerStrategy new.
+		PBABytecodeProfilerStrategy new."
 	}
 	
 ]

@@ -12,14 +12,15 @@ Class {
 { #category : 'running' }
 PBAVeritasBenchmarksExperiment class >> run [
 
-	^ self new runPCAExperiment: 'all-veritas-benchmarks-pca.csv'
+	^ self new runExperiment
 ]
 
 { #category : 'as yet unclassified' }
 PBAVeritasBenchmarksExperiment >> allBenchmarks [
 
 	^ self benchmarkClasses collect: [ :benchClass |
-		PBASmarkBenchmarkProgram bench: benchClass new
+		  (PBABenchmarkProgram bench: benchClass new)
+				classesToExecute: benchClass package classes
 	]
 ]
 
@@ -28,39 +29,20 @@ PBAVeritasBenchmarksExperiment >> benchmarkClasses [
 
 	^ {
 		VeritasDataFrame.
-		VeritasCormas.
+		VeritasCormas. "<-"
 		VeritasRewriterTransformer.
 		VeritasRewriterFinder.
 		VeritasReMobidyc.
 		VeritasHoneyGinger.
-		"VeritasMoose."
-		"VeritasBloc."
+		"VeritasMoose. <-"
+		"VeritasBloc. <-"
 		VeritasMicrodown.
 		"VeritasRegis"
 	}
 ]
 
 { #category : 'as yet unclassified' }
-PBAVeritasBenchmarksExperiment >> benchmarkFiles [
-
-	^ { 
-		'tiny_dataset.csv'.
-"		'tiny_fifty_times_larger_dataset.csv'.
-		'tiny_one_hundred_times_larger_dataset.csv'"
-	}
-]
-
-{ #category : 'as yet unclassified' }
-PBAVeritasBenchmarksExperiment >> initialize [
-	
-	super initialize.
-	experiments := {
-		PBAMemoryBenchmarksExperiment new
-	}
-]
-
-{ #category : 'as yet unclassified' }
 PBAVeritasBenchmarksExperiment >> runExperiment [
 
-	^ self runExperiment: 'veritas-benchmarks-features.csv'
+	^ self runExperiment: 'all-veritas-benchmarks-features.csv'
 ]

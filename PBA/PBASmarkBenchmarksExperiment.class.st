@@ -16,7 +16,7 @@ PBASmarkBenchmarksExperiment class >> run [
 PBASmarkBenchmarksExperiment >> allBenchmarks [
 
 	^ self benchmarks collect: [ :bench |
-		  (PBASmarkBenchmarkProgram bench: bench new) classesToExecute:
+		  (PBABenchmarkProgram bench: bench new) classesToExecute:
 			  bench package classes
 	]
 ]
