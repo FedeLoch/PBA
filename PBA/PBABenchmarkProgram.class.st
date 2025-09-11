@@ -55,6 +55,5 @@ PBABenchmarkProgram >> name [
 
 { #category : 'accessing' }
 PBABenchmarkProgram >> run [
-
 	^ benchmark run.
 ]
