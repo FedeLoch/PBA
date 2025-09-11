@@ -18,15 +18,17 @@ BaselineOfPBA >> baseline: spec [
 			spec baseline: 'PolyMath' with: [ spec repository: 'github://PolyMathOrg/PolyMath' ].
 			spec baseline: 'AILinearModels' with: [ spec repository: 'github://pharo-ai/linear-models/src' ].
 			spec baseline: 'AIMetrics' with: [ spec repository: 'github://pharo-ai/metrics' ].
-			{ 'VeritasDataFrame' . 'VeritasCormas' . 'VeritasRewriter' .
+			
+"			{ 'VeritasDataFrame' . 'VeritasCormas' . 'VeritasRewriter' .
 				'VeritasReMobidyc' . 'VeritasHoneyGinger' . 'VeritasMoose' .
-				'VeritasBloc' ". 'VeritasRegis'" . 'VeritasMicrodown' } do: [ :baseline |
+				'VeritasBloc' "". 'VeritasRegis'"" . 'VeritasMicrodown' } do: [ :baseline |
 				spec baseline: baseline with: [ spec repository: 'github://jordanmontt/PharoVeritasBenchSuite:main' ]
-			].
+			]."
 			spec package: 'PBA' with: [
-				spec requires: #( 'SMark' 'PBP' 'BenchEvaluation' 'IllimaniProfiler' 'VeritasDataFrame' 'VeritasCormas'
-					'VeritasRewriter'  'VeritasReMobidyc' 'VeritasHoneyGinger' 'VeritasMoose' 'VeritasBloc'
-					"'VeritasRegis'" 'VeritasMicrodown' 'PolyMath' 'AILinearModels' 'AIMetrics'
+				spec requires: #( 'SMark' 'PBP' 'BenchEvaluation' 'IllimaniProfiler'
+"				'VeritasDataFrame' 'VeritasCormas' 'VeritasRewriter'  'VeritasReMobidyc'
+				'VeritasHoneyGinger' 'VeritasMoose' 'VeritasBloc' ""'VeritasRegis'"" 'VeritasMicrodown'"
+				'PolyMath' 'AILinearModels' 'AIMetrics'
 				)
 			].
 			spec group: 'default' with: #( 'PBA' ) ]
