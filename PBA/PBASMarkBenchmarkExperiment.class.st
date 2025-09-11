@@ -41,7 +41,10 @@ PBASMarkBenchmarkExperiment class >> run [
 	BGMandelbrot.
 	BGRegexDNA.
 	BGReverseComplement.
-} do: [ :bench | self bench: bench with: self iterations ]
+} do: [ :bench |
+	Transcript crShow: 'Starting Bench: ', bench name.
+	self bench: bench with: self iterations
+]
  
 ]
 
