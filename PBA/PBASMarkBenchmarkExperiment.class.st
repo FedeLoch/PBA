@@ -19,7 +19,7 @@ PBASMarkBenchmarkExperiment class >> bench: bechmark with: iterations [
 { #category : 'running' }
 PBASMarkBenchmarkExperiment class >> iterations [
 
-	^ ((1 to: 9) flatCollect: [  :i | (1 to: 6) collect: [ :j | i * (10 raisedTo: j) ] ]) sort
+	^ ((1 to: 9) flatCollect: [  :i | (1 to: 5) collect: [ :j | i * (10 raisedTo: j) ] ]) sort
 ]
 
 { #category : 'running' }
@@ -52,7 +52,7 @@ PBASMarkBenchmarkExperiment class >> run [
 PBASMarkBenchmarkExperiment >> allBenchmarks [ 
 
 	^ problemSizes collect: [ :size |
-		(PBABenchmarkProgram bench: (benchmark new problemSize: size)) classesToExecute:
+		(PBABenchmarkProgram bench: benchmark new) problemSize: size; classesToExecute:
 			  benchmark package classes
 	]
 ]

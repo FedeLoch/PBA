@@ -1,13 +1,22 @@
 Extension { #name : 'SMarkRichards' }
 
 { #category : '*PBA' }
-SMarkRichards >> problemSize: aProblemSize [
+SMarkRichards >> benchRichards: size [
 
-	problemSize := aProblemSize 
+	size timesRepeat: [
+		RichObject initialize.
+		RichRunner start
+	]
 ]
 
 { #category : '*PBA' }
 SMarkRichards >> run [
 
 	^ self benchRichards
+]
+
+{ #category : '*PBA' }
+SMarkRichards >> runWith: problemSize [
+
+	^ self benchRichards: problemSize
 ]

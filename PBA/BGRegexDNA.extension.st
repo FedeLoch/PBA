@@ -1,19 +1,13 @@
 Extension { #name : 'BGRegexDNA' }
 
 { #category : '*PBA' }
-BGRegexDNA >> problemSize [
-	
-	^ problemSize
-]
-
-{ #category : '*PBA' }
-BGRegexDNA >> problemSize: aProblemSize [
-
-	problemSize := aProblemSize 
-]
-
-{ #category : '*PBA' }
 BGRegexDNA >> run [
 
 	^ BenchmarkGameSuite new benchRegexDNA 
+]
+
+{ #category : '*PBA' }
+BGRegexDNA >> runWith: problemSize [
+
+	^ BenchmarkGameSuite new benchRegexDNA: problemSize
 ]

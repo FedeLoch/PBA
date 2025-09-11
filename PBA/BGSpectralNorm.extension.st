@@ -1,19 +1,13 @@
 Extension { #name : 'BGSpectralNorm' }
 
 { #category : '*PBA' }
-BGSpectralNorm >> problemSize [
-
-	^ problemSize 
-]
-
-{ #category : '*PBA' }
-BGSpectralNorm >> problemSize: aProblemSize [
-
-	problemSize := aProblemSize 
-]
-
-{ #category : '*PBA' }
 BGSpectralNorm >> run [
 
 	^ BenchmarkGameSuite new benchSpectralNorm
+]
+
+{ #category : '*PBA' }
+BGSpectralNorm >> runWith: problemSize [
+
+	^ BenchmarkGameSuite new benchSpectralNorm: problemSize
 ]

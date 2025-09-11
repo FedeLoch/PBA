@@ -3,7 +3,8 @@ Class {
 	#superclass : 'PBABenchmarkTarget',
 	#instVars : [
 		'benchmark',
-		'classesToExecute'
+		'classesToExecute',
+		'problemSize'
 	],
 	#category : 'PBA-Target',
 	#package : 'PBA',
@@ -54,6 +55,13 @@ PBABenchmarkProgram >> name [
 ]
 
 { #category : 'accessing' }
+PBABenchmarkProgram >> problemSize: aProblemSize [ 
+	
+	problemSize := aProblemSize
+]
+
+{ #category : 'accessing' }
 PBABenchmarkProgram >> run [
-	^ benchmark run.
+
+	^ benchmark runWith: problemSize
 ]

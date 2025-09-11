@@ -1,26 +1,22 @@
 Extension { #name : 'SMarkDeltaBlue' }
 
 { #category : '*PBA' }
-SMarkDeltaBlue >> problemSize [
-	<omniUnenforced> "Hint for the OMOP that it is part of the meta infrastructure"
-	| ps |
-	
-	problemSize ifNotNil: [ ^ problemSize ].
-	ps := super problemSize.
-	
-	ps isInteger ifFalse: [	^ self defaultProblemSize].
-		
-	^ ps
-]
+SMarkDeltaBlue >> benchDeltaBlue: n [
 
-{ #category : '*PBA' }
-SMarkDeltaBlue >> problemSize: aProblemSize [
-
-	problemSize := aProblemSize 
+	DBStrength initialize.
+	DBPlanner chainTest: n.
+	DBPlanner projectionTest: n.
+	^ true
 ]
 
 { #category : '*PBA' }
 SMarkDeltaBlue >> run [
 
 	^ self benchDeltaBlue
+]
+
+{ #category : '*PBA' }
+SMarkDeltaBlue >> runWith: problemSize [
+
+	^ self benchDeltaBlue: problemSize
 ]
