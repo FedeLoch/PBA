@@ -40,6 +40,17 @@ DataFrameBenchmarkExamples >> dataTypes [
 ]
 
 { #category : 'as yet unclassified' }
+DataFrameBenchmarkExamples >> removeAt [
+
+	<script: ' self new removeAt'>
+	| df |
+
+	df := DataFrame withRows: { { 'a' . 1 } . { 'b' . 2 } . { 'c' . 3 } }.
+	
+	df removeRowAt: 1
+]
+
+{ #category : 'as yet unclassified' }
 DataFrameBenchmarkExamples >> transposed [
 
 	<script: ' self new transposed'>
