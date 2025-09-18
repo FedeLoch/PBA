@@ -49,3 +49,14 @@ DataFrameBenchmarkExamples >> transposed [
 	
 	self assert: df transposed equals: (DataFrame withRows: { { 'a' . 'b' . 'c' } . { 1 . 2 . 3 } }).
 ]
+
+{ #category : 'as yet unclassified' }
+DataFrameBenchmarkExamples >> withRows [
+
+	<script: ' self new withRows'>
+	| array |
+
+	array := { { 'a' . 1 } . { 'b' . 2 } . { 'c' . 3 } }.
+	
+	self assert: (DataFrame withRows: array) class equals: DataFrame.
+]
