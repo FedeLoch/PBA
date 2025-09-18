@@ -38,3 +38,14 @@ DataFrameBenchmarkExamples >> dataTypes [
 	
 	self assert: df dataTypes equals: { 1 -> Object . 2 -> SmallInteger } asDictionary.
 ]
+
+{ #category : 'as yet unclassified' }
+DataFrameBenchmarkExamples >> transposed [
+
+	<script: ' self new transposed'>
+	| df |
+
+	df := DataFrame withRows: { { 'a' . 1 } . { 'b' . 2 } . { 'c' . 3 } }.
+	
+	self assert: df transposed equals: (DataFrame withRows: { { 'a' . 'b' . 'c' } . { 1 . 2 . 3 } }).
+]
