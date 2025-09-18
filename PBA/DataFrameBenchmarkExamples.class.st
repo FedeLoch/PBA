@@ -40,6 +40,17 @@ DataFrameBenchmarkExamples >> dataTypes [
 ]
 
 { #category : 'as yet unclassified' }
+DataFrameBenchmarkExamples >> readFromCsv [
+
+	<script: ' self new readFromCsv'>
+	| path |
+
+	path := '/Users/fede/Downloads/MOCK_DATA.csv' asFileReference.
+	
+	self assert: (DataFrame readFromCsv: path) class equals: DataFrame
+]
+
+{ #category : 'as yet unclassified' }
 DataFrameBenchmarkExamples >> removeAt [
 
 	<script: ' self new removeAt'>
