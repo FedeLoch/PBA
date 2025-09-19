@@ -25,10 +25,10 @@ PBAMemoryBenchmarksExperiment >> allBenchmarks [
 PBAMemoryBenchmarksExperiment >> benchmarkDataFrameFiles [
 
 	^ { 
-		'../tiny_dataset.csv'. "2,3 mb"
-		'../tiny_ten_times_larger_dataset.csv'. "23,4 mb"
-"		'tiny_fifty_times_larger_dataset.csv'. ""117 mb""
-		'tiny_one_hundred_times_larger_dataset.csv'. ""234 mb""
+		'tiny_dataset.csv'. "2,3 mb"
+		"'tiny_ten_times_larger_dataset.csv'. ""23,4 mb""
+		'tiny_fifty_times_larger_dataset.csv'. ""117 mb"""
+		"'tiny_one_hundred_times_larger_dataset.csv'. ""234 mb""
 		'tiny_two_hundred_times_larger_dataset.csv' ""468 mb"""
 	}
 ]
