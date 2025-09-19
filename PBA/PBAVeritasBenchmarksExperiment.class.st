@@ -36,8 +36,8 @@ PBAVeritasBenchmarksExperiment >> benchmarkClasses [
 		VeritasHoneyGinger.
 		""VeritasMoose. <-""
 		""VeritasBloc. <-""
-		VeritasMicrodown."
-		"VeritasRegis"
+		VeritasMicrodown.
+		""VeritasRegis"""
 	}
 ]
 
