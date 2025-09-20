@@ -7,27 +7,38 @@ Class {
 }
 
 { #category : 'accessing' }
-MethodProfiler class >> profile: targetProgram [
+MethodProfiler class >> profile: program [
 
-	| handler mps |
+	^ self profile: program for: (program classesToExecute flatCollect: #methods)
 	
-	handler :=  self new.
-	1 halt.
-	mps := (targetProgram classesToExecute flatCollect: #methods) collect: [ :method |
-		MpMethodProxy  onMethod: method handler: handler
+	
+
+]
+
+{ #category : 'accessing' }
+MethodProfiler class >> profile: block for: methods [
+
+	| handlers methodProxies |
+
+	methodProxies := methods collect: [ :method |
+		MpMethodProxy onMethod: method handler: (MethodHandler new method: method)
 	].
+
+	handlers := methodProxies collect: #handler.
 	
 	"Installing method proxies"
-	mps do: [ :mp | mp install; enableInstrumentation ].
+	methodProxies do: [ :mp | mp install; enableInstrumentation ].
 	
 	"Executing"
-	targetProgram run.
-	
-	"Unistalling method proxies"
-	mps do: [ :mp | mp uninstall ].
-	
-	^ handler result
-	
-	
+	block ensure: [ methodProxies do: #uninstall ].
 
+	^ self result: handlers
+]
+
+{ #category : 'accessing' }
+MethodProfiler class >> result: handlers [
+
+	^ handlers inject: Dictionary new into: [ :dict :handler |
+		dict at: handler method name put: handler count; yourself
+	]
 ]
