@@ -7,9 +7,18 @@ Class {
 }
 
 { #category : 'accessing' }
+MethodProfiler class >> methodsCalled: handlers [
+
+	^ handlers inject: Dictionary new into: [ :dict :handler |
+		dict at: handler method name put: handler count; yourself
+	]
+
+]
+
+{ #category : 'accessing' }
 MethodProfiler class >> profile: program [
 
-	^ self profile: program for: (program classesToExecute flatCollect: #methods)
+	^ self profile: [ program run ] for: (program classesToExecute flatCollect: #methods)
 	
 	
 
@@ -38,7 +47,5 @@ MethodProfiler class >> profile: block for: methods [
 { #category : 'accessing' }
 MethodProfiler class >> result: handlers [
 
-	^ handlers inject: Dictionary new into: [ :dict :handler |
-		dict at: handler method name put: handler count; yourself
-	]
+	^ { 'methodsCalled' -> self methodsCalled: handlers } asDictionary
 ]
