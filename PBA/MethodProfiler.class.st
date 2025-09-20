@@ -47,5 +47,5 @@ MethodProfiler class >> profile: block for: methods [
 { #category : 'accessing' }
 MethodProfiler class >> result: handlers [
 
-	^ { 'methodsCalled' -> self methodsCalled: handlers } asDictionary
+	^ { 'methodsCalled' -> (self methodsCalled: handlers) } asDictionary
 ]
