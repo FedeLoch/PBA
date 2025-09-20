@@ -62,6 +62,7 @@ PBAnalyzer >> initialize [
 		PBACallBacksStrategy new.
 		PBACoverageCollectorStrategy new.
 		PBAIllimaniStrategy new.
+		PBAMethodProfilerStrategy new.
 		PBABytecodeProfilerStrategy new.
 	}
 	

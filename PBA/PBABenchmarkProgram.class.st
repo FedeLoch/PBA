@@ -55,6 +55,14 @@ PBABenchmarkProgram >> name [
 ]
 
 { #category : 'accessing' }
+PBABenchmarkProgram >> problemSize [
+
+	problemSize ifNil: [ ^ benchmark defaultProblemSize ].
+
+	^ problemSize 
+]
+
+{ #category : 'accessing' }
 PBABenchmarkProgram >> problemSize: aProblemSize [ 
 	
 	problemSize := aProblemSize
@@ -63,5 +71,5 @@ PBABenchmarkProgram >> problemSize: aProblemSize [
 { #category : 'accessing' }
 PBABenchmarkProgram >> run [
 
-	^ benchmark runWith: problemSize
+	^ benchmark runWith: self problemSize
 ]
