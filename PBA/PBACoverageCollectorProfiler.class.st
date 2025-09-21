@@ -1,13 +1,13 @@
 Class {
-	#name : 'PBACoverageCollectorStrategy',
-	#superclass : 'PBAAnalysisStrategy',
+	#name : 'PBACoverageCollectorProfiler',
+	#superclass : 'PBAAnalysisProfiler',
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
 	#tag : 'AnalysisStrategy'
 }
 
 { #category : 'testing' }
-PBACoverageCollectorStrategy >> analyze: aTargetProgram [
+PBACoverageCollectorProfiler >> analyze: aTargetProgram [
 
 	| result|
 	

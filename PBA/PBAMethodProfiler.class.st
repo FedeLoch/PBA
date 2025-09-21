@@ -1,13 +1,13 @@
 Class {
-	#name : 'PBAMethodProfilerStrategy',
-	#superclass : 'PBAAnalysisStrategy',
+	#name : 'PBAMethodProfiler',
+	#superclass : 'PBAAnalysisProfiler',
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
 	#tag : 'AnalysisStrategy'
 }
 
 { #category : 'testing' }
-PBAMethodProfilerStrategy >> analyze: aTargetProgram [
+PBAMethodProfiler >> analyze: aTargetProgram [
 
 	^ PBAResult from: (MethodProfiler profile: aTargetProgram)
 ]

@@ -2,31 +2,19 @@ Class {
 	#name : 'PBAnalyzer',
 	#superclass : 'Object',
 	#instVars : [
-		'analysisStrategies',
-		'results'
+		'results',
+		'profilers'
 	],
 	#category : 'PBA-Analyzer',
 	#package : 'PBA',
 	#tag : 'Analyzer'
 }
 
-{ #category : 'accessing' }
-PBAnalyzer >> analysisStrategies [
-
-	^ analysisStrategies
-]
-
-{ #category : 'accessing' }
-PBAnalyzer >> analysisStrategies: someAnalysisStrategies [
-
-	analysisStrategies := someAnalysisStrategies
-]
-
 { #category : 'analyzing' }
 PBAnalyzer >> analyze: aTargetProgram [
 
-	^ analysisStrategies inject: PBAResult new into: [ :result :strategy |
-		result merge: (strategy analyze: aTargetProgram)
+	^ profilers inject: PBAResult new into: [ :result :profiler |
+		result merge: (profiler analyze: aTargetProgram)
 	] 
 ]
 
@@ -58,14 +46,26 @@ PBAnalyzer >> analyzeAll: targetPrograms [
 PBAnalyzer >> initialize [ 
 	
 	super initialize.
-	analysisStrategies := {
-		PBACallBacksStrategy new.
-		PBACoverageCollectorStrategy new.
-		PBAIllimaniStrategy new.
-		PBAMethodProfilerStrategy new.
-		PBABytecodeProfilerStrategy new.
+	profilers := {
+		PBACallBacksProfiler new.
+		PBACoverageCollectorProfiler new.
+		PBAIllimaniProfiler new.
+		PBAMethodProfiler new.
+		PBABytecodeProfiler new.
 	}
 	
+]
+
+{ #category : 'accessing' }
+PBAnalyzer >> profilers [
+
+	^ profilers 
+]
+
+{ #category : 'accessing' }
+PBAnalyzer >> profilers: _profilers [
+
+	profilers := _profilers
 ]
 
 { #category : 'accessing' }

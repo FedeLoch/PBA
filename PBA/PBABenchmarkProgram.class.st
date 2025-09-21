@@ -31,8 +31,9 @@ PBABenchmarkProgram >> benchmark: aBenchmark [
 
 { #category : 'accessing' }
 PBABenchmarkProgram >> classesToExecute [
-	
-	^ classesToExecute 
+
+	^ classesToExecute ifEmpty: [ benchmark class package classes ] ifNotEmpty: [ classesToExecute ]
+
 ]
 
 { #category : 'accessing' }

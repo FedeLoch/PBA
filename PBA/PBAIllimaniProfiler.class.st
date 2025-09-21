@@ -1,13 +1,13 @@
 Class {
-	#name : 'PBAIllimaniStrategy',
-	#superclass : 'PBAAnalysisStrategy',
+	#name : 'PBAIllimaniProfiler',
+	#superclass : 'PBAAnalysisProfiler',
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
 	#tag : 'AnalysisStrategy'
 }
 
 { #category : 'testing' }
-PBAIllimaniStrategy >> analyze: aTargetProgram [
+PBAIllimaniProfiler >> analyze: aTargetProgram [
 
 	| profiler |
 	profiler := FiLiP new profileOn: [ aTargetProgram run ].
@@ -18,7 +18,7 @@ PBAIllimaniStrategy >> analyze: aTargetProgram [
 ]
 
 { #category : 'initialization' }
-PBAIllimaniStrategy >> initialize [
+PBAIllimaniProfiler >> initialize [
 
 	super initialize.
 	analysis := PBAIllimaniAnalysis allSubclasses collect: #new
