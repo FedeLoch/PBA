@@ -18,7 +18,7 @@ BaselineOfPBA >> baseline: spec [
 			spec baseline: 'PolyMath' with: [ spec repository: 'github://PolyMathOrg/PolyMath' ].
 			spec baseline: 'AILinearModels' with: [ spec repository: 'github://pharo-ai/linear-models/src' ].
 			spec baseline: 'AIMetrics' with: [ spec repository: 'github://pharo-ai/metrics' ].
-			spec baseline: 'MethodProxies' with: [ spec repository: 'github://pharo-contributions/MethodProxies/src' ].
+			spec baseline: 'MethodProfiler' with: [ spec repository: 'github://FedeLoch/MethodProfiler:main' ].
 			
 "			{ 'VeritasDataFrame' . 'VeritasCormas' . 'VeritasRewriter' .
 				'VeritasReMobidyc' . 'VeritasHoneyGinger' . 'VeritasMoose' .
@@ -29,7 +29,7 @@ BaselineOfPBA >> baseline: spec [
 				spec requires: #( 'SMark' 'PBP' 'BenchEvaluation' 'IllimaniProfiler'
 "				'VeritasDataFrame' 'VeritasCormas' 'VeritasRewriter'  'VeritasReMobidyc'
 				'VeritasHoneyGinger' 'VeritasMoose' 'VeritasBloc' ""'VeritasRegis'"" 'VeritasMicrodown'"
-				'PolyMath' 'AILinearModels' 'AIMetrics' 'MethodProxies'
+				'PolyMath' 'AILinearModels' 'AIMetrics' 'MethodProfiler'
 				)
 			].
 			spec group: 'default' with: #( 'PBA' ) ]
