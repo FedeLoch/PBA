@@ -24,6 +24,19 @@ A PBA default execution looks like the following:
 PBAnalyzer new analyze: (PBASmarkBenchmarkpProgram bench: SMarkDeltaBlue new)
 ```
 
+In case you don't want to use all the profilers at the same time, you can just do:
+
+```Smalltalk
+PBAnalyzer new profilers: { PBAMethodProfiler new }; analyze: program
+```
+
+The current available class profilers are:
+- `PBABytecodeProfiler`
+- `PBACallBacksProfiler`
+- `PBACoverageCollectorProfiler`
+- `PBAIllimaniProfiler`
+- `PBAMethodProfiler`
+
 ### PBA Result
 
 As a result, PBA provides a **PBAResult** which has a series of feature measurements:
