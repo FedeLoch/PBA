@@ -16,6 +16,12 @@ PBAProgram class >> from: block [
 	^ self new block: block
 ]
 
+{ #category : 'benchmarking' }
+PBAProgram class >> from: block forClasses: classes [
+
+	^ self new block: block; classesToExecute: classes
+]
+
 { #category : 'accessing' }
 PBAProgram >> block [
 

@@ -6,6 +6,13 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
+{ #category : 'as yet unclassified' }
+PBAMethodProfiler class >> methodsCalledKey [
+
+	^ 'methodsCalled'
+
+]
+
 { #category : 'testing' }
 PBAMethodProfiler >> analyze: aTargetProgram [
 

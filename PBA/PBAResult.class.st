@@ -40,6 +40,12 @@ PBAResult >> at: index put: value [
 	^ self
 ]
 
+{ #category : 'as yet unclassified' }
+PBAResult >> executionTime [
+
+	^ self at: PBAExecutionTimeAnalysis key
+]
+
 { #category : 'initialization' }
 PBAResult >> initialize [
 
@@ -55,4 +61,10 @@ PBAResult >> merge: anotherResult [
 	].
 
 	^ self
+]
+
+{ #category : 'as yet unclassified' }
+PBAResult >> methodsCalled [
+
+	^ self at: PBAMethodProfiler methodsCalledKey
 ]
