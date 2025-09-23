@@ -6,6 +6,12 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
+{ #category : 'as yet unclassified' }
+PBACoverageCollectorProfiler class >> coverageKey [
+
+	^ 'coverage'
+]
+
 { #category : 'testing' }
 PBACoverageCollectorProfiler >> analyze: aTargetProgram [
 
@@ -14,8 +20,10 @@ PBACoverageCollectorProfiler >> analyze: aTargetProgram [
 	result := CoverageCollector new methods: aTargetProgram methodsToExecute; runOn: [ aTargetProgram run ].
 
 	^ PBAResult from: ({
-		'methodsCovered' -> result methods size.
-		'percentageCovered' -> result percentage.
-		'coveredNodes' -> result nodes size
+		self class coverageKey -> {
+			'methodsCovered' -> result methods size.
+			'percentageCovered' -> result percentage.
+			'coveredNodes' -> result nodes size
+		} asDictionary
 	} asDictionary)
 ]

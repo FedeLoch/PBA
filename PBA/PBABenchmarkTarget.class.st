@@ -21,9 +21,7 @@ PBABenchmarkTarget >> classesToExecute [
 { #category : 'as yet unclassified' }
 PBABenchmarkTarget >> methodsToExecute [
 
-	^ self classesToExecute inject: OrderedCollection new into: [ :collection :cl |
-		collection addAll: cl methods asOrderedCollection
-	] 
+	^ self classesToExecute flatCollect: #methods
 ]
 
 { #category : 'accessing' }

@@ -41,6 +41,12 @@ PBAResult >> at: index put: value [
 ]
 
 { #category : 'as yet unclassified' }
+PBAResult >> coverage [
+
+	^ self at: PBACoverageCollectorProfiler coverageKey
+]
+
+{ #category : 'as yet unclassified' }
 PBAResult >> executionTime [
 
 	^ self at: PBAExecutionTimeAnalysis key
