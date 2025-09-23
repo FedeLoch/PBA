@@ -59,6 +59,12 @@ PBAResult >> initialize [
 	analysisResults := DataSeries new
 ]
 
+{ #category : 'as yet unclassified' }
+PBAResult >> memory [
+
+	^ self at: PBAIllimaniProfiler memoryKey
+]
+
 { #category : 'initialization' }
 PBAResult >> merge: anotherResult [
 	

@@ -6,15 +6,28 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
+{ #category : 'as yet unclassified' }
+PBAIllimaniProfiler class >> memoryKey [
+
+	^ 'memory'
+]
+
+{ #category : 'testing' }
+PBAIllimaniProfiler >> analysisResults: profiler [
+	
+	^ analysis inject: Dictionary new into: [ :result :anAnalysis |
+		anAnalysis queryOn: profiler for: result.
+		result
+	]
+]
+
 { #category : 'testing' }
 PBAIllimaniProfiler >> analyze: aTargetProgram [
 
 	| profiler |
 	profiler := FiLiP new profileOn: [ aTargetProgram run ].
-	^ analysis
-		  inject: PBAResult new
-		  into: [ :result :anAnalysis |
-		  anAnalysis queryOn: profiler for: result ]
+	
+	^ PBAResult from: ({ self class memoryKey -> (self analysisResults: profiler) } asDictionary)
 ]
 
 { #category : 'initialization' }
