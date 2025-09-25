@@ -40,11 +40,29 @@ PBAResult >> at: index put: value [
 	^ self
 ]
 
+{ #category : 'as yet unclassified' }
+PBAResult >> coverage [
+
+	^ self at: PBACoverageCollectorProfiler coverageKey
+]
+
+{ #category : 'as yet unclassified' }
+PBAResult >> executionTime [
+
+	^ self at: PBAExecutionTimeAnalysis key
+]
+
 { #category : 'initialization' }
 PBAResult >> initialize [
 
 	super initialize.
 	analysisResults := DataSeries new
+]
+
+{ #category : 'as yet unclassified' }
+PBAResult >> memory [
+
+	^ self at: PBAIllimaniProfiler memoryKey
 ]
 
 { #category : 'initialization' }
@@ -55,4 +73,10 @@ PBAResult >> merge: anotherResult [
 	].
 
 	^ self
+]
+
+{ #category : 'as yet unclassified' }
+PBAResult >> methodsCalled [
+
+	^ self at: PBAMethodProfiler methodsCalledKey
 ]

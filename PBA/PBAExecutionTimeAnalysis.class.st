@@ -9,10 +9,20 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
+{ #category : 'accessing' }
+PBAExecutionTimeAnalysis class >> key [
+
+	^ 'executionTime'
+
+	
+
+	
+]
+
 { #category : 'initialization' }
 PBAExecutionTimeAnalysis >> defaultFeatureName [
 
-	^ 'execution time (μs)'
+	^ self class key
 ]
 
 { #category : 'testing' }

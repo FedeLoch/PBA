@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBAAnalysisStrategy',
+	#name : 'PBAAnalysisProfiler',
 	#superclass : 'Object',
 	#instVars : [
 		'analysis'
@@ -10,25 +10,25 @@ Class {
 }
 
 { #category : 'testing' }
-PBAAnalysisStrategy class >> isAbstract [
+PBAAnalysisProfiler class >> isAbstract [
 
-	^ self = PBAAnalysisStrategy
+	^ self = PBAAnalysisProfiler
 ]
 
 { #category : 'accessing' }
-PBAAnalysisStrategy >> analysis [
+PBAAnalysisProfiler >> analysis [
 
 	^ analysis
 ]
 
 { #category : 'accessing' }
-PBAAnalysisStrategy >> analysis: someAnalysis [
+PBAAnalysisProfiler >> analysis: someAnalysis [
 
 	analysis := someAnalysis
 ]
 
 { #category : 'testing' }
-PBAAnalysisStrategy >> analyze: aTargetProgram [
+PBAAnalysisProfiler >> analyze: aTargetProgram [
 
 	self subclassResponsibility 
 ]

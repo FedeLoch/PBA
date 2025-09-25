@@ -31,8 +31,9 @@ PBABenchmarkProgram >> benchmark: aBenchmark [
 
 { #category : 'accessing' }
 PBABenchmarkProgram >> classesToExecute [
-	
-	^ classesToExecute 
+
+	^ classesToExecute ifEmpty: [ benchmark class package classes ] ifNotEmpty: [ classesToExecute ]
+
 ]
 
 { #category : 'accessing' }
@@ -52,6 +53,14 @@ PBABenchmarkProgram >> initialize [
 PBABenchmarkProgram >> name [
 
 	^ benchmark className
+]
+
+{ #category : 'accessing' }
+PBABenchmarkProgram >> problemSize [
+
+	problemSize ifNil: [ ^ benchmark defaultProblemSize ].
+
+	^ problemSize 
 ]
 
 { #category : 'accessing' }

@@ -1,13 +1,13 @@
 Class {
-	#name : 'PBACallBacksStrategy',
-	#superclass : 'PBAAnalysisStrategy',
+	#name : 'PBACallBacksProfiler',
+	#superclass : 'PBAAnalysisProfiler',
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
 	#tag : 'AnalysisStrategy'
 }
 
 { #category : 'testing' }
-PBACallBacksStrategy >> analyze: aTargetProgram [
+PBACallBacksProfiler >> analyze: aTargetProgram [
 
 	| startTime endTime |
 	
@@ -23,7 +23,7 @@ PBACallBacksStrategy >> analyze: aTargetProgram [
 ]
 
 { #category : 'initialization' }
-PBACallBacksStrategy >> initialize [
+PBACallBacksProfiler >> initialize [
 
 	super initialize.
 	analysis := PBACallbacksAnalysis allSubclasses collect: #new

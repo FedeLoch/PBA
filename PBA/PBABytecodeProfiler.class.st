@@ -1,13 +1,13 @@
 Class {
-	#name : 'PBABytecodeProfilerStrategy',
-	#superclass : 'PBAAnalysisStrategy',
+	#name : 'PBABytecodeProfiler',
+	#superclass : 'PBAAnalysisProfiler',
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
 	#tag : 'AnalysisStrategy'
 }
 
 { #category : 'testing' }
-PBABytecodeProfilerStrategy >> analyze: aTargetProgram [
+PBABytecodeProfiler >> analyze: aTargetProgram [
 
 	^ PBAResult from: (BytecodeProfiler profile: (aTargetProgram asContext)) first
 ]
