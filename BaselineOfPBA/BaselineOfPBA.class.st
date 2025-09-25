@@ -21,15 +21,15 @@ BaselineOfPBA >> baseline: spec [
 			spec baseline: 'AIMetrics' with: [ spec repository: 'github://pharo-ai/metrics' ].
 			spec baseline: 'MethodProfiler' with: [ spec repository: 'github://FedeLoch/MethodProfiler:main' ].
 			
-"			{ 'VeritasDataFrame' . 'VeritasCormas' . 'VeritasRewriter' .
+			{ 'VeritasDataFrame' . "'VeritasCormas' . 'VeritasRewriter' .
 				'VeritasReMobidyc' . 'VeritasHoneyGinger' . 'VeritasMoose' .
-				'VeritasBloc' "". 'VeritasRegis'"" . 'VeritasMicrodown' } do: [ :baseline |
+				'VeritasBloc' . 'VeritasRegis' . 'VeritasMicrodown'" } do: [ :baseline |
 				spec baseline: baseline with: [ spec repository: 'github://jordanmontt/PharoVeritasBenchSuite:main' ]
-			]."
+			].
 			spec package: 'PBA' with: [
 				spec requires: #( 'SMark' 'PBP' "'BenchEvaluation'" 'IllimaniProfiler'
-"				'VeritasDataFrame' 'VeritasCormas' 'VeritasRewriter'  'VeritasReMobidyc'
-				'VeritasHoneyGinger' 'VeritasMoose' 'VeritasBloc' ""'VeritasRegis'"" 'VeritasMicrodown'"
+				'VeritasDataFrame' "'VeritasCormas' 'VeritasRewriter'  'VeritasReMobidyc'
+				'VeritasHoneyGinger' 'VeritasMoose' 'VeritasBloc' 'VeritasRegis' 'VeritasMicrodown'"
 				'PolyMath' 'AILinearModels' 'AIMetrics' 'MethodProfiler' 'DataFrame'
 				)
 			].
