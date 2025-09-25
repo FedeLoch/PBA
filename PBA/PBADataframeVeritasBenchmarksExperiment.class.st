@@ -6,6 +6,12 @@ Class {
 	#tag : 'Experiment'
 }
 
+{ #category : 'running' }
+PBADataframeVeritasBenchmarksExperiment class >> run [
+
+	^ self new runExperiment: 'veritas-dataframe-benchmarks.csv'
+]
+
 { #category : 'accessing' }
 PBADataframeVeritasBenchmarksExperiment >> allBenchmarks [
 
