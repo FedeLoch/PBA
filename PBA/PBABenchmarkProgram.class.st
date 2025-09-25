@@ -63,5 +63,5 @@ PBABenchmarkProgram >> problemSize: aProblemSize [
 { #category : 'accessing' }
 PBABenchmarkProgram >> run [
 
-	^ benchmark run "runWith: problemSize"
+	^ benchmark runWith: self problemSize
 ]
