@@ -4,7 +4,9 @@ Class {
 	#instVars : [
 		'pca',
 		'standardizer',
-		'linearRegressionModel'
+		'linearRegressionModel',
+		'logFile',
+		'logStream'
 	],
 	#category : 'PBA-Experiment',
 	#package : 'PBA',
@@ -21,6 +23,12 @@ PBAExperiment >> allBenchmarks [
 PBAExperiment >> benchmarks [
 
 	^ self subclassResponsibility 
+]
+
+{ #category : 'initialization' }
+PBAExperiment >> defaultLogFile [
+
+	^ ('../' , self className , '.log') asFileReference
 ]
 
 { #category : 'accessing' }
@@ -43,7 +51,8 @@ PBAExperiment >> getPreprocessedResults [
 { #category : 'initialization' }
 PBAExperiment >> initialize [
 
-	standardizer := AIStandardizationNormalizer new
+	standardizer := AIStandardizationNormalizer new.
+	logFile := self defaultLogFile
 ]
 
 { #category : 'accessing' }
@@ -92,6 +101,45 @@ PBAExperiment >> linearRegressionWith: dataframe learningRate: learningRate maxI
 			  ('weights' -> weights).
 			  ('bias' -> bias).
 			  ('mse' -> mse) }
+]
+
+{ #category : 'logging' }
+PBAExperiment >> logEndExperiment [
+
+	logStream
+		nextPutAll: 'Ending experiment ';
+		nextPutAll: self className;
+		cr;
+		close
+]
+
+{ #category : 'logging' }
+PBAExperiment >> logEndWritingCsv [
+
+	logStream
+		nextPutAll: 'Finished writing CSV';
+		cr;
+		flush
+]
+
+{ #category : 'logging' }
+PBAExperiment >> logStartExperiment [
+
+	logStream := logFile writeStream.
+	logStream
+		nextPutAll: 'Starting experiment ';
+		nextPutAll: self className;
+		cr;
+		flush
+]
+
+{ #category : 'logging' }
+PBAExperiment >> logStartWritingCsv [
+
+	logStream
+		nextPutAll: 'Writing CSV';
+		cr;
+		flush
 ]
 
 { #category : 'accessing' }
@@ -143,17 +191,26 @@ PBAExperiment >> runExperiment [
 { #category : 'running' }
 PBAExperiment >> runExperiment: fileName [
 
-	^ self runExperimentAndWriteCSVWith: self allBenchmarks name: fileName
+	| results |
+	self logStartExperiment.
+	results := self
+		           runExperimentAndWriteCSVWith: self allBenchmarks
+		           name: fileName.
+	self logEndExperiment.
+	^ results
 ]
 
 { #category : 'running' }
 PBAExperiment >> runExperimentAndWriteCSVWith: targets name: fileName [
 
 	| featuresResult |
+	featuresResult := (PBAnalyzer newWithLogStream: logStream)
+		                  analyzeAll: targets.
 
-	featuresResult := PBAnalyzer new analyzeAll: targets.
+	self logStartWritingCsv.
 	featuresResult writeToCsv: fileName asFileReference.
-	
+	self logEndWritingCsv.
+
 	^ featuresResult
 ]
 
