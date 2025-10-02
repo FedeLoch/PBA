@@ -3,19 +3,34 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'results',
-		'profilers'
+		'profilers',
+		'logStream'
 	],
 	#category : 'PBA-Analyzer',
 	#package : 'PBA',
 	#tag : 'Analyzer'
 }
 
+{ #category : 'instance creation' }
+PBAnalyzer class >> newWithLogStream: aStream [
+
+	^ self new
+		  logStream: aStream;
+		  yourself
+]
+
 { #category : 'analyzing' }
 PBAnalyzer >> analyze: aTargetProgram [
 
-	^ profilers inject: PBAResult new into: [ :result :profiler |
-		result merge: (profiler analyze: aTargetProgram)
-	] 
+	| intermediateResult |
+	self logAnalyzeTarget: aTargetProgram.
+	intermediateResult := profilers
+		                      inject: PBAResult new
+		                      into: [ :result :profiler |
+			                      result merge:
+				                      (profiler analyze: aTargetProgram) ].
+	self logIntermediateResult: intermediateResult.
+	^ intermediateResult
 ]
 
 { #category : 'analyzing' }
@@ -54,6 +69,43 @@ PBAnalyzer >> initialize [
 		PBABytecodeProfiler new.
 	}
 	
+]
+
+{ #category : 'logging' }
+PBAnalyzer >> logAnalyzeTarget: aTargetProgram [
+
+	logStream
+		nextPutAll: 'Analyzing ';
+		nextPutAll: aTargetProgram name;
+		cr;
+		flush
+]
+
+{ #category : 'logging' }
+PBAnalyzer >> logIntermediateResult: intermediateResult [
+
+	logStream
+		nextPutAll: 'Intermediate result: ';
+		cr.
+	intermediateResult analysisResults associationsDo: [ :assoc |
+			logStream
+				nextPutAll: assoc key;
+				nextPutAll: '->';
+				nextPutAll: assoc value asString;
+				cr ].
+	logStream flush
+]
+
+{ #category : 'accessing' }
+PBAnalyzer >> logStream [
+
+	^ logStream
+]
+
+{ #category : 'accessing' }
+PBAnalyzer >> logStream: anObject [
+
+	logStream := anObject
 ]
 
 { #category : 'accessing' }
