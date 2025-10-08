@@ -74,11 +74,13 @@ PBAnalyzer >> initialize [
 { #category : 'logging' }
 PBAnalyzer >> logAnalyzeTarget: aTargetProgram [
 
-	logStream
-		nextPutAll: 'Analyzing ';
-		nextPutAll: aTargetProgram name;
-		cr;
-		flush
+	logStream ifNotNil: [
+			logStream
+				nextPutAll: 'Analyzing ';
+				nextPutAll: aTargetProgram name;
+				cr;
+				flush
+	]
 ]
 
 { #category : 'logging' }
