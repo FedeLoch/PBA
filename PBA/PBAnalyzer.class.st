@@ -86,16 +86,18 @@ PBAnalyzer >> logAnalyzeTarget: aTargetProgram [
 { #category : 'logging' }
 PBAnalyzer >> logIntermediateResult: intermediateResult [
 
-	logStream
-		nextPutAll: 'Intermediate result: ';
-		cr.
-	intermediateResult analysisResults associationsDo: [ :assoc |
+	logStream ifNotNil: [
 			logStream
-				nextPutAll: assoc key;
-				nextPutAll: '->';
-				nextPutAll: assoc value asString;
-				cr ].
-	logStream flush
+				nextPutAll: 'Intermediate result: ';
+				cr.
+			intermediateResult analysisResults associationsDo: [ :assoc |
+					logStream
+						nextPutAll: assoc key;
+						nextPutAll: '->';
+						nextPutAll: assoc value asString;
+						cr ].
+			logStream flush
+	]
 ]
 
 { #category : 'accessing' }
