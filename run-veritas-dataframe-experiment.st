@@ -1,6 +1,6 @@
 Metacello new
 		baseline: 'PBA';
-		repository: 'github://FedeLoch/PBA:smallExp';
+		repository: 'github://FedeLoch/PBA:main';
 		onConflictUseIncoming;
 		load.
 
