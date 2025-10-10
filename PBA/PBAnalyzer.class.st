@@ -92,12 +92,14 @@ PBAnalyzer >> logIntermediateResult: intermediateResult [
 				cr.
 			intermediateResult analysisResults associationsDo: [ :assoc |
 					logStream
+						tab;
 						nextPutAll: assoc key;
-						nextPutAll: '->';
+						nextPutAll: ',';
 						nextPutAll: assoc value asString;
 						cr ].
-			logStream flush
-	]
+			logStream
+				cr;
+				flush ]
 ]
 
 { #category : 'accessing' }

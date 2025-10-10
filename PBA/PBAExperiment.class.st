@@ -119,6 +119,7 @@ PBAExperiment >> logEndWritingCsv [
 	logStream
 		nextPutAll: 'Finished writing CSV';
 		cr;
+		cr;
 		flush
 ]
 
@@ -129,6 +130,7 @@ PBAExperiment >> logStartExperiment [
 	logStream
 		nextPutAll: 'Starting experiment ';
 		nextPutAll: self className;
+		cr;
 		cr;
 		flush
 ]
