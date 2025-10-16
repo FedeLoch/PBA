@@ -18,6 +18,12 @@ PBARegexBenchmarksExperiment class >> run [
 { #category : 'running' }
 PBARegexBenchmarksExperiment class >> run: tests [
 
+	^ self new tests: tests; runExperiment: 'regexes-benchmarks-features.csv'
+]
+
+{ #category : 'running' }
+PBARegexBenchmarksExperiment class >> runPCA: tests [
+
 	^ self new tests: tests; runPCAExperiment: 'regexes-benchmarks-pca.csv'
 ]
 
