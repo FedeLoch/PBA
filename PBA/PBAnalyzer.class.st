@@ -41,20 +41,37 @@ PBAnalyzer >> analyzeAll: targetPrograms [
 		^ DataFrame new: 0 @ 0 ].
 
 	intermediateResult := self analyze: targetPrograms first.
-	featureNames := intermediateResult analysisResults keys.
-	firstRowName := targetPrograms first name , '_'
-	                , 1 asString.
+	intermediateResult := self flattenResults:
+		                      intermediateResult analysisResults.
+	featureNames := intermediateResult keys.
+	firstRowName := targetPrograms first name , '_' , 1 asString.
 
 	results := targetPrograms allButFirst
 		           inject: ((DataFrame withColumnNames: featureNames)
-				            addRow: intermediateResult analysisResults values
+				            addRow: intermediateResult values
 				            named: firstRowName)
 		           into: [ :df :target |
 				           df
-					           addRow: (self analyze: target) analysisResults values
-					           named:
-					           (self rowNameFor: target name in: df) ].
+					           addRow:
+					           (self flattenResults:
+						            (self analyze: target) analysisResults) values
+					           named: (self rowNameFor: target name in: df) ].
 	^ results
+]
+
+{ #category : 'flattening' }
+PBAnalyzer >> flattenResults: intermediateResult [
+
+	| coverageMetrics memoryMetrics |
+	coverageMetrics := intermediateResult removeAt: 'coverage'.
+	intermediateResult addAll: coverageMetrics.
+	
+	memoryMetrics := intermediateResult removeAt: 'memory'.
+	intermediateResult addAll: memoryMetrics.
+	
+	intermediateResult at: 'methodsCalled' put: (intermediateResult at: 'methodsCalled') sum.
+	
+	^ intermediateResult 
 ]
 
 { #category : 'initialization' }
