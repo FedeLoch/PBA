@@ -55,23 +55,24 @@ PBAnalyzer >> analyzeAll: targetPrograms [
 	^ results
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'flattening' }
 PBAnalyzer >> flatResultsOf: aTarget [
 
 	^ self flattenResults: (self analyze: aTarget) analysisResults
 ]
 
 { #category : 'flattening' }
+PBAnalyzer >> flattenDictionariesAt: aKeyCollection in: result [
+
+	aKeyCollection do: [ :key | result addAll: (result removeAt: key) ]
+]
+
+{ #category : 'flattening' }
 PBAnalyzer >> flattenResults: intermediateResult [
 
-	| coverageMetrics memoryMetrics |
-	coverageMetrics := intermediateResult removeAt:
-		                   PBACoverageCollectorProfiler coverageKey.
-	intermediateResult addAll: coverageMetrics.
-
-	memoryMetrics := intermediateResult removeAt:
-		                 PBAIllimaniProfiler memoryKey.
-	intermediateResult addAll: memoryMetrics.
+	self flattenDictionariesAt: {
+			PBACoverageCollectorProfiler coverageKey.
+			PBAIllimaniProfiler memoryKey } in: intermediateResult.
 
 	intermediateResult
 		at: PBAMethodProfiler methodsCalledKey
