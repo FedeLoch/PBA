@@ -22,6 +22,22 @@ PBARegexBenchmarksExperiment class >> run: tests [
 ]
 
 { #category : 'running' }
+PBARegexBenchmarksExperiment class >> runFromFile: aFileName [
+
+	| tests |
+	tests := (aFileName asFileReference contents substrings:
+		          { Character lf }) collect: [ :string |
+			         PBTTest new
+				         target: RxMatcher >> #matches:;
+				         arguments: { string minimalStringMatching };
+				         receiver: string asRegex;
+				         score: nil;
+				         result: nil ].
+
+	^ self run: tests
+]
+
+{ #category : 'running' }
 PBARegexBenchmarksExperiment class >> runPCA: tests [
 
 	^ self new tests: tests; runPCAExperiment: 'regexes-benchmarks-pca.csv'
