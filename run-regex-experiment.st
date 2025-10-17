@@ -4,4 +4,4 @@ Metacello new
 		onConflictUseIncoming;
 		load.
 
-(Smalltalk at: #PBARegexBenchmarksExperiment) runWithFile: '../regexes.txt'
+(Smalltalk at: #PBARegexBenchmarksExperiment) runFromFile: '../regexes.txt'
