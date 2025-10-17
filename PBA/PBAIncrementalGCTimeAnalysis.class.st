@@ -6,8 +6,8 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
-{ #category : 'initialization' }
-PBAIncrementalGCTimeAnalysis >> defaultFeatureName [
+{ #category : 'accessing' }
+PBAIncrementalGCTimeAnalysis class >> key [
 
 	^ 'totalIncrementalGCTime'
 ]

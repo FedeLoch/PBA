@@ -6,8 +6,8 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
-{ #category : 'initialization' }
-PBAFullGCTimeAnalysis >> defaultFeatureName [ 
+{ #category : 'accessing' }
+PBAFullGCTimeAnalysis class >> key [
 
 	^ 'totalFullGCTime'
 ]

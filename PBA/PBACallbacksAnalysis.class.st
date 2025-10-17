@@ -15,6 +15,12 @@ PBACallbacksAnalysis class >> isAbstract [
 	^ self = PBACallbacksAnalysis
 ]
 
+{ #category : 'initialization' }
+PBACallbacksAnalysis >> defaultFeatureName [ 
+
+	^ self class key
+]
+
 { #category : 'testing' }
 PBACallbacksAnalysis >> endExecutionFor: result [
 

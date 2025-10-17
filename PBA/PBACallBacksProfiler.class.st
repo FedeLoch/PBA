@@ -22,5 +22,14 @@ PBACallBacksProfiler >> analyze: aTargetProgram [
 PBACallBacksProfiler >> initialize [
 
 	super initialize.
-	analysis := PBACallbacksAnalysis allSubclasses collect: #new
+	analysis := {
+		            PBAExecutionTimeAnalysis new.
+		            PBAIncrementalGCTimeAnalysis new.
+		            PBAFullGCTimeAnalysis new }
+]
+
+{ #category : 'accessing' }
+PBACallBacksProfiler >> measuringOnlyExecutionTime [
+
+	analysis := { PBAExecutionTimeAnalysis new }
 ]

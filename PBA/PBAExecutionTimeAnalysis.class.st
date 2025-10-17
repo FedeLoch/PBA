@@ -16,12 +16,6 @@ PBAExecutionTimeAnalysis class >> key [
 	
 ]
 
-{ #category : 'initialization' }
-PBAExecutionTimeAnalysis >> defaultFeatureName [
-
-	^ self class key
-]
-
 { #category : 'accessing' }
 PBAExecutionTimeAnalysis >> time [
 
