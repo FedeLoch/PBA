@@ -1,6 +1,9 @@
 Class {
 	#name : 'PBACallbacksAnalysis',
 	#superclass : 'PBAAnalysis',
+	#instVars : [
+		'initialTime'
+	],
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
 	#tag : 'AnalysisStrategy'
@@ -12,14 +15,33 @@ PBACallbacksAnalysis class >> isAbstract [
 	^ self = PBACallbacksAnalysis
 ]
 
-{ #category : 'testing' }
-PBACallbacksAnalysis >> endExecution: aTime for: result [
+{ #category : 'initialization' }
+PBACallbacksAnalysis >> defaultFeatureName [ 
 
-	^ self putValueFrom: aTime in: result
+	^ self class key
 ]
 
 { #category : 'testing' }
-PBACallbacksAnalysis >> startExecution: aTime [
+PBACallbacksAnalysis >> endExecutionFor: result [
 
-	self subclassResponsibility 
+	self putValueFrom: self time in: result.
+	^ result
+]
+
+{ #category : 'testing' }
+PBACallbacksAnalysis >> startExecution [
+
+	initialTime := self time
+]
+
+{ #category : 'accessing' }
+PBACallbacksAnalysis >> time [
+
+	^ self subclassResponsibility
+]
+
+{ #category : 'accessing' }
+PBACallbacksAnalysis >> valueToExtractFrom: aTime [
+
+	^ aTime - initialTime
 ]

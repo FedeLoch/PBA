@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBAExecutionTimeAnalysis',
+	#name : 'PBAFullGCTimeAnalysis',
 	#superclass : 'PBACallbacksAnalysis',
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
@@ -7,17 +7,13 @@ Class {
 }
 
 { #category : 'accessing' }
-PBAExecutionTimeAnalysis class >> key [
+PBAFullGCTimeAnalysis class >> key [
 
-	^ 'executionTime'
-
-	
-
-	
+	^ 'totalFullGCTime'
 ]
 
 { #category : 'accessing' }
-PBAExecutionTimeAnalysis >> time [
+PBAFullGCTimeAnalysis >> time [
 
-	^ Time microsecondClockValue
+	^ Smalltalk vm totalFullGCTime
 ]

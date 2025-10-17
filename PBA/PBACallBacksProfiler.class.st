@@ -9,22 +9,27 @@ Class {
 { #category : 'testing' }
 PBACallBacksProfiler >> analyze: aTargetProgram [
 
-	| startTime endTime |
-	
-	startTime := Time microsecondClockValue.
-	analysis do: [ :anAnalysis | anAnalysis startExecution: startTime ].
-	
+	analysis do: [ :anAnalysis | anAnalysis startExecution ].
+
 	aTargetProgram run.
-	
-	endTime := Time microsecondClockValue.
-	^ analysis inject: PBAResult new into: [ :result :anAnalysis |
-		anAnalysis endExecution: endTime for: result
-	].
+
+	^ analysis
+		  inject: PBAResult new
+		  into: [ :result :anAnalysis | anAnalysis endExecutionFor: result ]
 ]
 
 { #category : 'initialization' }
 PBACallBacksProfiler >> initialize [
 
 	super initialize.
-	analysis := PBACallbacksAnalysis allSubclasses collect: #new
+	analysis := {
+		            PBAExecutionTimeAnalysis new.
+		            PBAIncrementalGCTimeAnalysis new.
+		            PBAFullGCTimeAnalysis new }
+]
+
+{ #category : 'accessing' }
+PBACallBacksProfiler >> measuringOnlyExecutionTime [
+
+	analysis := { PBAExecutionTimeAnalysis new }
 ]
