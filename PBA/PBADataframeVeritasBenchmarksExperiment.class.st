@@ -27,7 +27,7 @@ PBADataframeVeritasBenchmarksExperiment >> benchmarkDataFrameFiles [
 	^ { 
 		'../dataset.csv'.
 		'../dataset_2.csv'.
-		'../dataset_3.csv'.
+		"'../dataset_3.csv'.
 		'../dataset_5.csv'.
 		'../dataset_7.csv'.
 		'../dataset_10.csv'.
@@ -44,7 +44,7 @@ PBADataframeVeritasBenchmarksExperiment >> benchmarkDataFrameFiles [
 		'../dataset_250.csv'.
 		'../dataset_300.csv'.
 		'../dataset_400.csv'.
-		'../dataset_500.csv'.
+		'../dataset_500.csv'."
 		"'../dataset_750.csv'.
 		'../dataset_1000.csv'"
 	}

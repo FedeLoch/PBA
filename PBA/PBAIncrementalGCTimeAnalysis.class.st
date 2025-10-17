@@ -1,6 +1,6 @@
 Class {
 	#name : 'PBAIncrementalGCTimeAnalysis',
-	#superclass : 'PBAGarbageCollectionAnalysis',
+	#superclass : 'PBACallbacksAnalysis',
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
 	#tag : 'AnalysisStrategy'
@@ -13,7 +13,7 @@ PBAIncrementalGCTimeAnalysis >> defaultFeatureName [
 ]
 
 { #category : 'accessing' }
-PBAIncrementalGCTimeAnalysis >> gcTime [
+PBAIncrementalGCTimeAnalysis >> time [
 
 	^ Smalltalk vm totalIncrementalGCTime
 ]

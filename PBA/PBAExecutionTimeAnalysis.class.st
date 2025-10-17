@@ -1,9 +1,6 @@
 Class {
 	#name : 'PBAExecutionTimeAnalysis',
 	#superclass : 'PBACallbacksAnalysis',
-	#instVars : [
-		'initialTime'
-	],
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
 	#tag : 'AnalysisStrategy'
@@ -25,14 +22,8 @@ PBAExecutionTimeAnalysis >> defaultFeatureName [
 	^ self class key
 ]
 
-{ #category : 'testing' }
-PBAExecutionTimeAnalysis >> startExecution: aTime [
-
-	initialTime := aTime
-]
-
 { #category : 'accessing' }
-PBAExecutionTimeAnalysis >> valueToExtractFrom: endTime [
+PBAExecutionTimeAnalysis >> time [
 
-	^ endTime - initialTime
+	^ Time microsecondClockValue
 ]

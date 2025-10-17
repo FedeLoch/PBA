@@ -1,6 +1,6 @@
 Class {
 	#name : 'PBAFullGCTimeAnalysis',
-	#superclass : 'PBAGarbageCollectionAnalysis',
+	#superclass : 'PBACallbacksAnalysis',
 	#category : 'PBA-AnalysisStrategy',
 	#package : 'PBA',
 	#tag : 'AnalysisStrategy'
@@ -13,7 +13,7 @@ PBAFullGCTimeAnalysis >> defaultFeatureName [
 ]
 
 { #category : 'accessing' }
-PBAFullGCTimeAnalysis >> gcTime [
+PBAFullGCTimeAnalysis >> time [
 
 	^ Smalltalk vm totalFullGCTime
 ]
