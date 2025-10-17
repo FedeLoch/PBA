@@ -40,21 +40,45 @@ PBAnalyzer >> analyzeAll: targetPrograms [
 	(targetPrograms isNil or: [ targetPrograms isEmpty ]) ifTrue: [
 		^ DataFrame new: 0 @ 0 ].
 
-	intermediateResult := self analyze: targetPrograms first.
-	featureNames := intermediateResult analysisResults keys.
-	firstRowName := targetPrograms first name , '_'
-	                , 1 asString.
+	intermediateResult := self flatResultsOf: targetPrograms first.
+	featureNames := intermediateResult keys.
+	firstRowName := targetPrograms first name , '_1'.
 
 	results := targetPrograms allButFirst
 		           inject: ((DataFrame withColumnNames: featureNames)
-				            addRow: intermediateResult analysisResults values
+				            addRow: intermediateResult values
 				            named: firstRowName)
 		           into: [ :df :target |
 				           df
-					           addRow: (self analyze: target) analysisResults values
-					           named:
-					           (self rowNameFor: target name in: df) ].
+					           addRow: (self flatResultsOf: target) values
+					           named: (self rowNameFor: target name in: df) ].
 	^ results
+]
+
+{ #category : 'flattening' }
+PBAnalyzer >> flatResultsOf: aTarget [
+
+	^ self flattenResults: (self analyze: aTarget) analysisResults
+]
+
+{ #category : 'flattening' }
+PBAnalyzer >> flattenDictionariesAt: aKeyCollection in: result [
+
+	aKeyCollection do: [ :key | result addAll: (result removeAt: key) ]
+]
+
+{ #category : 'flattening' }
+PBAnalyzer >> flattenResults: intermediateResult [
+
+	self flattenDictionariesAt: {
+			PBACoverageCollectorProfiler coverageKey.
+			PBAIllimaniProfiler memoryKey } in: intermediateResult.
+
+	intermediateResult
+		at: PBAMethodProfiler methodsCalledKey
+		put: (intermediateResult at: PBAMethodProfiler methodsCalledKey) sum.
+
+	^ intermediateResult
 ]
 
 { #category : 'initialization' }
