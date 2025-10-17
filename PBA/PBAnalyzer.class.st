@@ -40,11 +40,9 @@ PBAnalyzer >> analyzeAll: targetPrograms [
 	(targetPrograms isNil or: [ targetPrograms isEmpty ]) ifTrue: [
 		^ DataFrame new: 0 @ 0 ].
 
-	intermediateResult := self analyze: targetPrograms first.
-	intermediateResult := self flattenResults:
-		                      intermediateResult analysisResults.
+	intermediateResult := self flatResultsOf: targetPrograms first.
 	featureNames := intermediateResult keys.
-	firstRowName := targetPrograms first name , '_' , 1 asString.
+	firstRowName := targetPrograms first name , '_1'.
 
 	results := targetPrograms allButFirst
 		           inject: ((DataFrame withColumnNames: featureNames)
@@ -52,26 +50,34 @@ PBAnalyzer >> analyzeAll: targetPrograms [
 				            named: firstRowName)
 		           into: [ :df :target |
 				           df
-					           addRow:
-					           (self flattenResults:
-						            (self analyze: target) analysisResults) values
+					           addRow: (self flatResultsOf: target) values
 					           named: (self rowNameFor: target name in: df) ].
 	^ results
+]
+
+{ #category : 'as yet unclassified' }
+PBAnalyzer >> flatResultsOf: aTarget [
+
+	^ self flattenResults: (self analyze: aTarget) analysisResults
 ]
 
 { #category : 'flattening' }
 PBAnalyzer >> flattenResults: intermediateResult [
 
 	| coverageMetrics memoryMetrics |
-	coverageMetrics := intermediateResult removeAt: 'coverage'.
+	coverageMetrics := intermediateResult removeAt:
+		                   PBACoverageCollectorProfiler coverageKey.
 	intermediateResult addAll: coverageMetrics.
-	
-	memoryMetrics := intermediateResult removeAt: 'memory'.
+
+	memoryMetrics := intermediateResult removeAt:
+		                 PBAIllimaniProfiler memoryKey.
 	intermediateResult addAll: memoryMetrics.
-	
-	intermediateResult at: 'methodsCalled' put: (intermediateResult at: 'methodsCalled') sum.
-	
-	^ intermediateResult 
+
+	intermediateResult
+		at: PBAMethodProfiler methodsCalledKey
+		put: (intermediateResult at: PBAMethodProfiler methodsCalledKey) sum.
+
+	^ intermediateResult
 ]
 
 { #category : 'initialization' }
