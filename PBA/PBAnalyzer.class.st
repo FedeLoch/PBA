@@ -69,19 +69,21 @@ PBAnalyzer >> flattenDictionariesAt: aKeyCollection in: result [
 ]
 
 { #category : 'flattening' }
-PBAnalyzer >> flattenResults: intermediateResult [
+PBAnalyzer >> flattenResults: analysisResult [
 
 	self
 		flattenDictionariesAt: {
 				PBACoverageCollectorProfiler coverageKey.
 				PBAIllimaniProfiler memoryKey }
-		in: intermediateResult.
+		in: analysisResult.
 
-	intermediateResult
-		at: PBAMethodProfiler methodsCalledKey
-		put: (intermediateResult at: PBAMethodProfiler methodsCalledKey) sum.
+	(analysisResult keys includes: PBAMethodProfiler methodsCalledKey)
+		ifTrue: [
+				analysisResult
+					at: PBAMethodProfiler methodsCalledKey
+					put: (analysisResult at: PBAMethodProfiler methodsCalledKey) sum ].
 
-	^ intermediateResult
+	^ analysisResult
 ]
 
 { #category : 'initialization' }
