@@ -115,11 +115,14 @@ PBAnalyzer >> logAnalyzeTarget: aTargetProgram [
 { #category : 'logging' }
 PBAnalyzer >> logIntermediateResult: intermediateResult [
 
+	| analysisResult |
+	analysisResult := self flattenResults:
+		                  intermediateResult analysisResults copy.
 	logStream ifNotNil: [
 			logStream
 				nextPutAll: 'Intermediate result: ';
 				cr.
-			intermediateResult analysisResults associationsDo: [ :assoc |
+			analysisResult associationsDo: [ :assoc |
 					logStream
 						tab;
 						nextPutAll: assoc key;
