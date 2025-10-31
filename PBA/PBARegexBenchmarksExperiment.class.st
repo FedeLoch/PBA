@@ -18,7 +18,7 @@ PBARegexBenchmarksExperiment class >> run [
 { #category : 'running' }
 PBARegexBenchmarksExperiment class >> run: tests [
 
-	^ self new tests: tests; runExperiment: 'regexes-benchmarks-features.csv'
+	^ self new tests: tests; runExperiment: 'regexes-benchmarks-features.csv' profilers: { PBAMethodProfiler new }
 ]
 
 { #category : 'running' }
@@ -53,6 +53,14 @@ PBARegexBenchmarksExperiment >> allBenchmarks [
 PBARegexBenchmarksExperiment >> runExperiment [
 
 	^ self runExperiment: 'regexes-benchmarks-features.csv'
+]
+
+{ #category : 'as yet unclassified' }
+PBARegexBenchmarksExperiment >> runExperimentMethodsCalled [
+
+	^ self
+		  runExperiment: 'regexes-benchmarks-features.csv'
+		  profilers: { PBAMethodProfiler new }
 ]
 
 { #category : 'accessing' }
