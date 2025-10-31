@@ -4,4 +4,10 @@ Metacello new
 		onConflictUseIncoming;
 		load.
 
-(Smalltalk at: #PBARegexBenchmarksExperiment) runWithFile: '../regexes.txt'
+Metacello new
+		baseline: 'PBT';
+		repository: 'github://FedeLoch/PBT:main';
+		onConflictUseIncoming;
+		load.
+
+(Smalltalk at: #PBARegexBenchmarksExperiment) runFromFile: '../regexes.txt'
