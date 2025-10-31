@@ -18,7 +18,7 @@ PBARegexBenchmarksExperiment class >> run [
 { #category : 'running' }
 PBARegexBenchmarksExperiment class >> run: tests [
 
-	^ self new tests: tests; runExperiment: 'regexes-benchmarks-features.csv' profilers: { PBAMethodProfiler new }
+	^ self new tests: tests; runExperiment: 'regexes-benchmarks-features.csv'
 ]
 
 { #category : 'running' }
