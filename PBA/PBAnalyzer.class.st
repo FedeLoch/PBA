@@ -64,15 +64,18 @@ PBAnalyzer >> flatResultsOf: aTarget [
 { #category : 'flattening' }
 PBAnalyzer >> flattenDictionariesAt: aKeyCollection in: result [
 
-	aKeyCollection do: [ :key | result addAll: (result removeAt: key) ]
+	aKeyCollection do: [ :key |
+		result addAll: (result removeKey: key ifAbsent: {  }) ]
 ]
 
 { #category : 'flattening' }
 PBAnalyzer >> flattenResults: intermediateResult [
 
-	self flattenDictionariesAt: {
-			PBACoverageCollectorProfiler coverageKey.
-			PBAIllimaniProfiler memoryKey } in: intermediateResult.
+	self
+		flattenDictionariesAt: {
+				PBACoverageCollectorProfiler coverageKey.
+				PBAIllimaniProfiler memoryKey }
+		in: intermediateResult.
 
 	intermediateResult
 		at: PBAMethodProfiler methodsCalledKey
