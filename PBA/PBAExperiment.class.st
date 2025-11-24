@@ -6,7 +6,8 @@ Class {
 		'standardizer',
 		'linearRegressionModel',
 		'logFile',
-		'logStream'
+		'logStream',
+		'analyzer'
 	],
 	#category : 'PBA-Experiment',
 	#package : 'PBA',
@@ -17,6 +18,13 @@ Class {
 PBAExperiment >> allBenchmarks [
 
 	^ self subclassResponsibility
+]
+
+{ #category : 'running' }
+PBAExperiment >> analyzer [
+
+	^ analyzer ifNil: [
+		  analyzer := PBAnalyzer newWithLogStream: logStream ]
 ]
 
 { #category : 'accessing' }
@@ -193,20 +201,33 @@ PBAExperiment >> runExperiment [
 { #category : 'running' }
 PBAExperiment >> runExperiment: fileName [
 
+	^ self runExperiment: fileName profilers: {
+			  PBACallBacksProfiler new.
+			  PBACoverageCollectorProfiler new.
+			  PBAIllimaniProfiler new.
+			  PBAMethodProfiler new.
+			  PBABytecodeProfiler new }
+]
+
+{ #category : 'running' }
+PBAExperiment >> runExperiment: fileName profilers: profilers [
+
 	| results |
 	self logStartExperiment.
 	results := self
 		           runExperimentAndWriteCSVWith: self allBenchmarks
-		           name: fileName.
+		           name: fileName
+		           profilers: profilers.
 	self logEndExperiment.
 	^ results
 ]
 
 { #category : 'running' }
-PBAExperiment >> runExperimentAndWriteCSVWith: targets name: fileName [
+PBAExperiment >> runExperimentAndWriteCSVWith: targets name: fileName profilers: profilers [
 
 	| featuresResult |
-	featuresResult := (PBAnalyzer newWithLogStream: logStream)
+	featuresResult := self analyzer
+		                  profilers: profilers;
 		                  analyzeAll: targets.
 
 	self logStartWritingCsv.

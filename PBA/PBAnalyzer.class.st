@@ -64,21 +64,26 @@ PBAnalyzer >> flatResultsOf: aTarget [
 { #category : 'flattening' }
 PBAnalyzer >> flattenDictionariesAt: aKeyCollection in: result [
 
-	aKeyCollection do: [ :key | result addAll: (result removeAt: key) ]
+	aKeyCollection do: [ :key |
+		result addAll: (result removeKey: key ifAbsent: {  }) ]
 ]
 
 { #category : 'flattening' }
-PBAnalyzer >> flattenResults: intermediateResult [
+PBAnalyzer >> flattenResults: analysisResult [
 
-	self flattenDictionariesAt: {
-			PBACoverageCollectorProfiler coverageKey.
-			PBAIllimaniProfiler memoryKey } in: intermediateResult.
+	self
+		flattenDictionariesAt: {
+				PBACoverageCollectorProfiler coverageKey.
+				PBAIllimaniProfiler memoryKey }
+		in: analysisResult.
 
-	intermediateResult
-		at: PBAMethodProfiler methodsCalledKey
-		put: (intermediateResult at: PBAMethodProfiler methodsCalledKey) sum.
+	(analysisResult keys includes: PBAMethodProfiler methodsCalledKey)
+		ifTrue: [
+				analysisResult
+					at: PBAMethodProfiler methodsCalledKey
+					put: (analysisResult at: PBAMethodProfiler methodsCalledKey) sum ].
 
-	^ intermediateResult
+	^ analysisResult
 ]
 
 { #category : 'initialization' }
@@ -110,11 +115,14 @@ PBAnalyzer >> logAnalyzeTarget: aTargetProgram [
 { #category : 'logging' }
 PBAnalyzer >> logIntermediateResult: intermediateResult [
 
+	| analysisResult |
+	analysisResult := self flattenResults:
+		                  intermediateResult analysisResults copy.
 	logStream ifNotNil: [
 			logStream
 				nextPutAll: 'Intermediate result: ';
 				cr.
-			intermediateResult analysisResults associationsDo: [ :assoc |
+			analysisResult associationsDo: [ :assoc |
 					logStream
 						tab;
 						nextPutAll: assoc key;
