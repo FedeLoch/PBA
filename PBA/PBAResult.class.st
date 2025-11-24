@@ -40,6 +40,12 @@ PBAResult >> at: index put: value [
 	^ self
 ]
 
+{ #category : 'accessing' }
+PBAResult >> bytecodes [
+
+	^ self at: PBABytecodeProfiler bytecodesKey
+]
+
 { #category : 'as yet unclassified' }
 PBAResult >> coverage [
 

@@ -85,7 +85,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfCovered
 	| total result |
 	
 	result := analyzer analyze: deltaBlue.
-	total := result at: 'coveredMethods'.
+	total := (result at: 'bytecodes') result at: 'coveredMethods'.
 
 	self assert: total equals: 6
 ]
@@ -96,7 +96,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfCovered
 	| total result |
 	
 	result := analyzer analyze: deltaBlue.
-	total := result at: 'coveredNodes'.
+	total := (result at: 'bytecodes') result at: 'coveredNodes'.
 
 	self assert: total equals: 7
 ]
@@ -107,7 +107,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfDiffere
 	| total result |
 	
 	result := analyzer analyze: deltaBlue.
-	total := result at: 'differentCallSites'.
+	total := (result at: 'bytecodes') result at: 'differentCallSites'.
 	
 	self assert: total equals: 489
 ]
@@ -118,7 +118,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfDiffere
 	| total result |
 	
 	result := analyzer analyze: deltaBlue.
-	total := result at: 'differentExecutedBlocks'.
+	total := (result at: 'bytecodes') result at: 'differentExecutedBlocks'.
 
 	self assert: total equals: 16
 ]
@@ -129,7 +129,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfDiffere
 	| total result |
 	
 	result := analyzer analyze: deltaBlue.
-	total := result at: 'differentExecutedBytecodes'.
+	total := (result at: 'bytecodes') result at: 'differentExecutedBytecodes'.
 	
 	self assert: total equals: 356
 ]
@@ -140,7 +140,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfDiffere
 	| total result |
 	
 	result := analyzer analyze: deltaBlue.
-	total := result at: 'differentMethodsCalled'.
+	total := (result at: 'bytecodes') at: 'differentMethodsCalled'.
 	
 	self assert: total equals: 179
 ]
@@ -151,7 +151,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfExecute
 	| total result |
 	
 	result := analyzer analyze: deltaBlue.
-	total := result at: 'totalExecutedBlocks'.
+	total := (result at: 'bytecodes') result at: 'totalExecutedBlocks'.
 
 	self assert: total equals: 840279
 ]
@@ -162,7 +162,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfExecute
 	| total result |
 	
 	result := analyzer analyze: deltaBlue.
-	total := result at: 'totalExecutedBytecodes'.
+	total := (result at: 'bytecodes') result at: 'totalExecutedBytecodes'.
 
 	self assert: total equals: 50833582
 ]
@@ -173,7 +173,7 @@ PBAnalyzerTest >> testRunTheAnalyzerWithAbenchmarkItCountTheTotalNumberOfExecute
 	| total result |
 	
 	result := analyzer analyze: deltaBlue.
-	total := result at: 'totalExecutedLoops'.
+	total := (result at: 'bytecodes') result at: 'totalExecutedLoops'.
 
 	self assert: total equals: 895444
 ]
