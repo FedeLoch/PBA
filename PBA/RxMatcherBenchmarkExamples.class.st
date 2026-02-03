@@ -12,8 +12,8 @@ RxMatcherBenchmarkExamples >> matches [
 	<script: ' self new matches'>
 	| regexString string |
 
-	regexString := (PBTGrammarMCTSGenerator from: GncRegexGrammar new) gen: nil.
+	regexString := (UmeGrammarMCTSGenerator from: GncRegexGrammar new) gen: nil.
 	string := regexString minimalStringMatching.
 	
-	self assert: ((PBTRegex fromString: regexString) matches: string) equals: true.
+	self assert: ((UmeRegex fromString: regexString) matches: string) equals: true.
 ]

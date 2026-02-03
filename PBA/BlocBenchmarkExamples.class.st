@@ -13,7 +13,7 @@ BlocBenchmarkExamples >> addABlElement [
 	| elem |
 	
 	"Generating a an bloc element using PBT"
-	elem := PBTBlocBenchsTest new blElementConstraint gen.
+	elem := UmeBlocBenchsTest new blElementConstraint gen.
 
 	BlElement new addChild: elem
 ]
@@ -25,8 +25,8 @@ BlocBenchmarkExamples >> runBlBlocCase [
 	| elem time |
 	
 	"Generating a an bloc element using PBT"
-	elem := PBTBlocBenchsTest new blElementConstraint gen.
+	elem := UmeBlocBenchsTest new blElementConstraint gen.
 	time := 500 milliSeconds.
 
-	(BlBBlocPBTCase new element: elem) duration: time; run
+	(BlBBlocCase new element: elem) duration: time; run
 ]
