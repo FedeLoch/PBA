@@ -29,6 +29,12 @@ PBACallBacksProfiler >> initialize [
 ]
 
 { #category : 'accessing' }
+PBACallBacksProfiler >> measuringOnlyCGs [
+
+	analysis := { PBAGCsAnalysis new }
+]
+
+{ #category : 'accessing' }
 PBACallBacksProfiler >> measuringOnlyExecutionTime [
 
 	analysis := { PBAExecutionTimeAnalysis new }
