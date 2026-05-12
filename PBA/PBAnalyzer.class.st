@@ -23,12 +23,14 @@ PBAnalyzer class >> newWithLogStream: aStream [
 PBAnalyzer >> analyze: aTargetProgram [
 
 	| intermediateResult |
+
 	self logAnalyzeTarget: aTargetProgram.
 	intermediateResult := profilers
 		                      inject: PBAResult new
 		                      into: [ :result :profiler |
 			                      result merge:
 				                      (profiler analyze: aTargetProgram) ].
+
 	self logIntermediateResult: intermediateResult.
 	^ intermediateResult
 ]

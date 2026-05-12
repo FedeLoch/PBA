@@ -26,7 +26,7 @@ PBAIllimaniProfiler >> analyze: aTargetProgram [
 
 	| profiler |
 	profiler := FiLiP new profileOn: [ aTargetProgram run ].
-	
+
 	^ PBAResult from: ({ self class memoryKey -> (self analysisResults: profiler) } asDictionary)
 ]
 
