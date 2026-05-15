@@ -58,6 +58,12 @@ PBAResult >> executionTime [
 	^ self at: PBAExecutionTimeAnalysis key
 ]
 
+{ #category : 'as yet unclassified' }
+PBAResult >> gcs [
+
+	^ self at: PBAGCsAnalysis featureName
+]
+
 { #category : 'initialization' }
 PBAResult >> initialize [
 

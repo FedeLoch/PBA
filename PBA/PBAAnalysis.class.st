@@ -46,7 +46,7 @@ PBAAnalysis >> putValueFrom: anObject in: result [
 ]
 
 { #category : 'accessing' }
-PBAAnalysis >> valueToExtractFrom: anObject [
+PBAAnalysis >> valueToExtractFrom: object [
 
-	^ self subclassResponsibility
+	^ self subclassResponsibility 
 ]

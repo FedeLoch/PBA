@@ -9,6 +9,12 @@ Class {
 	#tag : 'AnalysisStrategy'
 }
 
+{ #category : 'accessing' }
+PBAGCsAnalysis class >> featureName [
+
+	^ 'gcs'
+]
+
 { #category : 'initialization' }
 PBAGCsAnalysis >> defaultFeatureName [
 
@@ -33,4 +39,10 @@ PBAGCsAnalysis >> gcs [
 PBAGCsAnalysis >> startExecution [
 
 	initialGCs := self gcs
+]
+
+{ #category : 'testing' }
+PBAGCsAnalysis >> valueToExtractFrom: gcs [
+
+	^ gcs - initialGCs 
 ]
