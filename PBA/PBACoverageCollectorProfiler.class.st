@@ -16,8 +16,8 @@ PBACoverageCollectorProfiler class >> coverageKey [
 PBACoverageCollectorProfiler >> analyze: aTargetProgram [
 
 	| result|
-	
-	result := CoverageCollector new methods: aTargetProgram methodsToExecute; runOn: [ aTargetProgram run ].
+
+	result := CoverageCollector new methods: aTargetProgram methodsToInstrument; runOn: [ aTargetProgram run ].
 
 	^ PBAResult from: ({
 		self class coverageKey -> {

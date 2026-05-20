@@ -3,7 +3,8 @@ Class {
 	#superclass : 'PBABenchmarkTarget',
 	#instVars : [
 		'block',
-		'classesToExecute'
+		'classesToExecute',
+		'methodsToInstrument'
 	],
 	#category : 'PBA-Target',
 	#package : 'PBA',
@@ -52,6 +53,18 @@ PBAProgram >> initialize [
 
 	super initialize.
 	classesToExecute := {}
+]
+
+{ #category : 'accessing' }
+PBAProgram >> methodsToInstrument [
+
+	^ methodsToInstrument
+]
+
+{ #category : 'accessing' }
+PBAProgram >> methodsToInstrument: methods [
+
+	methodsToInstrument := methods 
 ]
 
 { #category : 'accessing' }
